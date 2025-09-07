@@ -1,0 +1,210 @@
+@extends('layouts.app')
+
+<style>
+        .playfair-display {
+            font-family: 'Playfair Display', serif;
+        }
+        .stacked-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .image-back {
+            position: absolute;
+            width: 85%;
+            height: 380px;
+            top: 20px;
+            left: 0;
+            background-color: #f3f4f6;
+            border-radius: 12px;
+            z-index: 1;
+        }
+        .image-front {
+            position: relative;
+            width: 85%;
+            height: 380px;
+            margin-left: 15%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+        .image-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .small-image {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            bottom: -30px;
+            left: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+            border: 4px solid white;
+        }
+        .small-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 768px) {
+            .image-back, .image-front {
+                height: 300px;
+            }
+            .small-image {
+                width: 120px;
+                height: 120px;
+            }
+        }
+    </style>
+
+@section('hero')
+    {{-- Hero Section --}}
+    <section class="relative bg-cover bg-center min-h-[65vh] md:min-h-screen flex items-center"
+        style="background-image: url('/images/hero_background.png');">
+        <div class="relative container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
+            {{-- Kiri: Text + Button --}}
+            <div class="text-white space-y-6 text-center md:text-left">
+                <h1 class="text-3xl md:text-5xl font-bold">Keindahan Batik Tanjung Bumi Warisan Budaya Madura</h1>
+                <p class="text-lg md:text-xl max-w-md mx-auto md:mx-0">
+                    Temukan Batik Impianmu di Sini!
+                </p>
+                <a href="/products"
+                    class="inline-block bg-[#1E41FB] text-white px-6 py-3 rounded-3xl font-semibold hover:bg-[#5A71EC] transition duration-300">
+                    Lihat Produk
+                </a>
+            </div>
+
+            {{-- Kanan: Gambar Orang (Hanya muncul di layar medium ke atas) --}}
+            <div class="hidden md:flex justify-center md:justify-end">
+                <div class="relative">
+                    <div class="w-72 h-72 md:w-96 md:h-96 bg-white rounded-full flex items-center justify-center shadow-lg">
+                        <img src="/images/model_batik_hero.png" alt="Orang memakai batik"
+                            class="w-64 md:w-95 object-contain rounded-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- Section UMKM --}}
+    <section class="relative bg-cover py-10 bg-bottom min-h-[140vh]"
+        style="background-image: url('/images/bg_batik_1.png');">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="container mx-auto px-6 text-center text-black">
+
+            {{-- Judul & Deskripsi --}}
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">UMKM</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-3">Kampung Batik Paseseh</h2>
+            <p class="text-lg md:text-xl mb-12 max-w-4xl mx-auto">
+                Kampung batik paseseh merupakan komunitas yang memiliki 10 UMKM terkenal ditanjung bumi. serta disetiap UMKM
+                memiliki banyak produk unggulan yang mereka produksi
+            </p>
+
+            {{-- Grid UMKM --}}
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+
+                {{-- Kartu Kiri --}}
+                <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+                    <img src="/images/hero_background.png" alt="UMKM 1" class="rounded-lg w-full h-48 object-cover">
+                    <div class="flex justify-center -mt-6">
+                        <img src="/images/model_batik_hero.png" alt="Logo UMKM 1"
+                            class="w-16 h-16 rounded-full border-2 border-white shadow">
+                    </div>
+                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Sinar</h3>
+                </div>
+
+                {{-- Kartu Tengah (lebih ke bawah) --}}
+                <div class="bg-white rounded-lg shadow-lg p-4 w-72 transform translate-y-8">
+                    <img src="/images/umkm2.jpg" alt="UMKM 2" class="rounded-lg w-full h-48 object-cover">
+                    <div class="flex justify-center -mt-6">
+                        <img src="/images/logo2.png" alt="Logo UMKM 2"
+                            class="w-16 h-16 rounded-full border-2 border-white shadow">
+                    </div>
+                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Indah</h3>
+                </div>
+
+                {{-- Kartu Kanan --}}
+                <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+                    <img src="/images/umkm3.jpg" alt="UMKM 3" class="rounded-lg w-full h-48 object-cover">
+                    <div class="flex justify-center -mt-6">
+                        <img src="/images/logo3.png" alt="Logo UMKM 3"
+                            class="w-16 h-16 rounded-full border-2 border-white shadow">
+                    </div>
+                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Lestari</h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-6 md:px-12 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <!-- Kiri: Foto bertumpuk -->
+        <div class="stacked-image-container">
+            <!-- Background abu-abu -->
+            <div class="image-back"></div>
+            
+            <!-- Foto utama -->
+            <div class="image-front">
+                <img src="/images/bg_batik_3.png" alt="Proses Pembuatan Batik">
+            </div>
+            
+            <!-- Foto kecil di depan -->
+            <div class="small-image">
+                <img src="/images/bg_batik_2.png" alt="Motif Batik Detail">
+            </div>
+        </div>
+
+        <!-- Kanan: Teks -->
+        <div class="text-left space-y-6">
+            <div>
+                <h1 class="playfair-display text-3xl md:text-4xl font-bold text-gray-900 mb-2">Perjalanan</h1>
+                <h2 class="playfair-display text-4xl md:text-5xl font-semibold text-[#1E41FB]">Kampung Batik Paseseh</h2>
+            </div>
+            
+            <div class="space-y-4 text-gray-700 text-lg leading-relaxed">
+                <p>
+                    Batik Tanjung Bumi merupakan salah satu kekayaan budaya yang lestari di pesisir utara pulau Madura, 
+                    tepatnya di Kecamatan Tanjung Bumi, Kabupaten Bangkalan. Menurut kisah turun temurun, batik ini mulai 
+                    berkembang sejak abad ke-16 hingga ke-17, seiring dengan meningkatnya aktivitas perdagangan di wilayah pesisir Madura.
+                </p>
+                
+                <p>
+                    Tanjung Bumi dikenal sebagai daerah yang banyak dilalui oleh nelayan dan pedagang. Interaksinya dengan 
+                    para pedagang dari Jawa, Bali, Cina, Arab, dan Eropa menjadikan Tanjung Bumi sebagai titik pertemuan budaya. 
+                    Dari interaksi inilah lahir beragam motif batik yang kaya akan makna simbolis dan penuh warna.
+                </p>
+                
+                <p>
+                    Pada awalnya, kegiatan membatik dilakukan oleh para perempuan dari keluarga bangsawan atau keluarga pedagang kaya. 
+                    Batik bukan sekadar pakaian, melainkan penanda status sosial. Motif-motif tertentu hanya boleh digunakan oleh 
+                    kalangan tertentu, terutama motif dengan detail rumit dan warna berani.
+                </p>
+            </div>
+            
+            <div class="pt-4">
+                <button class="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition duration-300">
+                    Pelajari Sejarah Lengkap
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    {{-- Section produk setelah hero --}}
+    <div id="produk" class="container mx-auto px-6 py-12">
+        <h2 class="text-3xl font-bold mb-6">Produk Unggulan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h3 class="font-semibold">Batik Tulis</h3>
+                <p class="text-sm text-slate-500">Deskripsi singkat produk.</p>
+            </div>
+        </div>
+    </div>
+@endsection
