@@ -1,69 +1,5 @@
 @extends('layouts.app')
 
-<style>
-        .playfair-display {
-            font-family: 'Playfair Display', serif;
-        }
-        .stacked-image-container {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .image-back {
-            position: absolute;
-            width: 85%;
-            height: 380px;
-            top: 20px;
-            left: 0;
-            background-color: #f3f4f6;
-            border-radius: 12px;
-            z-index: 1;
-        }
-        .image-front {
-            position: relative;
-            width: 85%;
-            height: 380px;
-            margin-left: 15%;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            z-index: 2;
-        }
-        .image-front img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        .small-image {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            bottom: -30px;
-            left: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            z-index: 3;
-            border: 4px solid white;
-        }
-        .small-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        @media (max-width: 768px) {
-            .image-back, .image-front {
-                height: 300px;
-            }
-            .small-image {
-                width: 120px;
-                height: 120px;
-            }
-        }
-    </style>
-
 @section('hero')
     {{-- Hero Section --}}
     <section class="relative bg-cover bg-center min-h-[65vh] md:min-h-screen flex items-center"
@@ -146,56 +82,61 @@
 
     <section class="container mx-auto px-6 md:px-12 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         <!-- Kiri: Foto bertumpuk -->
-        <div class="stacked-image-container">
+        <div class="relative w-full max-w-[500px] mx-auto">
             <!-- Background abu-abu -->
-            <div class="image-back"></div>
-            
+            <div class="absolute w-[85%] h-[300px] md:h-[380px] top-5 left-0 bg-gray-100 rounded-xl z-[1]"></div>
+
             <!-- Foto utama -->
-            <div class="image-front">
-                <img src="/images/bg_batik_3.png" alt="Proses Pembuatan Batik">
+            <div class="relative w-[85%] h-[300px] md:h-[380px] ml-[15%] rounded-xl overflow-hidden shadow-xl z-[2]">
+                <img src="/images/bg_batik_3.png" alt="Proses Pembuatan Batik" class="w-full h-full object-cover">
             </div>
-            
-            <!-- Foto kecil di depan -->
-            <div class="small-image">
-                <img src="/images/bg_batik_2.png" alt="Motif Batik Detail">
+
+            <!-- Foto kecil -->
+            <div
+                class="absolute w-[120px] h-[120px] md:w-[160px] md:h-[160px] -bottom-8 left-0 rounded-xl overflow-hidden shadow-2xl z-[3] border-4 border-white">
+                <img src="/images/bg_batik_2.png" alt="Motif Batik Detail" class="w-full h-full object-cover">
             </div>
         </div>
 
         <!-- Kanan: Teks -->
         <div class="text-left space-y-6">
             <div>
-                <h1 class="playfair-display text-3xl md:text-4xl font-bold text-gray-900 mb-2">Perjalanan</h1>
-                <h2 class="playfair-display text-4xl md:text-5xl font-semibold text-[#1E41FB]">Kampung Batik Paseseh</h2>
+                <h1 class="font-playfair text-3xl md:text-4xl font-bold text-gray-900 mb-2">Perjalanan</h1>
+                <h2 class="font-playfair text-4xl md:text-5xl font-semibold text-[#1E41FB]">Kampung Batik Paseseh</h2>
             </div>
-            
+
             <div class="space-y-4 text-gray-700 text-lg leading-relaxed">
                 <p>
-                    Batik Tanjung Bumi merupakan salah satu kekayaan budaya yang lestari di pesisir utara pulau Madura, 
-                    tepatnya di Kecamatan Tanjung Bumi, Kabupaten Bangkalan. Menurut kisah turun temurun, batik ini mulai 
-                    berkembang sejak abad ke-16 hingga ke-17, seiring dengan meningkatnya aktivitas perdagangan di wilayah pesisir Madura.
+                    Batik Tanjung Bumi merupakan salah satu kekayaan budaya yang lestari di pesisir utara pulau Madura,
+                    tepatnya di Kecamatan Tanjung Bumi, Kabupaten Bangkalan. Menurut kisah turun temurun, batik ini mulai
+                    berkembang sejak abad ke-16 hingga ke-17, seiring dengan meningkatnya aktivitas perdagangan di wilayah
+                    pesisir Madura.
                 </p>
-                
+
                 <p>
-                    Tanjung Bumi dikenal sebagai daerah yang banyak dilalui oleh nelayan dan pedagang. Interaksinya dengan 
-                    para pedagang dari Jawa, Bali, Cina, Arab, dan Eropa menjadikan Tanjung Bumi sebagai titik pertemuan budaya. 
+                    Tanjung Bumi dikenal sebagai daerah yang banyak dilalui oleh nelayan dan pedagang. Interaksinya dengan
+                    para pedagang dari Jawa, Bali, Cina, Arab, dan Eropa menjadikan Tanjung Bumi sebagai titik pertemuan
+                    budaya.
                     Dari interaksi inilah lahir beragam motif batik yang kaya akan makna simbolis dan penuh warna.
                 </p>
-                
+
                 <p>
-                    Pada awalnya, kegiatan membatik dilakukan oleh para perempuan dari keluarga bangsawan atau keluarga pedagang kaya. 
-                    Batik bukan sekadar pakaian, melainkan penanda status sosial. Motif-motif tertentu hanya boleh digunakan oleh 
+                    Pada awalnya, kegiatan membatik dilakukan oleh para perempuan dari keluarga bangsawan atau keluarga
+                    pedagang kaya.
+                    Batik bukan sekadar pakaian, melainkan penanda status sosial. Motif-motif tertentu hanya boleh digunakan
+                    oleh
                     kalangan tertentu, terutama motif dengan detail rumit dan warna berani.
                 </p>
             </div>
-            
-            <div class="pt-4">
-                <button class="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition duration-300">
+
+            {{-- <div class="pt-4">
+                <button
+                    class="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white font-medium rounded-lg transition duration-300">
                     Pelajari Sejarah Lengkap
                 </button>
-            </div>
+            </div> --}}
         </div>
     </section>
-
 
     {{-- Section produk setelah hero --}}
     <div id="produk" class="container mx-auto px-6 py-12">

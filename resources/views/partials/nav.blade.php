@@ -13,6 +13,7 @@
             color: #1E41FB !important;
             border-radius: 0.5rem;
         }
+
         .active-menu-mobile {
             background-color: white;
             color: #1E41FB !important;
@@ -21,14 +22,20 @@
     </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen">
-    <header class="bg-[#1E41FB]" x-data="navbar()">
+{{-- <body class="bg-gray-100 min-h-screen">
+    <header class="bg-[#1E41FB]" x-data="navbar()"> --}}
+
+<body class="bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
+    scrolled = window.scrollY > 300; // nempel setelah scroll 100px
+})">
+    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'"
+        class="transition-all duration-500 ease-in-out">
         <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div class="flex lg:flex-1">
                 <a href="#" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
-                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
-                        alt="" class="h-8 w-auto" />
+                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white" alt=""
+                        class="h-8 w-auto" />
                 </a>
             </div>
             <div class="flex lg:hidden">
@@ -43,12 +50,14 @@
                 </button>
             </div>
             <div class="hidden lg:flex lg:gap-x-4">
-                <a href="/" class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                   :class="{ 'active-menu': activeMenu === 'beranda' }" @click="setActiveMenu('beranda')">Beranda</a>
+                <a href="/"
+                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    :class="{ 'active-menu': activeMenu === 'beranda' }" @click="setActiveMenu('beranda')">Beranda</a>
 
                 <!-- Product Menu -->
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
-                    <button class="flex items-center gap-x-1 text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    <button
+                        class="flex items-center gap-x-1 text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                         :class="{ 'active-menu': activeMenu === 'komunitas' }" @click="setActiveMenu('komunitas')">
                         Komunitas
                         <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
@@ -139,14 +148,19 @@
                     </div>
                 </div>
                 <!-- End Product Menu -->
-                <a href="/events" class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                   :class="{ 'active-menu': activeMenu === 'event' }" @click="setActiveMenu('event')">Event</a>
-                <a href="/edukasi" class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                   :class="{ 'active-menu': activeMenu === 'edukasi' }" @click="setActiveMenu('edukasi')">Edukasi</a>
-                <a href="/shop" class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                   :class="{ 'active-menu': activeMenu === 'shop' }" @click="setActiveMenu('shop')">Shop</a>
-                <a href="/contact" class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                   :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>
+                <a href="/events"
+                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    :class="{ 'active-menu': activeMenu === 'event' }" @click="setActiveMenu('event')">Event</a>
+                <a href="/edukasi"
+                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    :class="{ 'active-menu': activeMenu === 'edukasi' }"
+                    @click="setActiveMenu('edukasi')">Edukasi</a>
+                <a href="/shop"
+                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    :class="{ 'active-menu': activeMenu === 'shop' }" @click="setActiveMenu('shop')">Shop</a>
+                <a href="/contact"
+                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
+                    :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>
             </div>
         </nav>
 
@@ -156,13 +170,12 @@
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 lg:hidden" style="display: none;">
             <div class="fixed inset-0 bg-black bg-opacity-25" @click="mobileMenuOpen = false"></div>
-            <div
-                class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#1E41FB] px-6 py-6 sm:max-w-sm">
+            <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#1E41FB] px-6 py-6 sm:max-w-sm">
                 <div class="flex items-center justify-between">
                     <a href="#" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
-                        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white"
-                            alt="" class="h-8 w-auto" />
+                        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white" alt=""
+                            class="h-8 w-auto" />
                     </a>
                     <button type="button" @click="mobileMenuOpen = false"
                         class="-m-2.5 rounded-md p-2.5 text-white">
@@ -176,9 +189,11 @@
                 <div class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-white/10">
                         <div class="space-y-2 py-6">
-                            <a href="/" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                               :class="{ 'active-menu-mobile': activeMenu === 'beranda' }" @click="setActiveMenu('beranda'); mobileMenuOpen = false;">Beranda</a>
-                            
+                            <a href="/"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
+                                :class="{ 'active-menu-mobile': activeMenu === 'beranda' }"
+                                @click="setActiveMenu('beranda'); mobileMenuOpen = false;">Beranda</a>
+
                             <div class="-mx-3">
                                 <button type="button" @click="toggleMobileProductMenu()"
                                     class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
@@ -192,7 +207,8 @@
                                             clip-rule="evenodd" fill-rule="evenodd" />
                                     </svg>
                                 </button>
-                                <div x-show="mobileProductMenuOpen" class="mt-2 space-y-2 pl-4" style="display: none;">
+                                <div x-show="mobileProductMenuOpen" class="mt-2 space-y-2 pl-4"
+                                    style="display: none;">
                                     <a href="/products" @click="setActiveMenu('komunitas'); mobileMenuOpen = false;"
                                         class="block rounded-lg py-2 px-3 text-sm/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200">Perjalanan</a>
                                     <a href="#" @click="setActiveMenu('komunitas'); mobileMenuOpen = false;"
@@ -201,15 +217,23 @@
                                         class="block rounded-lg py-2 px-3 text-sm/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200">Wisata</a>
                                 </div>
                             </div>
-                            
-                            <a href="/events" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                               :class="{ 'active-menu-mobile': activeMenu === 'event' }" @click="setActiveMenu('event'); mobileMenuOpen = false;">Event</a>
-                            <a href="/edukasi" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                               :class="{ 'active-menu-mobile': activeMenu === 'edukasi' }" @click="setActiveMenu('edukasi'); mobileMenuOpen = false;">Edukasi</a>
-                            <a href="/shop" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                               :class="{ 'active-menu-mobile': activeMenu === 'shop' }" @click="setActiveMenu('shop'); mobileMenuOpen = false;">Shop</a>
-                            <a href="/contact" class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                               :class="{ 'active-menu-mobile': activeMenu === 'about' }" @click="setActiveMenu('about'); mobileMenuOpen = false;">About Us</a>
+
+                            <a href="/events"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
+                                :class="{ 'active-menu-mobile': activeMenu === 'event' }"
+                                @click="setActiveMenu('event'); mobileMenuOpen = false;">Event</a>
+                            <a href="/edukasi"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
+                                :class="{ 'active-menu-mobile': activeMenu === 'edukasi' }"
+                                @click="setActiveMenu('edukasi'); mobileMenuOpen = false;">Edukasi</a>
+                            <a href="/shop"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
+                                :class="{ 'active-menu-mobile': activeMenu === 'shop' }"
+                                @click="setActiveMenu('shop'); mobileMenuOpen = false;">Shop</a>
+                            <a href="/contact"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
+                                :class="{ 'active-menu-mobile': activeMenu === 'about' }"
+                                @click="setActiveMenu('about'); mobileMenuOpen = false;">About Us</a>
                         </div>
                     </div>
                 </div>
@@ -231,7 +255,7 @@
                 toggleMobileProductMenu() {
                     this.mobileProductMenuOpen = !this.mobileProductMenuOpen;
                 },
-                
+
                 setActiveMenu(menu) {
                     this.activeMenu = menu;
                 }
