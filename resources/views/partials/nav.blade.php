@@ -160,7 +160,7 @@
                 <a href="/shop"
                     class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                     :class="{ 'active-menu': activeMenu === 'shop' }" @click="setActiveMenu('shop')">Shop</a>
-                <a href="/contact"
+                <a href="{{ route('aboutus') }}"
                     class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                     :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>
             </div>

@@ -29,4 +29,8 @@ class PageController extends Controller
     {
         return view('edukasi');
     }
+    public function aboutus()
+    {
+        return view('aboutus');
+    }
 }
