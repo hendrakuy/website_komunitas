@@ -7,6 +7,7 @@
     <title>Navbar dengan Menu Aktif</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> --}}
     <style>
         .active-menu {
             background-color: white;
@@ -25,7 +26,7 @@
 {{-- <body class="bg-gray-100 min-h-screen">
     <header class="bg-[#1E41FB]" x-data="navbar()"> --}}
 
-<body class="bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
+<body class="font-sans bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
     scrolled = window.scrollY > 300; // nempel setelah scroll 100px
 })">
     <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'" x-data="navbar()"

@@ -7,7 +7,10 @@
         <div class="relative container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             {{-- Kiri: Text + Button --}}
             <div class="text-white space-y-6 text-center md:text-left">
-                <h1 class="text-3xl md:text-5xl font-bold">Keindahan Batik Tanjung Bumi Warisan Budaya Madura</h1>
+                {{-- <h1  class="text-3xl md:text-4xl font-bold">Keindahan Batik Tanjung Bumi Warisan Budaya Madura</h1> --}}
+                <h1 id="typing" data-text="Keindahan Batik Tanjung Bumi Warisan Budaya Madura"
+                    class="text-3xl md:text-4xl lg:text-4xl font-bold border-r-4 border-black pr-1 max-w-3xl">
+                </h1>
                 <p class="text-lg md:text-xl max-w-md mx-auto md:mx-0">
                     Temukan Batik Impianmu di Sini!
                 </p>
@@ -81,7 +84,7 @@
     </section>
 @endsection
 
-@section('content')
+@section('content')     
     {{-- Section sejarah setelah hero --}}
     <section class="container mx-auto px-6 md:px-12 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         <!-- Kiri: Foto bertumpuk -->
@@ -108,7 +111,7 @@
                 <h2 class="font-playfair text-4xl md:text-5xl font-semibold text-[#1E41FB]">Kampung Batik Paseseh</h2>
             </div>
 
-            <div class="space-y-4 text-gray-700 text-lg leading-relaxed">
+            <div class="space-y-4 text-gray-700 text-[14px] md:text-[16px] leading-relaxed">
                 <p>
                     Batik Tanjung Bumi merupakan salah satu kekayaan budaya yang lestari di pesisir utara pulau Madura,
                     tepatnya di Kecamatan Tanjung Bumi, Kabupaten Bangkalan. Menurut kisah turun temurun, batik ini mulai
@@ -152,3 +155,5 @@
         </div>
     </div>
 @endsection
+
+@vite('resources/js/typing.js')
