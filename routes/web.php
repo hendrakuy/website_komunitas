@@ -8,4 +8,5 @@ Route::get('/products', [PageController::class, 'products'])->name('products');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/event', [PageController::class, 'event'])->name('event');
 Route::get('/edukasi', [PageController::class, 'edukasi'])->name('edukasi');
+Route::get('/aboutus', [PageController::class, 'aboutus'])->name('aboutus');
 
