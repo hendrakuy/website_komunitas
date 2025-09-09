@@ -28,7 +28,7 @@
 <body class="bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
     scrolled = window.scrollY > 300; // nempel setelah scroll 100px
 })">
-    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'"
+    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'" x-data="navbar()"
         class="transition-all duration-500 ease-in-out">
         <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div class="flex lg:flex-1">
@@ -50,9 +50,11 @@
                 </button>
             </div>
             <div class="hidden lg:flex lg:gap-x-4">
-                <a href="/"
-                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                    :class="{ 'active-menu': activeMenu === 'beranda' }" @click="setActiveMenu('beranda')">Beranda</a>
+                <a href="{{ route('home') }}"
+                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
+                    {{ request()->routeIs('home') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                    Beranda
+                </a>
 
                 <!-- Product Menu -->
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
@@ -148,7 +150,7 @@
                     </div>
                 </div>
                 <!-- End Product Menu -->
-                <a href="/events"
+                <a href="{{ route('event') }}"
                     class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                     :class="{ 'active-menu': activeMenu === 'event' }" @click="setActiveMenu('event')">Event</a>
                 <a href="/edukasi"

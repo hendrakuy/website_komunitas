@@ -1,13 +1,16 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // sesuaikan dengan project kamu
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",   // kalau pakai Vue
+    "./resources/**/*.jsx",   // kalau pakai React
+    "./resources/**/*.tsx",   // kalau pakai TypeScript React
   ],
   theme: {
     extend: {
       fontFamily: {
-        playfair: ["Playfair Display", "serif"],
+        sans: ["Poppins", "sans-serif"], // jadikan default font
       },
     },
   },

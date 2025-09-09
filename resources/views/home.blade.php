@@ -11,7 +11,7 @@
                 <p class="text-lg md:text-xl max-w-md mx-auto md:mx-0">
                     Temukan Batik Impianmu di Sini!
                 </p>
-                <a href="/products"
+                <a href="{{ route('products') }}"
                     class="inline-block bg-[#1E41FB] text-white px-6 py-3 rounded-3xl font-semibold hover:bg-[#5A71EC] transition duration-300">
                     Lihat Produk
                 </a>
@@ -79,7 +79,10 @@
             </div>
         </div>
     </section>
+@endsection
 
+@section('content')
+    {{-- Section sejarah setelah hero --}}
     <section class="container mx-auto px-6 md:px-12 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         <!-- Kiri: Foto bertumpuk -->
         <div class="relative w-full max-w-[500px] mx-auto">
