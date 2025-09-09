@@ -25,4 +25,8 @@ class PageController extends Controller
     {
         return view('pages.event');
     }
+    public function edukasi()
+    {
+        return view('edukasi');
+    }
 }
