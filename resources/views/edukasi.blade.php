@@ -83,19 +83,19 @@
             <h2 class="text-2xl font-bold mb-8 text-center md:text-left">Profil Pengajar</h2>
             <div class="flex flex-col md:flex-row gap-6 md:gap-10 justify-center md:justify-start">
                 <!-- Pengajar 1 -->
-                <div class="text-center p-6 rounded-lg hover:bg-blue-500 transition-colors w-full md:w-1/3">
+                <div class="text-center p-6 rounded-lg hover:bg-indigo-600 hover:text-white transition-colors w-full md:w-1/3">
                     <img src="/images/Pengajar1.png" class="w-24 h-24 rounded-full mb-3 object-cover mx-auto" alt="Pengajar 1">
                     <p class="font-semibold">Siti Aminah</p>
                     <p class="mt-2">(Pengrajin Batik Senior – 25 tahun pengalaman)</p>
                 </div>
                 <!-- Pengajar 2 -->
-                <div class="text-center p-6 rounded-lg hover:bg-blue-500 transition-colors w-full md:w-1/3">
+                <div class="text-center p-6 rounded-lg hover:bg-indigo-600 hover:text-white transition-colors w-full md:w-1/3">
                     <img src="/images/Pengajar2.png" class="w-24 h-24 rounded-full mb-3 object-cover mx-auto" alt="Pengajar 2">
                     <p class="font-semibold">Hj Abdullah Rahman</p>
                     <p class="mt-2">(Instruktur Batik – 18 tahun pengalaman)</p>
                 </div>
                 <!-- Pengajar 3 -->
-                <div class="text-center p-6 rounded-lg hover:bg-blue-500 transition-colors w-full md:w-1/3">
+                <div class="text-center p-6 rounded-lg hover:bg-indigo-600 hover:text-white transition-colors w-full md:w-1/3">
                     <img src="/images/Pengajar3.png" class="w-24 h-24 rounded-full mb-3 object-cover mx-auto" alt="Pengajar 3">
                     <p class="font-semibold">Nurul Hayati</p>
                     <p class="mt-2">(Desainer Batik – 12 tahun pengalaman)</p>

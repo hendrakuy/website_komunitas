@@ -1,21 +1,22 @@
 @extends('layouts.app')
 
 @section('hero')
-{{-- Hero Section --}}
+    {{-- Hero Section --}}
     <section class="relative bg-cover bg-center h-64 md:h-80 flex items-center justify-center text-white"
-        style="background-image: url('/images/event_bg.png');">
-        <div class="text-center max-w-2xl px-4">
+        style="background-image: url('/images/bg_shop.png');">
+        <div class="text-center max-w-3xl px-4">
             <h1 class="text-2xl md:text-4xl font-bold mb-4">Shop Batik Tanjung Bumi</h1>
-            <p class="text-sm md:text-lg mb-6">
+            <p class="text-sm md:text-lg mb-6 max-w-3xl mx-auto w-full">
                 Temukan koleksi batik Tanjung Bumi dengan desain eksklusif, motif autentik, dan kualitas terbaik.
                 Kenyamanan dalam setiap detail dan pesona budaya Indonesia.
             </p>
             {{-- Search Bar --}}
-            <form action="{{ route('shop.index') }}" method="GET" class="flex items-center bg-white rounded-full overflow-hidden">
+            <form action="{{ route('shop.index') }}" method="GET"
+                class="flex items-center bg-white rounded-full overflow-hidden">
                 <input type="text" name="q" placeholder="Temukan batik impianmu..."
                     class="px-4 py-2 text-gray-700 w-full focus:outline-none">
                 <button type="submit" class="bg-[#1E41FB] text-white px-4 py-2 hover:bg-[#5A71EC] transition">
-                    🔍
+                    <i class="fas fa-search"></i>
                 </button>
             </form>
         </div>
@@ -75,15 +76,18 @@
         {{-- Produk --}}
         <section class="md:col-span-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {{-- Loop produk --}}
-            @foreach(range(1,9) as $i)
+            @foreach (range(1, 9) as $i)
                 <div class="bg-white shadow rounded-lg overflow-hidden hover:shadow-lg transition">
-                    <img src="/images/produk{{ $i }}.jpg" alt="Produk {{ $i }}" class="w-full h-60 object-cover">
+                    <img src="/images/bg_batik_{{ $i }}.png" alt="Produk {{ $i }}"
+                        class="w-full h-60 object-cover">
                     <div class="p-4 space-y-2">
-                        <h3 class="font-semibold text-gray-800">Batik Tulis Madura Asli</h3>
-                        <p class="text-sm text-gray-500">Batik Cap</p>
-                        <p class="text-green-600 font-bold">Rp 170.000</p>
+                        <h3 class="font-semibold text-gray-800">Batik Tulis Megamendung Asli Madura 100%</h3>
+                        <p class="text-sm text-gray-500">Batik Tulis</p>
+                        <p class="text-black-600 font-medium flex items-center gap-2">
+                            <i class="fas fa-tag text-red-500"></i>Rp 170.000
+                        </p>
                         <a href="{{ route('shop.detail', $i) }}"
-                           class="inline-block w-full text-center bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
+                            class="inline-block w-full text-center bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition">
                             Lihat Detail
                         </a>
                     </div>

@@ -29,11 +29,11 @@
 <body class="font-sans bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
     scrolled = window.scrollY > 300; // nempel setelah scroll 100px
 })">
-    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'" x-data="navbar()"
-        class="transition-all duration-500 ease-in-out">
+    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'"
+        x-data="navbar()" class="transition-all duration-500 ease-in-out">
         <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
             <div class="flex lg:flex-1">
-                <a href="#" class="-m-1.5 p-1.5">
+                <a href="{{ route('home') }}" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
                     <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white" alt=""
                         class="h-8 w-auto" />
@@ -78,7 +78,7 @@
                         x-transition:leave="transition ease-in duration-150"
                         x-transition:leave-start="opacity-100 translate-y-0"
                         x-transition:leave-end="opacity-0 translate-y-1"
-                        class="absolute z-10 mt-3 w-screen max-w-sm transform px-2 sm:px-0" style="display: none;">
+                        class="absolute z-50 mt-3 w-screen max-w-sm transform px-2 sm:px-0" style="display: none;">
                         <div class="overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-black ring-opacity-5">
                             <div class="p-4">
                                 <div
@@ -161,8 +161,9 @@
                     class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
                     {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Shop</a>
                 <a href="{{ route('aboutus') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                    :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>
+                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
+                    {{ request()->routeIs('aboutus') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">About
+                    Us</a>
             </div>
         </nav>
 
@@ -191,10 +192,11 @@
                 <div class="mt-6 flow-root">
                     <div class="-my-6 divide-y divide-white/10">
                         <div class="space-y-2 py-6">
-                            <a href="/"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                :class="{ 'active-menu-mobile': activeMenu === 'beranda' }"
-                                @click="setActiveMenu('beranda'); mobileMenuOpen = false;">Beranda</a>
+                            <a href="{{ route('home') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
+                                {{ request()->routeIs('home') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                                Beranda
+                            </a>
 
                             <div class="-mx-3">
                                 <button type="button" @click="toggleMobileProductMenu()"
@@ -220,22 +222,26 @@
                                 </div>
                             </div>
 
-                            <a href="/events"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                :class="{ 'active-menu-mobile': activeMenu === 'event' }"
-                                @click="setActiveMenu('event'); mobileMenuOpen = false;">Event</a>
-                            <a href="/edukasi"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                :class="{ 'active-menu-mobile': activeMenu === 'edukasi' }"
-                                @click="setActiveMenu('edukasi'); mobileMenuOpen = false;">Edukasi</a>
-                            <a href="/shop"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                :class="{ 'active-menu-mobile': activeMenu === 'shop' }"
-                                @click="setActiveMenu('shop'); mobileMenuOpen = false;">Shop</a>
-                            <a href="/contact"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                :class="{ 'active-menu-mobile': activeMenu === 'about' }"
-                                @click="setActiveMenu('about'); mobileMenuOpen = false;">About Us</a>
+                            <a href="{{ route('event') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
+                                {{ request()->routeIs('event') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                                Event
+                            </a>
+                            <a href="{{ route('edukasi') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
+                                {{ request()->routeIs('edukasi') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                                Edukasi
+                            </a>
+                            <a href="{{ route('shop.index') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
+                                {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                                Shop
+                            </a>
+                            <a href="{{ route('aboutus') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
+                                {{ request()->routeIs('aboutus') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                                About Us
+                            </a>
                         </div>
                     </div>
                 </div>
