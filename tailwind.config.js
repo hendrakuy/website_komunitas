@@ -3,16 +3,30 @@ export default {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./resources/**/*.vue",   // kalau pakai Vue
-    "./resources/**/*.jsx",   // kalau pakai React
-    "./resources/**/*.tsx",   // kalau pakai TypeScript React
+    "./resources/**/*.vue"
   ],
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Poppins", "sans-serif"], // jadikan default font
+theme: {
+  extend: {
+    fontFamily: {
+      sans: ['Poppins', 'ui-sans-serif', 'system-ui']
+    },
+    keyframes: {
+      fadeInUp: {
+        '0%': { opacity: '0', transform: 'translateY(10px)' },
+        '100%': { opacity: '1', transform: 'translateY(0)' },
+      },
+      fadeInDown: {
+        '0%': { opacity: '0', transform: 'translateY(-10px)' },
+        '100%': { opacity: '1', transform: 'translateY(0)' },
       },
     },
-  },
-  plugins: [],
+    animation: {
+      'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+      'fade-in-down': 'fadeInDown 0.5s ease-out forwards',
+    },
+  }
+},
+plugins: []
 }
+
+

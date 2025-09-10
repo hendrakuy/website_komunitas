@@ -7,6 +7,7 @@
     <title>Navbar dengan Menu Aktif</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {{-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet"> --}}
     <style>
         .active-menu {
             background-color: white;
@@ -25,7 +26,7 @@
 {{-- <body class="bg-gray-100 min-h-screen">
     <header class="bg-[#1E41FB]" x-data="navbar()"> --}}
 
-<body class="bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
+<body class="font-sans bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
     scrolled = window.scrollY > 300; // nempel setelah scroll 100px
 })">
     <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'" x-data="navbar()"
@@ -156,9 +157,9 @@
                 <a href="{{ route('edukasi') }}"
                     class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
                     {{ request()->routeIs('edukasi') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Edukasi</a>
-                <a href="/shop"
-                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                    :class="{ 'active-menu': activeMenu === 'shop' }" @click="setActiveMenu('shop')">Shop</a>
+                <a href="{{ route('shop.index') }}"
+                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
+                    {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Shop</a>
                 <a href="{{ route('aboutus') }}"
                     class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                     :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>
