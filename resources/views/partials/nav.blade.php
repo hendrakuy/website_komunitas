@@ -157,9 +157,9 @@
                 <a href="{{ route('edukasi') }}"
                     class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
                     {{ request()->routeIs('edukasi') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Edukasi</a>
-                <a href="/shop"
-                    class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                    :class="{ 'active-menu': activeMenu === 'shop' }" @click="setActiveMenu('shop')">Shop</a>
+                <a href="{{ route('shop.index') }}"
+                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
+                    {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Shop</a>
                 <a href="{{ route('aboutus') }}"
                     class="text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
                     :class="{ 'active-menu': activeMenu === 'about' }" @click="setActiveMenu('about')">About Us</a>

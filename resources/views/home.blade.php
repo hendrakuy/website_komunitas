@@ -9,7 +9,7 @@
             <div class="text-white space-y-6 text-center md:text-left">
                 {{-- <h1  class="text-3xl md:text-4xl font-bold">Keindahan Batik Tanjung Bumi Warisan Budaya Madura</h1> --}}
                 <h1 id="typing" data-text="Keindahan Batik Tanjung Bumi Warisan Budaya Madura"
-                    class="text-3xl md:text-4xl lg:text-4xl font-bold border-r-4 border-black pr-1 max-w-3xl">
+                    class="text-3xl md:text-4xl lg:text-4xl font-bold border-r-4 border-white pr-1 max-w-3xl">
                 </h1>
                 <p class="text-lg md:text-xl max-w-md mx-auto md:mx-0">
                     Temukan Batik Impianmu di Sini!
@@ -84,7 +84,7 @@
     </section>
 @endsection
 
-@section('content')     
+@section('content')
     {{-- Section sejarah setelah hero --}}
     <section class="container mx-auto px-6 md:px-12 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
         <!-- Kiri: Foto bertumpuk -->
@@ -144,8 +144,57 @@
         </div>
     </section>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-600 py-20 p-6 md:p-12 rounded-2xl">
+        <!-- Kiri: Card besar -->
+        <div class="bg-white rounded-2xl shadow overflow-hidden flex flex-col justify-between">
+            <img src="/images/batik1.jpg" alt="Batik Tulis Tanjung Bumi" class="w-full h-48 md:h-64 object-cover">
+            <div class="p-6">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">KEUNIKAN BATIK TULIS TANJUNG BUMI</h2>
+                <p class="text-slate-600 text-sm md:text-base">
+                    Paduan Tradisi, Kisah, dan Ekspresi Seni. <br>
+                    Setiap Helai Adalah Mahakarya.
+                </p>
+            </div>
+        </div>
+
+        <!-- Kanan: 4 card kecil -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <img src="/images/batik2.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
+                <div class="p-4">
+                    <h3 class="font-semibold text-slate-800 text-sm">Batik Tulis Tanjung Bumi</h3>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <img src="/images/batik3.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
+                <div class="p-4">
+                    <h3 class="font-semibold text-slate-800 text-sm">Keindahan dan Ciri Khas Batik Tulis</h3>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-black rounded-2xl shadow overflow-hidden flex flex-col justify-between">
+                <div class="p-6 text-white">
+                    <h3 class="text-lg font-semibold">BATIK TULIS TANJUNG BUMI</h3>
+                    <p class="text-sm mt-2">Warisan Abadi dari Tanjung Bumi</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-2xl shadow overflow-hidden">
+                <img src="/images/batik4.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
+                <div class="p-4">
+                    <h3 class="font-semibold text-slate-800 text-sm">Karya Seni dalam Setiap Goresan</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
     {{-- Section produk setelah hero --}}
-    <div id="produk" class="container mx-auto px-6 py-12">
+    {{-- <div id="produk" class="container mx-auto px-6 py-12">
         <h2 class="text-3xl font-bold mb-6">Produk Unggulan</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="bg-white p-4 rounded-lg shadow">
@@ -153,7 +202,7 @@
                 <p class="text-sm text-slate-500">Deskripsi singkat produk.</p>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @vite('resources/js/typing.js')
