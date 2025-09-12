@@ -14,7 +14,7 @@
                 <p class="text-lg md:text-xl max-w-md mx-auto md:mx-0">
                     Temukan Batik Impianmu di Sini!
                 </p>
-                <a href="{{ route('products') }}"
+                <a href="{{ route('shop.index') }}"
                     class="inline-block bg-[#1E41FB] text-white px-6 py-3 rounded-3xl font-semibold hover:bg-[#5A71EC] transition duration-300">
                     Lihat Produk
                 </a>
