@@ -57,14 +57,21 @@
                     Beranda
                 </a>
 
+                @php
+                    $komunitasActive =
+                        request()->routeIs('perjalanan') ||
+                        request()->routeIs('penghargaan') ||
+                        request()->routeIs('wisata');
+                @endphp
+
                 <!-- Product Menu -->
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                     <button
-                        class="flex items-center gap-x-1 text-sm/6 font-semibold py-2 px-4 text-white hover:bg-white/20 rounded-lg transition-colors duration-200"
-                        :class="{ 'active-menu': activeMenu === 'komunitas' }" @click="setActiveMenu('komunitas')">
+                        class="flex items-center gap-x-1 text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
+                        {{ $komunitasActive ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
                         Komunitas
                         <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
-                            class="size-5 flex-none text-white">
+                            class="size-5 flex-none {{ $komunitasActive ? 'text-[#1E41FB]' : 'text-white' }}">
                             <path
                                 d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
                                 clip-rule="evenodd" fill-rule="evenodd" />
@@ -96,7 +103,7 @@
                                     </div>
                                     <!-- Teks -->
                                     <div class="flex-auto">
-                                        <a href="/products"
+                                        <a href="{{ route('perjalanan') }}"
                                             class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
                                             Perjalanan
                                             <span class="absolute inset-0"></span>
@@ -118,7 +125,7 @@
                                     </div>
                                     <!-- Teks -->
                                     <div class="flex-auto">
-                                        <a href="#"
+                                        <a href="{{ route('penghargaan') }}"
                                             class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
                                             Penghargaan
                                             <span class="absolute inset-0"></span>
@@ -138,7 +145,7 @@
                                         </svg>
                                     </div>
                                     <div class="flex-auto">
-                                        <a href="#"
+                                        <a href="{{ route('wisata') }}"
                                             class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
                                             Wisata
                                             <span class="absolute inset-0"></span>

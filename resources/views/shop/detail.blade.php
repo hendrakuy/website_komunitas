@@ -2,45 +2,56 @@
 
 @section('content')
     <!-- Container -->
-    <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+
+        <!-- Breadcrumb -->
+        <nav class="text-sm text-gray-500 mb-4" aria-label="Breadcrumb">
+            <ol class="list-reset flex">
+                <li>
+                    <a href="{{ route('home') }}" class="text-blue-600 hover:underline">Beranda</a>
+                    <span class="mx-2">/</span>
+                </li>
+                <li>
+                    <a href="{{ route('shop.index') }}" class="text-blue-600 hover:underline">Shop</a>
+                    <span class="mx-2">/</span>
+                </li>
+                <li class="text-gray-700" aria-current="page">
+                    {{ $batik->title }}
+                </li>
+            </ol>
+        </nav>
 
         <!-- Product Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-4 rounded-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 p-4 rounded-2xl">
 
             <!-- Product Image -->
             <div class="flex items-center justify-center">
-                <img src="/images/model_1.png" alt="Batik Madura Motif Burung Hong"
-                    class="w-full h-[400px] md:h-[600px] rounded-xl object-cover object-top items-center shadow-md bg-gray-100">
+                <img src="{{ asset('storage/' . $batik->media->first()->file_path) }}"
+                    alt="{{ $batik->media->first()->alt ?? $batik->title }}"
+                    class="w-full h-[400px] md:h-[600px] rounded-xl object-cover object-top shadow-md bg-gray-100">
             </div>
 
             <!-- Product Info -->
             <div class="flex flex-col justify-between">
                 <div>
-                    <!-- Nama & Harga -->
-                    <h1 class="text-2xl font-bold text-gray-900">
-                        Batik Madura Motif Burung Hong
-                    </h1>
+                    <h1 class="text-2xl font-bold text-gray-900">{{ $batik->title }}</h1>
                     <p class="text-xl font-semibold text-black mt-4">
-                        <i class="fas fa-tag mr-2 text-red-600"></i>Rp. 175.000
+                        <i class="fas fa-tag mr-2 text-red-600"></i>Rp. {{ number_format($batik->price, 0, ',', '.') }}
                     </p>
 
                     <!-- Deskripsi -->
                     <h2 class="text-lg font-semibold mt-6 mb-2">Deskripsi</h2>
-                    <div class="mt-2 border-t pt-2 text-sm text-gray-600"></div>
-                    <p class="text-gray-600 leading-relaxed">
-                        Batik Madura identik dengan batik tulis khas lokalitas daerah Madura. Motif Burung Hong
-                        merupakan simbol kemewahan, keanggunan, dan keberuntungan. Cocok dipakai untuk acara formal
-                        maupun casual. Diproduksi dengan bahan katun premium yang lembut dan nyaman.
-                    </p>
+                    <div class="mt-2 border-t pt-2 text-sm text-gray-900"></div>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">{{ $batik->description }}</p>
 
                     <!-- Ukuran -->
                     <div class="mt-6">
                         <h3 class="text-lg font-semibold mb-2">Ukuran</h3>
                         <div class="flex flex-wrap gap-2">
-                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-100">M</button>
-                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-100">L</button>
-                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-100">XL</button>
-                            <button class="px-4 py-2 border rounded-lg hover:bg-gray-100">XXL</button>
+                            @foreach (explode(',', $batik->size) as $size)
+                                <button
+                                    class="px-4 py-2 border border-gray-400 rounded-lg hover:bg-gray-100">{{ $size }}</button>
+                            @endforeach
                         </div>
                     </div>
 
@@ -63,13 +74,13 @@
         <h3 class="text-lg font-semibold mt-8 mb-2">Informasi Tambahan</h3>
         <div class="mt-2 border-t pt-4 text-sm text-gray-600">
             <ul class="space-y-1">
-                <li><strong>Nama Produk:</strong> Batik Madura Motif Burung Hong</li>
-                <li><strong>Bahan:</strong> Katun Premium</li>
-                <li><strong>Tema Motif:</strong> Burung Hong (kemewahan, keanggunan, keberuntungan)</li>
-                <li><strong>Tersedia:</strong> M, L, XL, XXL</li>
-                <li><strong>Teknik:</strong> Tulis Cap (grade premium)</li>
-                <li><strong>Kualitas:</strong> Jahitan rapi & bahan adem</li>
-                <li><strong>Cocok untuk:</strong> Acara formal, kantor, pesta hingga sehari-hari</li>
+                <li><strong>Nama Produk:</strong> {{ $batik->title }}</li>
+                <li><strong>Bahan:</strong> {{ $batik->material }}</li>
+                <li><strong>Tema Motif:</strong> {{ $batik->title }}</li>
+                <li><strong>Tersedia:</strong> {{ $batik->size }}</li>
+                <li><strong>Teknik:</strong> {{ $batik->category->name }}</li>
+                <li><strong>Kualitas:</strong> {{ $batik->quality }}</li>
+                <li><strong>UMKM:</strong> {{ $batik->umkm->name }}</li>
             </ul>
         </div>
 

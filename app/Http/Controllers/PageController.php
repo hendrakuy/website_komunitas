@@ -16,6 +16,21 @@ class PageController extends Controller
         return view('products.index');
     }
 
+    public function perjalanan()
+    {
+        return view('komunitas.perjalanan');
+    }
+
+    public function penghargaan()
+    {
+        return view('komunitas.penghargaan');
+    }
+
+    public function wisata()
+    {
+        return view('komunitas.wisata');
+    }
+
     public function contact()
     {
         return view('pages.contact');
