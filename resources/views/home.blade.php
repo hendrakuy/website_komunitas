@@ -33,55 +33,145 @@
     </section>
 
     {{-- Section UMKM --}}
-    <section class="relative bg-cover py-10 bg-bottom min-h-[140vh]"
-        style="background-image: url('/images/bg_batik_1.png');">
-        <div class="absolute inset-0 bg-black/10"></div>
-        <div class="container mx-auto px-6 text-center text-black">
+<section class="relative bg-cover py-10 bg-bottom min-h-[140vh]"
+    style="background-image: url('/images/bg_batik_1.png');">
+    
+    <!-- Overlay background -->
+    <div class="absolute inset-0 bg-black/10"></div>
 
-            {{-- Judul & Deskripsi --}}
-            <h2 class="text-3xl md:text-4xl font-bold mb-3">UMKM</h2>
-            <h2 class="text-3xl md:text-4xl font-bold mb-3">Kampung Batik Paseseh</h2>
-            <p class="text-lg md:text-xl mb-12 max-w-4xl mx-auto">
-                Kampung batik paseseh merupakan komunitas yang memiliki 10 UMKM terkenal ditanjung bumi. serta disetiap UMKM
-                memiliki banyak produk unggulan yang mereka produksi
-            </p>
+    <!-- Konten utama -->
+    <div class="relative z-10 container mx-auto px-6 text-center text-black">
 
-            {{-- Grid UMKM --}}
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+        {{-- Judul & Deskripsi --}}
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">UMKM</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-3">Kampung Batik Paseseh</h2>
+        <p class="text-lg md:text-xl mb-12 max-w-4xl mx-auto">
+            Kampung batik paseseh merupakan komunitas yang memiliki 10 UMKM terkenal ditanjung bumi. serta disetiap UMKM
+            memiliki banyak produk unggulan yang mereka produksi
+        </p>
 
-                {{-- Kartu Kiri --}}
-                <div class="bg-white rounded-lg shadow-lg p-4 w-72">
-                    <img src="/images/hero_background.png" alt="UMKM 1" class="rounded-lg w-full h-48 object-cover">
-                    <div class="flex justify-center -mt-6">
-                        <img src="/images/model_batik_hero.png" alt="Logo UMKM 1"
-                            class="w-16 h-16 rounded-full border-2 border-white shadow">
-                    </div>
-                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Sinar</h3>
+        {{-- Grid UMKM --}}
+        <div id="umkm-list" class="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+            
+            {{-- UMKM 1 --}}
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 1" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 1"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
                 </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Jasmine</h3>
+            </div>
 
-                {{-- Kartu Tengah (lebih ke bawah) --}}
-                <div class="bg-white rounded-lg shadow-lg p-4 w-72 transform translate-y-8">
-                    <img src="/images/umkm2.jpg" alt="UMKM 2" class="rounded-lg w-full h-48 object-cover">
-                    <div class="flex justify-center -mt-6">
-                        <img src="/images/logo2.png" alt="Logo UMKM 2"
-                            class="w-16 h-16 rounded-full border-2 border-white shadow">
-                    </div>
-                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Indah</h3>
+            {{-- UMKM 2 --}}
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+                <img src="/images/Home/Umkm2_Batik.png" alt="UMKM 2" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm2_Logo.png" alt="Logo UMKM 2"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
                 </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Naraya Batik</h3>
+            </div>
 
-                {{-- Kartu Kanan --}}
-                <div class="bg-white rounded-lg shadow-lg p-4 w-72">
-                    <img src="/images/umkm3.jpg" alt="UMKM 3" class="rounded-lg w-full h-48 object-cover">
-                    <div class="flex justify-center -mt-6">
-                        <img src="/images/logo3.png" alt="Logo UMKM 3"
-                            class="w-16 h-16 rounded-full border-2 border-white shadow">
-                    </div>
-                    <h3 class="mt-4 font-semibold text-gray-800">UMKM Batik Lestari</h3>
+            {{-- UMKM 3 --}}
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72">
+                <img src="/images/Home/Umkm3_Batik.png" alt="UMKM 3" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm3_Logo.png" alt="Logo UMKM 3"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
                 </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Maya Batik</h3>
+            </div>
 
+            {{-- UMKM tambahan (disembunyikan dulu) --}}
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 4" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 4"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Halima Batik</h3>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 5" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 5"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Anisawa Batik</h3>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 6" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 6"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Veroy Batik</h3>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 7" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 7"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Maruha Batik</h3>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 8" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 8"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Kiki Batik</h3>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 9" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 9"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Nurul Batik</h3>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-4 w-72 hidden more-umkm">
+                <img src="/images/Home/Umkm1_Batik.png" alt="UMKM 10" class="rounded-lg w-full h-48 object-cover">
+                <div class="flex justify-center -mt-6">
+                    <img src="/images/Home/Umkm1_Logo.png" alt="Logo UMKM 10"
+                        class="w-16 h-16 rounded-full border-2 border-white shadow">
+                </div>
+                <h3 class="mt-4 font-semibold text-gray-800">UMKM Diyah Batik</h3>
             </div>
         </div>
-    </section>
+
+        {{-- Tombol Lihat Lengkap --}}
+        <div class="mt-10">
+            <button id="lihatLengkapBtn"
+                class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">
+                Lihat Lengkap
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    const btn = document.getElementById('lihatLengkapBtn');
+    const hiddenItems = document.querySelectorAll('.more-umkm');
+
+    btn.addEventListener('click', () => {
+        hiddenItems.forEach(item => item.classList.toggle('hidden'));
+
+        if (btn.innerText === "Lihat Lengkap") {
+            btn.innerText = "Tutup";
+        } else {
+            btn.innerText = "Lihat Lengkap";
+        }
+    });
+</script>
+
 @endsection
 
 @section('content')
@@ -144,51 +234,62 @@
         </div>
     </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-600 py-20 p-6 md:p-12 rounded-2xl">
-        <!-- Kiri: Card besar -->
-        <div class="bg-white rounded-2xl shadow overflow-hidden flex flex-col justify-between">
-            <img src="/images/batik1.jpg" alt="Batik Tulis Tanjung Bumi" class="w-full h-48 md:h-64 object-cover">
-            <div class="p-6">
-                <h2 class="text-xl font-bold text-slate-800 mb-2">KEUNIKAN BATIK TULIS TANJUNG BUMI</h2>
-                <p class="text-slate-600 text-sm md:text-base">
-                    Paduan Tradisi, Kisah, dan Ekspresi Seni. <br>
-                    Setiap Helai Adalah Mahakarya.
-                </p>
-            </div>
-        </div>
+    <div class="w-full px-6 md:px-12 mt-12">
+        <!-- Judul -->
+        <h2 class="text-2xl font-bold text-blue-600 mb-8 text-center">Instagram</h2>
 
-        <!-- Kanan: 4 card kecil -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <!-- Card 1 -->
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-                <img src="/images/batik2.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-slate-800 text-sm">Batik Tulis Tanjung Bumi</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-blue-600 py-20 p-6 md:p-12 rounded-2xl">
+            <!-- Kiri: Card besar -->
+            <a href="https://instagram.com/akun_instagrammu" target="_blank" 
+            class="bg-white rounded-2xl shadow overflow-hidden flex flex-col justify-between hover:scale-105 transform transition">
+                <img src="/images/Home1.png" alt="Batik Tulis Tanjung Bumi" class="w-full h-48 md:h-64 object-cover">
+                <div class="p-6">
+                    <h2 class="text-xl font-bold text-slate-800 mb-2">KEUNIKAN BATIK TULIS TANJUNG BUMI</h2>
+                    <p class="text-slate-600 text-sm md:text-base">
+                        Paduan Tradisi, Kisah, dan Ekspresi Seni. <br>
+                        Setiap Helai Adalah Mahakarya.
+                    </p>
                 </div>
-            </div>
+            </a>
 
-            <!-- Card 2 -->
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-                <img src="/images/batik3.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-slate-800 text-sm">Keindahan dan Ciri Khas Batik Tulis</h3>
-                </div>
-            </div>
+            <!-- Kanan: 4 card kecil -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <!-- Card 1 -->
+                <a href="https://instagram.com/akun_instagrammu" target="_blank" 
+                class="bg-white rounded-2xl shadow overflow-hidden hover:scale-105 transform transition">
+                    <img src="/images/Home2.png" alt="Batik Tulis" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-slate-800 text-sm">Batik Tulis Tanjung Bumi</h3>
+                    </div>
+                </a>
 
-            <!-- Card 3 -->
-            <div class="bg-black rounded-2xl shadow overflow-hidden flex flex-col justify-between">
-                <div class="p-6 text-white">
-                    <h3 class="text-lg font-semibold">BATIK TULIS TANJUNG BUMI</h3>
-                    <p class="text-sm mt-2">Warisan Abadi dari Tanjung Bumi</p>
-                </div>
-            </div>
+                <!-- Card 2 -->
+                <a href="https://instagram.com/akun_instagrammu" target="_blank" 
+                class="bg-white rounded-2xl shadow overflow-hidden hover:scale-105 transform transition">
+                    <img src="/images/Home3.png" alt="Batik Tulis" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-slate-800 text-sm">Keindahan dan Ciri Khas Batik Tulis</h3>
+                    </div>
+                </a>
+                
+                <!-- Card 3 -->
+                <a href="https://instagram.com/akun_instagrammu" target="_blank" 
+                class="bg-white rounded-2xl shadow overflow-hidden flex flex-col justify-between hover:scale-105 transform transition">
+                    <div class="p-6">
+                        <img src="/images/Home3.png" alt="Batik Tulis" class="w-full h-32 object-cover rounded-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mt-4">BATIK TULIS TANJUNG BUMI</h3>
+                        <p class="text-sm text-slate-600 mt-2">Warisan Abadi dari Tanjung Bumi</p>
+                    </div>
+                </a>
 
-            <!-- Card 4 -->
-            <div class="bg-white rounded-2xl shadow overflow-hidden">
-                <img src="/images/batik4.jpg" alt="Batik Tulis" class="w-full h-32 object-cover">
-                <div class="p-4">
-                    <h3 class="font-semibold text-slate-800 text-sm">Karya Seni dalam Setiap Goresan</h3>
-                </div>
+                <!-- Card 4 -->
+                <a href="https://instagram.com/akun_instagrammu" target="_blank" 
+                class="bg-white rounded-2xl shadow overflow-hidden hover:scale-105 transform transition">
+                    <img src="/images/Home4.png" alt="Batik Tulis" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-semibold text-slate-800 text-sm">Karya Seni dalam Setiap Goresan</h3>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
