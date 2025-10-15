@@ -27,36 +27,59 @@
     <header class="bg-[#1E41FB]" x-data="navbar()"> --}}
 
 <body class="font-sans bg-gray-100 min-h-screen" x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => {
-    scrolled = window.scrollY > 300; // nempel setelah scroll 100px
+    scrolled = window.scrollY > 50;
 })">
-    <header :class="scrolled ? 'sticky top-0 z-50 bg-[#1E41FB] shadow-md' : 'relative bg-[#1E41FB]'"
+    <header
+        :class="scrolled ? 'sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-200' :
+            'relative bg-gradient-to-r from-blue-900 to-purple-800'"
         x-data="navbar()" class="transition-all duration-500 ease-in-out">
         <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
+            <!-- Logo Section -->
             <div class="flex lg:flex-1">
-                <a href="{{ route('home') }}" class="-m-1.5 p-1.5">
-                    <span class="sr-only">Your Company</span>
-                    <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white" alt=""
-                        class="h-8 w-auto" />
+                <a href="{{ route('home') }}" class="-m-1.5 p-1.5 flex items-center space-x-3 group">
+                    <div class="relative">
+                        <img src="{{ asset('images/KOMUNITAS (5).png') }}" alt="Logo"
+                            class="h-12 w-auto transform group-hover:scale-105 transition-transform duration-300" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300">
+                        </div>
+                    </div>
+                    <span :class="scrolled ? 'text-gray-900' : 'text-white'"
+                        class="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        Kampung Batik Paseseh
+                    </span>
                 </a>
             </div>
+
+            <!-- Mobile Menu Button -->
             <div class="flex lg:hidden">
                 <button type="button" @click="openMobileMenu()"
-                    class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    :class="scrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'"
+                    class="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-inset">
                     <span class="sr-only">Open main menu</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" data-slot="icon"
                         aria-hidden="true" class="size-6">
                         <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
                             stroke-linejoin="round" />
                     </svg>
                 </button>
             </div>
-            <div class="hidden lg:flex lg:gap-x-4">
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex lg:gap-x-2">
+                <!-- Beranda -->
                 <a href="{{ route('home') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                    {{ request()->routeIs('home') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                    :class="scrolled ?
+                        '{{ request()->routeIs('home') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                        '{{ request()->routeIs('home') ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                    class="relative group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-home text-sm"></i>
                     Beranda
+                    <span
+                        class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-current transform -translate-x-1/2 group-hover:w-3/4 transition-all duration-300"></span>
                 </a>
 
+                <!-- Komunitas Dropdown -->
                 @php
                     $komunitasActive =
                         request()->routeIs('perjalanan') ||
@@ -64,114 +87,151 @@
                         request()->routeIs('wisata');
                 @endphp
 
-                <!-- Product Menu -->
                 <div class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                     <button
-                        class="flex items-center gap-x-1 text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                        {{ $komunitasActive ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
+                        :class="scrolled ?
+                            '{{ $komunitasActive ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                            '{{ $komunitasActive ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                        class="group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                        <i class="fas fa-users text-sm"></i>
                         Komunitas
                         <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
-                            class="size-5 flex-none {{ $komunitasActive ? 'text-[#1E41FB]' : 'text-white' }}">
-                            <path
-                                d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                clip-rule="evenodd" fill-rule="evenodd" />
+                            class="size-4 transition-transform duration-300" :class="open ? 'rotate-180' : ''">
+                            <path fill-rule="evenodd"
+                                d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                clip-rule="evenodd" />
                         </svg>
                     </button>
 
                     <!-- Dropdown Panel -->
-                    <div x-show="open" x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 translate-y-1"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        x-transition:leave="transition ease-in duration-150"
-                        x-transition:leave-start="opacity-100 translate-y-0"
-                        x-transition:leave-end="opacity-0 translate-y-1"
-                        class="absolute z-50 mt-3 w-screen max-w-sm transform px-2 sm:px-0" style="display: none;">
-                        <div class="overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-                            <div class="p-4">
-                                <div
-                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-black/5">
-                                    <!-- Bulat icon -->
+                    <div x-show="open" x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-95 translate-y-2"
+                        x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 scale-95 translate-y-2"
+                        class="absolute z-50 mt-2 w-80 transform px-2" style="display: none;">
+                        <div
+                            class="overflow-hidden rounded-2xl bg-white/95 backdrop-blur-md shadow-xl ring-1 ring-gray-200/50">
+                            <div class="p-3">
+                                <!-- Perjalanan -->
+                                <a href="{{ route('perjalanan') }}"
+                                    class="group relative flex items-center gap-x-4 rounded-xl p-4 text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50 hover:shadow-md">
                                     <div
-                                        class="flex size-11 flex-none items-center justify-center rounded-lg bg-[#5A71EC]">
-                                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                            class="size-6 text-white group-hover:text-gray-100" data-slot="icon"
-                                            aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
-                                        </svg>
-
+                                        class="flex size-12 flex-none items-center justify-center rounded-xl bg-gradient-to-r from-blue-500 to-blue-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-route text-white text-lg"></i>
                                     </div>
-                                    <!-- Teks -->
                                     <div class="flex-auto">
-                                        <a href="{{ route('perjalanan') }}"
-                                            class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
+                                        <p
+                                            class="font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                                             Perjalanan
-                                            <span class="absolute inset-0"></span>
-                                        </a>
-                                        <p class="mt-1 text-gray-500">Ketahui perjalanan kami</p>
+                                        </p>
+                                        <p class="mt-1 text-gray-500 text-xs">Ketahui perjalanan dan sejarah kami</p>
                                     </div>
-                                </div>
-                                <div
-                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-black/5">
-                                    <!-- Bulat icon -->
+                                    <i
+                                        class="fas fa-chevron-right text-gray-400 group-hover:text-blue-500 transform group-hover:translate-x-1 transition-all duration-300"></i>
+                                </a>
+
+                                <!-- Penghargaan -->
+                                <a href="{{ route('penghargaan') }}"
+                                    class="group relative flex items-center gap-x-4 rounded-xl p-4 text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-purple-50 hover:to-pink-50 hover:shadow-md">
                                     <div
-                                        class="flex size-11 flex-none items-center justify-center rounded-lg bg-[#5A71EC]">
-                                        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                            class="size-6 text-white group-hover:text-gray-100" data-slot="icon"
-                                            aria-hidden="true">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M16.5 18.75h-9m9 0a3 3 0 0 1 3 3h-15a3 3 0 0 1 3-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 0 1-.982-3.172M9.497 14.25a7.454 7.454 0 0 0 .981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 0 0 7.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 0 0 2.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 0 1 2.916.52 6.003 6.003 0 0 1-5.395 4.972m0 0a6.726 6.726 0 0 1-2.749 1.35m0 0a6.772 6.772 0 0 1-3.044 0" />
-                                        </svg>
+                                        class="flex size-12 flex-none items-center justify-center rounded-xl bg-gradient-to-r from-purple-500 to-purple-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-trophy text-white text-lg"></i>
                                     </div>
-                                    <!-- Teks -->
                                     <div class="flex-auto">
-                                        <a href="{{ route('penghargaan') }}"
-                                            class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
+                                        <p
+                                            class="font-semibold text-gray-900 group-hover:text-purple-600 transition-colors">
                                             Penghargaan
-                                            <span class="absolute inset-0"></span>
-                                        </a>
-                                        <p class="mt-1 text-gray-500">Lihat daftar penghargaan</p>
+                                        </p>
+                                        <p class="mt-1 text-gray-500 text-xs">Prestasi dan pengakuan yang kami raih</p>
                                     </div>
-                                </div>
-                                <div
-                                    class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-black/5">
+                                    <i
+                                        class="fas fa-chevron-right text-gray-400 group-hover:text-purple-500 transform group-hover:translate-x-1 transition-all duration-300"></i>
+                                </a>
+
+                                <!-- Wisata -->
+                                <a href="{{ route('wisata') }}"
+                                    class="group relative flex items-center gap-x-4 rounded-xl p-4 text-sm transition-all duration-300 hover:bg-gradient-to-r hover:from-green-50 hover:to-teal-50 hover:shadow-md">
                                     <div
-                                        class="flex size-11 flex-none items-center justify-center rounded-lg bg-[#5A71EC]">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                            data-slot="icon" aria-hidden="true"
-                                            class="size-6 text-white group-hover:text-gray-100">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
-                                        </svg>
+                                        class="flex size-12 flex-none items-center justify-center rounded-xl bg-gradient-to-r from-green-500 to-green-600 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fas fa-map-marked-alt text-white text-lg"></i>
                                     </div>
                                     <div class="flex-auto">
-                                        <a href="{{ route('wisata') }}"
-                                            class="block font-semibold text-gray-900 group-hover:text-[#5A71EC]">
+                                        <p
+                                            class="font-semibold text-gray-900 group-hover:text-green-600 transition-colors">
                                             Wisata
-                                            <span class="absolute inset-0"></span>
-                                        </a>
-                                        <p class="mt-1 text-gray-500">Jelajahi destinasi wisata terbaik</p>
+                                        </p>
+                                        <p class="mt-1 text-gray-500 text-xs">Jelajahi destinasi wisata terbaik</p>
                                     </div>
-                                </div>
+                                    <i
+                                        class="fas fa-chevron-right text-gray-400 group-hover:text-green-500 transform group-hover:translate-x-1 transition-all duration-300"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- End Product Menu -->
-                <a href="{{ route('event') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                    {{ request()->routeIs('event') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Event</a>
-                <a href="{{ route('edukasi') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                    {{ request()->routeIs('edukasi') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Edukasi</a>
+
+                <!-- Kegiatan -->
+                <a href="{{ route('event.index') }}"
+                    :class="scrolled ?
+                        '{{ request()->routeIs('event.index') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                        '{{ request()->routeIs('event.index') ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                    class="relative group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-calendar-alt text-sm"></i>
+                    Kegiatan
+                    <span
+                        class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-current transform -translate-x-1/2 group-hover:w-3/4 transition-all duration-300"></span>
+                </a>
+
+                <!-- Edukasi -->
+                <a href="{{ route('edupackage.index') }}"
+                    :class="scrolled ?
+                        '{{ request()->routeIs('edupackage.index') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                        '{{ request()->routeIs('edupackage.index') ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                    class="relative group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-graduation-cap text-sm"></i>
+                    Edukasi
+                    <span
+                        class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-current transform -translate-x-1/2 group-hover:w-3/4 transition-all duration-300"></span>
+                </a>
+
+                <!-- Belanja -->
                 <a href="{{ route('shop.index') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                    {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">Shop</a>
+                    :class="scrolled ?
+                        '{{ request()->routeIs('shop.index') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                        '{{ request()->routeIs('shop.index') ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                    class="relative group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-shopping-bag text-sm"></i>
+                    Belanja
+                    <span
+                        class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-current transform -translate-x-1/2 group-hover:w-3/4 transition-all duration-300"></span>
+                </a>
+
+                <!-- Tentang Kami -->
                 <a href="{{ route('aboutus') }}"
-                    class="text-sm/6 font-semibold py-2 px-4 rounded-lg transition-colors duration-200
-                    {{ request()->routeIs('aboutus') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">About
-                    Us</a>
+                    :class="scrolled ?
+                        '{{ request()->routeIs('aboutus') ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100' }}' :
+                        '{{ request()->routeIs('aboutus') ? 'bg-white text-blue-600 shadow-lg' : 'text-white hover:bg-white/20' }}'"
+                    class="relative group flex items-center gap-x-2 text-sm font-semibold py-3 px-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5">
+                    <i class="fas fa-info-circle text-sm"></i>
+                    Tentang Kami
+                    <span
+                        class="absolute bottom-0 left-1/2 w-0 h-0.5 bg-current transform -translate-x-1/2 group-hover:w-3/4 transition-all duration-300"></span>
+                </a>
             </div>
+
+            <!-- CTA Button -->
+            {{-- <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                <a href="{{ route('shop.index') }}" 
+                    class="group relative overflow-hidden bg-gradient-to-r from-amber-500 to-orange-500 text-white text-sm font-bold py-3 px-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 hover:scale-105">
+                    <span class="relative z-10 flex items-center gap-x-2">
+                        <i class="fas fa-shopping-cart"></i>
+                        Belanja Sekarang
+                    </span>
+                    <div class="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                </a>
+            </div> --}}
         </nav>
 
         <!-- Mobile menu -->
@@ -179,75 +239,193 @@
             x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
             x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
             x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 lg:hidden" style="display: none;">
-            <div class="fixed inset-0 bg-black bg-opacity-25" @click="mobileMenuOpen = false"></div>
-            <div class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#1E41FB] px-6 py-6 sm:max-w-sm">
-                <div class="flex items-center justify-between">
-                    <a href="#" class="-m-1.5 p-1.5">
-                        <span class="sr-only">Your Company</span>
-                        <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=white" alt=""
-                            class="h-8 w-auto" />
-                    </a>
-                    <button type="button" @click="mobileMenuOpen = false"
-                        class="-m-2.5 rounded-md p-2.5 text-white">
-                        <span class="sr-only">Close menu</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                            data-slot="icon" aria-hidden="true" class="size-6">
-                            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="mt-6 flow-root">
-                    <div class="-my-6 divide-y divide-white/10">
-                        <div class="space-y-2 py-6">
-                            <a href="{{ route('home') }}"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
-                                {{ request()->routeIs('home') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
-                                Beranda
-                            </a>
 
-                            <div class="-mx-3">
-                                <button type="button" @click="toggleMobileProductMenu()"
-                                    class="flex w-full items-center justify-between rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200"
-                                    :class="{ 'active-menu-mobile': activeMenu === 'komunitas' }">
-                                    Komunitas
-                                    <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
-                                        class="size-5 flex-none transition-transform duration-200"
-                                        :class="mobileProductMenuOpen ? 'rotate-180' : ''">
-                                        <path
-                                            d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
-                                            clip-rule="evenodd" fill-rule="evenodd" />
-                                    </svg>
-                                </button>
-                                <div x-show="mobileProductMenuOpen" class="mt-2 space-y-2 pl-4"
-                                    style="display: none;">
-                                    <a href="/products" @click="setActiveMenu('komunitas'); mobileMenuOpen = false;"
-                                        class="block rounded-lg py-2 px-3 text-sm/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200">Perjalanan</a>
-                                    <a href="#" @click="setActiveMenu('komunitas'); mobileMenuOpen = false;"
-                                        class="block rounded-lg py-2 px-3 text-sm/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200">Penghargaan</a>
-                                    <a href="#" @click="setActiveMenu('komunitas'); mobileMenuOpen = false;"
-                                        class="block rounded-lg py-2 px-3 text-sm/7 font-semibold text-white hover:bg-white/20 transition-colors duration-200">Wisata</a>
-                                </div>
+            <!-- Backdrop with gradient -->
+            <div class="fixed inset-0 bg-gradient-to-br from-blue-900/90 to-purple-800/90 backdrop-blur-sm"
+                @click="mobileMenuOpen = false"></div>
+
+            <!-- Menu Panel -->
+            <div
+                class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-b from-blue-900 to-purple-800 shadow-2xl">
+                <div class="flex flex-col h-full">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between p-6 border-b border-white/10">
+                        <a href="{{ route('home') }}" class="flex items-center space-x-3 group"
+                            @click="mobileMenuOpen = false">
+                            <div class="relative">
+                                <img src="{{ asset('images/KOMUNITAS (5).png') }}" alt="Logo"
+                                    class="h-10 w-auto transform group-hover:scale-105 transition-transform duration-300" />
                             </div>
+                            <span class="text-lg font-bold text-white">
+                                Kampung Batik Paseseh
+                            </span>
+                        </a>
+                        <button type="button" @click="mobileMenuOpen = false"
+                            class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition-all duration-300 transform hover:scale-110">
+                            <span class="sr-only">Close menu</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                data-slot="icon" aria-hidden="true" class="size-6">
+                                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
 
-                            <a href="{{ route('event') }}"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
-                                {{ request()->routeIs('event') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
-                                Event
+                    <!-- Navigation Items -->
+                    <div class="flex-1 px-4 py-6 space-y-2">
+                        <!-- Beranda -->
+                        <a href="{{ route('home') }}" @click="mobileMenuOpen = false"
+                            class="group flex items-center space-x-3 rounded-2xl p-4 text-base font-semibold transition-all duration-300
+                    {{ request()->routeIs('home')
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
+                        : 'text-white hover:bg-white/10 hover:shadow-md' }}">
+                            <div
+                                class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-home text-sm"></i>
+                            </div>
+                            <span>Beranda</span>
+                        </a>
+
+                        <!-- Komunitas Dropdown -->
+                        <div class="space-y-2">
+                            <button type="button" @click="toggleMobileProductMenu()"
+                                class="group flex w-full items-center justify-between rounded-2xl p-4 text-base font-semibold text-white hover:bg-white/10 hover:shadow-md transition-all duration-300">
+                                <div class="flex items-center space-x-3">
+                                    <div
+                                        class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-users text-sm"></i>
+                                    </div>
+                                    <span>Komunitas</span>
+                                </div>
+                                <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true"
+                                    class="size-5 transition-transform duration-300 flex-none"
+                                    :class="mobileProductMenuOpen ? 'rotate-180' : ''">
+                                    <path fill-rule="evenodd"
+                                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
+
+                            <!-- Dropdown Content -->
+                            <div x-show="mobileProductMenuOpen" x-collapse class="space-y-2 pl-4"
+                                style="display: none;">
+                                <!-- Perjalanan -->
+                                <a href="{{ route('perjalanan') }}" @click="mobileMenuOpen = false"
+                                    class="group flex items-center space-x-3 rounded-xl p-3 text-sm font-semibold text-white/90 hover:bg-blue-500/30 hover:text-white transition-all duration-300 border-l-2 border-transparent hover:border-blue-400">
+                                    <div
+                                        class="w-6 h-6 rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-route text-xs text-white"></i>
+                                    </div>
+                                    <span>Perjalanan</span>
+                                </a>
+
+                                <!-- Penghargaan -->
+                                <a href="{{ route('penghargaan') }}" @click="mobileMenuOpen = false"
+                                    class="group flex items-center space-x-3 rounded-xl p-3 text-sm font-semibold text-white/90 hover:bg-purple-500/30 hover:text-white transition-all duration-300 border-l-2 border-transparent hover:border-purple-400">
+                                    <div
+                                        class="w-6 h-6 rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-trophy text-xs text-white"></i>
+                                    </div>
+                                    <span>Penghargaan</span>
+                                </a>
+
+                                <!-- Wisata -->
+                                <a href="{{ route('wisata') }}" @click="mobileMenuOpen = false"
+                                    class="group flex items-center space-x-3 rounded-xl p-3 text-sm font-semibold text-white/90 hover:bg-green-500/30 hover:text-white transition-all duration-300 border-l-2 border-transparent hover:border-green-400">
+                                    <div
+                                        class="w-6 h-6 rounded-lg bg-gradient-to-r from-green-500 to-green-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                        <i class="fas fa-map-marked-alt text-xs text-white"></i>
+                                    </div>
+                                    <span>Wisata</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Kegiatan -->
+                        <a href="{{ route('event.index') }}" @click="mobileMenuOpen = false"
+                            class="group flex items-center space-x-3 rounded-2xl p-4 text-base font-semibold transition-all duration-300
+                    {{ request()->routeIs('event.index')
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
+                        : 'text-white hover:bg-white/10 hover:shadow-md' }}">
+                            <div
+                                class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-calendar-alt text-sm"></i>
+                            </div>
+                            <span>Kegiatan</span>
+                        </a>
+
+                        <!-- Edukasi -->
+                        <a href="{{ route('edupackage.index') }}" @click="mobileMenuOpen = false"
+                            class="group flex items-center space-x-3 rounded-2xl p-4 text-base font-semibold transition-all duration-300
+                    {{ request()->routeIs('edupackage.index')
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
+                        : 'text-white hover:bg-white/10 hover:shadow-md' }}">
+                            <div
+                                class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-graduation-cap text-sm"></i>
+                            </div>
+                            <span>Edukasi</span>
+                        </a>
+
+                        <!-- Belanja -->
+                        <a href="{{ route('shop.index') }}" @click="mobileMenuOpen = false"
+                            class="group flex items-center space-x-3 rounded-2xl p-4 text-base font-semibold transition-all duration-300
+                    {{ request()->routeIs('shop.index')
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
+                        : 'text-white hover:bg-white/10 hover:shadow-md' }}">
+                            <div
+                                class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-shopping-bag text-sm"></i>
+                            </div>
+                            <span>Belanja</span>
+                        </a>
+
+                        <!-- Tentang Kami -->
+                        <a href="{{ route('aboutus') }}" @click="mobileMenuOpen = false"
+                            class="group flex items-center space-x-3 rounded-2xl p-4 text-base font-semibold transition-all duration-300
+                    {{ request()->routeIs('aboutus')
+                        ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-lg'
+                        : 'text-white hover:bg-white/10 hover:shadow-md' }}">
+                            <div
+                                class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <i class="fas fa-info-circle text-sm"></i>
+                            </div>
+                            <span>Tentang Kami</span>
+                        </a>
+                    </div>
+
+                    <!-- CTA Section -->
+                    <div class="p-6 border-t border-white/10">
+                        <a href="{{ route('shop.index') }}" @click="mobileMenuOpen = false"
+                            class="group w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center space-x-3">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>Belanja Sekarang</span>
+                        </a>
+
+                        <!-- Contact Info -->
+                        <div class="mt-6 space-y-3 text-center">
+                            <div class="flex items-center justify-center space-x-2 text-white/80 text-sm">
+                                <i class="fas fa-phone-alt text-amber-400"></i>
+                                <span>+62 867-4423-482</span>
+                            </div>
+                            <div class="flex items-center justify-center space-x-2 text-white/80 text-sm">
+                                <i class="fas fa-envelope text-amber-400"></i>
+                                <span>batikpasseeh@gmail.com</span>
+                            </div>
+                        </div>
+
+                        <!-- Social Media -->
+                        <div class="flex justify-center space-x-4 mt-6">
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-facebook-f text-white text-sm"></i>
                             </a>
-                            <a href="{{ route('edukasi') }}"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
-                                {{ request()->routeIs('edukasi') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
-                                Edukasi
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-instagram text-white text-sm"></i>
                             </a>
-                            <a href="{{ route('shop.index') }}"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
-                                {{ request()->routeIs('shop.index') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
-                                Shop
-                            </a>
-                            <a href="{{ route('aboutus') }}"
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold transition-colors duration-200
-                                {{ request()->routeIs('aboutus') ? 'bg-white text-[#1E41FB]' : 'text-white hover:bg-white/20' }}">
-                                About Us
+                            <a href="#"
+                                class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
+                                <i class="fab fa-whatsapp text-white text-sm"></i>
                             </a>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Batik extends Model
 {
@@ -12,20 +13,17 @@ class Batik extends Model
 
     protected $table = 'batiks';
 
+    // Kolom yang boleh diisi
     protected $fillable = [
         'category_id',
         'umkm_id',
         'user_id',
         'title',
         'slug',
-        'sku',
         'description',
         'material',
         'size',
-        'quality',
-        'gender',
         'price',
-        'stock',
         'specs',
         'image',
     ];
@@ -72,4 +70,14 @@ class Batik extends Model
     //     return $this->belongsToMany(Event::class, 'event_batik')
     //                 ->withTimestamps();
     // }
+
+    protected static function boot() 
+    {
+        parent::boot();
+        static::saving(function ($batik) {
+            if (empty($batik->slug)) {
+                $batik->slug = Str::slug($batik->title);
+            }
+        });
+    }
 }

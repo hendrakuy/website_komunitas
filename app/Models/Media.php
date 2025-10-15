@@ -29,4 +29,9 @@ class Media extends Model
     {
         return $query->orderBy('order', 'asc');
     }
+
+    public function getUrlAttribute()
+    {
+        return asset('storage/' . $this->file_path);
+    }
 }

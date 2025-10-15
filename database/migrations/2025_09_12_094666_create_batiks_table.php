@@ -29,6 +29,7 @@ return new class extends Migration
             $table->json('specs')->nullable(); // fleksibel: ukuran detail, care, dsb.
             $table->timestamps();
             $table->softDeletes();
+            // $table->string('image')->nullable();
 
             $table->index('price');
             $table->index('category_id');

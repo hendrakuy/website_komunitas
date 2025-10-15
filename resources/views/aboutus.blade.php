@@ -10,7 +10,7 @@
 
     <!-- Konten -->
     <div class="relative z-10 max-w-3xl px-4 sm:px-6">
-        <h1 class="text-2xl sm:text-4xl font-bold mb-4">About Us</h1>
+        <h1 class="text-2xl sm:text-4xl font-bold mb-4">Tentang Kami</h1>
         <p class="bg-black/60 p-3 sm:p-4 rounded-lg leading-relaxed text-sm sm:text-base">
             Komunitas Batik Paseseh adalah kelompok pengrajin batik yang berasal dari Tanjung Bumi, Bangkalan, Madura.
             Komunitas ini berfokus pada pelestarian sekaligus pengembangan batik tulis khas Madura

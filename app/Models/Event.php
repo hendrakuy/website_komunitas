@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Event extends Model
 {
@@ -18,6 +19,7 @@ class Event extends Model
         'start_at',
         'end_at',
         'is_promo',
+        'image',
     ];
 
     // Casting ke tipe data yang sesuai
@@ -38,4 +40,14 @@ class Event extends Model
     // {
     //     return $this->belongsToMany(Batik::class, 'event_batik')->withTimestamps();
     // }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($event) {
+            if (empty($event->slug)) {
+                $event->slug = Str::slug($event->title);
+            }
+        });
+    }
 }

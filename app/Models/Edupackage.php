@@ -15,16 +15,23 @@ class Edupackage extends Model
         'title',
         'slug',
         'description',
+        'materials',
+        'facilities',
+        'schedule_info',
         'price',
-        'features',
+        'whatsapp_link',
+        'image',
+        'is_active',
     ];
 
     /**
      * Casting kolom agar otomatis terkonversi.
      */
     protected $casts = [
-        'price' => 'decimal:2',
-        'features' => 'array', // JSON otomatis jadi array
+        'materials' => 'array',
+        'facilities' => 'array',
+        'schedule_info' => 'array',
+        'is_active' => 'boolean',
     ];
 
     /**

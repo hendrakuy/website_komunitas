@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Event;
+use App\Models\Umkm;
+use App\Models\Batik;
+use App\Models\InstagramPost;
 
 class PageController extends Controller
 {
     public function home()
     {
-        return view('home');
+        $umkms = Umkm::take(10)->get();
+        $batiks = Batik::all();
+        $instagramPosts = InstagramPost::orderBy('created_at', 'desc')->take(6)->get();
+
+        return view('home', compact('umkms', 'batiks', 'instagramPosts'));
     }
 
     public function products()
@@ -38,8 +46,28 @@ class PageController extends Controller
 
     public function event()
     {
-        return view('pages.event');
+        // ambil semua event, urutkan berdasarkan tanggal mulai terbaru
+        $events = \App\Models\Event::orderBy('start_at', 'desc')->get();
+
+        // tampilkan halaman event
+        return view('pages.event', compact('events'));
     }
+
+    public function eventDetail($slug)
+    {
+        // cari event berdasarkan slug
+        $event = \App\Models\Event::where('slug', $slug)->firstOrFail();
+
+        // ambil 3 event lain untuk rekomendasi
+        $relatedEvents = \App\Models\Event::where('id', '!=', $event->id)
+                              ->orderBy('start_at', 'desc')
+                              ->take(3)
+                              ->get();
+
+        // tampilkan halaman detail event
+        return view('pages.event-detail', compact('event', 'relatedEvents'));
+    }
+    
     public function edukasi()
     {
         return view('edukasi');

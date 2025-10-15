@@ -15,6 +15,7 @@ class Journey extends Model
         'year',
         'title',
         'content',
+        'image',
     ];
 
     // Casting agar year selalu integer
