@@ -1,80 +1,232 @@
 @extends('layouts.app')
 
+@section('title', 'Batik Paseseh - Edukasi')
+
 @section('hero')
-    <!-- Hero Section - Diperbaiki -->
-    <header class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen bg-gray-900 overflow-hidden">
-        <!-- Background Image -->
-        <img src="{{ asset('images/BG_Edukasi2.png') }}" alt="Batik Edukasi"
-            class="absolute inset-0 w-full h-full object-cover object-center">
-        <!-- Overlay Gradasi Warna -->
-        <div class="absolute inset-0 bg-gray-900/50"></div>
-        {{-- <div class="absolute inset-0 bg-gradient-to-r from-indigo-900/80 via-purple-800/50 to-amber-900/30 z-10"></div> --}}
-        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-800/60 to-indigo-900/70"></div> --}}
-        <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10"></div>
-        <div class="absolute inset-0 z-20 flex flex-col justify-center items-center text-center text-white px-4">
-            <h1 class="text-4xl md:text-5xl font-bold mb-6 tracking-tight">Paket Edukasi Membatik</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-2xl leading-relaxed">Nikmati pengalaman membatik langsung dari pengrajin
-                profesional Tanjung Bumi dengan teknik tradisional autentik.</p>
-            <a href="#paket"
-                class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 px-8 py-4 rounded-xl font-semibold text-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                Jelajahi Paket
-            </a>
+    <!-- Hero Section - Responsif Diperbarui -->
+    <header
+        class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen overflow-hidden flex items-center justify-center"
+        style="background-image: url('{{ asset('images/Bg_Aboutus.png') }}');">
+
+        {{-- bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 --}}
+
+        <!-- Background Pattern -->
+        {{-- <div
+            class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent">
+        </div> --}}
+
+        <!-- Overlay Gradient -->
+        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-purple-900/50 to-indigo-900/60"></div> --}}
+        <div class="absolute inset-0 bg-gray-900/45"></div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-10 left-10 w-16 sm:w-20 h-16 sm:h-20 bg-amber-400/10 rounded-full blur-xl"></div>
+        <div class="absolute bottom-10 right-10 w-24 sm:w-32 h-24 sm:h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
+        <div class="absolute top-1/3 right-1/4 w-10 sm:w-16 h-10 sm:h-16 bg-blue-400/10 rounded-full blur-lg"></div>
+
+        <!-- Main Content -->
+        <div class="relative z-20 text-center text-white px-4 sm:px-6 md:px-8 max-w-5xl">
+            <!-- Badge -->
+            <div
+                class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 mb-6 sm:mb-8 mt-6 sm:mt-8">
+                <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
+                <span class="text-xs sm:text-sm font-medium">Pengalaman Membatik Autentik</span>
+            </div>
+
+            <h1
+                class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight bg-gradient-to-r from-white to-amber-100 bg-clip-text text-transparent leading-tight">
+                Paket Edukasi <span class="text-amber-400">Membatik</span>
+            </h1>
+
+            <p
+                class="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed text-blue-100 px-2">
+                Rasakan seni membatik langsung dari tangan pengrajin profesional Tanjung Bumi.
+                Pelajari teknik tradisional autentik dan ciptakan karya batik Anda sendiri.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#paket"
+                    class="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-amber-500/25 flex items-center gap-3">
+                    <span>Jelajahi Paket</span>
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6">
+                        </path>
+                    </svg>
+                </a>
+
+                <a href="#fasilitas"
+                    class="group border-2 border-white/30 hover:border-white/50 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10 flex items-center gap-3">
+                    <span>Lihat Fasilitas</span>
+                    <svg class="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Stats -->
+            {{-- <div class="grid grid-cols-3 gap-4 sm:gap-8 mt-10 sm:mt-16">
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">500+</div>
+                    <div class="text-blue-200 text-xs sm:text-sm">Peserta Edukasi</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">98%</div>
+                    <div class="text-blue-200 text-xs sm:text-sm">Kepuasan Peserta</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">25+</div>
+                    <div class="text-blue-200 text-xs sm:text-sm">Tahun Pengalaman</div>
+                </div>
+            </div> --}}
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <div class="animate-bounce">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                    </path>
+                </svg>
+            </div>
         </div>
     </header>
 @endsection
 
 @section('content')
-    <!-- Deskripsi Program - Diperbaiki -->
-    <section class="py-16 px-4 max-w-6xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Deskripsi Program</h2>
-            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6"></div>
+    <!-- Deskripsi Program - Diperbarui -->
+    <section class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <div
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-medium mb-4">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+                    </path>
+                </svg>
+                Program Unggulan
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Deskripsi Program</h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mb-6 rounded-full"></div>
         </div>
-        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100 max-w-4xl mx-auto">
-            <p class="text-gray-700 text-lg leading-relaxed text-center">
-                Program Edukasi Membatik Tanjung Bumi dirancang khusus untuk memperkenalkan tradisi batik autentik dan
-                meningkatkan rasa cinta terhadap warisan budaya Indonesia kepada generasi muda.
-                Peserta akan mempelajari sejarah batik, teknik membatik tradisional, hingga menciptakan karya batik sendiri
-                di bawah bimbingan langsung pengrajin profesional dengan pengalaman puluhan tahun.
-            </p>
+
+        <div
+            class="bg-gradient-to-br from-white to-blue-50 rounded-3xl shadow-2xl p-8 md:p-12 border border-blue-100 max-w-4xl mx-auto relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-amber-400/10 to-transparent rounded-bl-3xl">
+            </div>
+            <div class="absolute bottom-0 left-0 w-20 h-20 bg-purple-400/10 rounded-tr-3xl"></div>
+
+            <div class="relative z-10">
+                <p class="text-gray-700 text-base md:text-lg leading-relaxed text-center font-medium">
+                    Program <span class="text-amber-600 font-semibold">Edukasi Membatik</span> dirancang khusus
+                    untuk melestarikan dan memperkenalkan tradisi batik autentik kepada generasi muda.
+                    Peserta akan mempelajari <span class="text-blue-600 font-semibold">sejarah batik</span>,
+                    <span class="text-purple-600 font-semibold">teknik membatik tradisional</span>, hingga menciptakan
+                    karya batik sendiri di bawah bimbingan langsung pengrajin profesional dengan pengalaman puluhan tahun.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">Materi Lengkap</h4>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">Pengrajin Profesional</h4>
+                    </div>
+                    <div class="text-center p-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-3">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                                </path>
+                            </svg>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">Alat Membatik</h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Paket Edukasi - Diperbaiki -->
-    <section id="paket" class="py-16 px-4 bg-gray-50">
+    <!-- Paket Edukasi - Diperbarui & Responsif -->
+    <section id="paket" class="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-blue-50/30">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-gray-800 mb-4">Paket Edukasi Membatik</h1>
-                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"></div>
-                <p class="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">Pilih paket yang sesuai dengan kebutuhan dan jadwal
-                    Anda. Semua paket termasuk materi lengkap dan bimbingan pengrajin profesional.</p>
+            <!-- Header -->
+            <div class="text-center mb-12 sm:mb-16">
+                <div
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-5 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium mb-4">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                    Pilihan Paket
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                    Paket Edukasi Membatik
+                </h1>
+                <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-amber-500 to-amber-600 mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
+                    Pilih paket yang sesuai dengan kebutuhan Anda. Setiap paket dirancang untuk memberikan pengalaman
+                    membatik yang tak terlupakan.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-12">
+            <!-- Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 @foreach ($packages as $package)
                     <div
-                        class="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100">
-                        <div class="overflow-hidden">
-                            <img src="{{ asset('storage/' . $package->image) }}"
-                                class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                                alt="{{ $package->title }}">
+                        class="group bg-white rounded-2xl sm:rounded-3xl shadow-md sm:shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-amber-200 relative">
+
+                        <!-- Gambar -->
+                        <div class="overflow-hidden relative">
+                            <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->title }}"
+                                class="w-full h-52 sm:h-60 md:h-64 object-cover group-hover:scale-110 transition-transform duration-700" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                         </div>
-                        <div class="p-6">
-                            <h2 class="text-xl font-bold mb-3 text-gray-800 group-hover:text-amber-600 transition-colors">
-                                {{ $package->title }}</h2>
-                            <p class="text-gray-600 mb-4 line-clamp-3">{{ $package->description }}</p>
-                            <div class="flex justify-between items-center mt-6">
-                                <span class="font-bold text-amber-600 text-lg">
-                                    Rp {{ number_format($package->price, 0, ',', '.') }}
-                                </span>
+
+                        <!-- Konten -->
+                        <div class="p-6 sm:p-8">
+                            <h2
+                                class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800 group-hover:text-amber-600 transition-colors duration-300">
+                                {{ $package->title }}
+                            </h2>
+
+                            <p class="text-gray-600 mb-5 sm:mb-6 leading-relaxed line-clamp-3 text-sm sm:text-base">
+                                {{ $package->description }}
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mt-6">
+                                <div>
+                                    <span class="font-bold text-amber-600 text-base sm:text-lg">
+                                        Rp {{ number_format($package->price, 0, ',', '.') }}
+                                    </span>
+                                    <p class="text-gray-500 text-xs sm:text-sm">
+                                        Untuk {{ $package->kapasitas ?? '—' }} orang
+                                    </p>
+                                </div>
                                 <a href="{{ route('edupackage.detail', $package->slug) }}"
-                                    class="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 transition-all duration-200 px-5 py-2 rounded-lg font-medium flex items-center">
-                                    Lihat Detail
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20"
-                                        fill="currentColor">
-                                        <path fill-rule="evenodd"
-                                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd" />
+                                    class="group/btn w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center sm:justify-start gap-2 text-sm sm:text-base">
+                                    <span>Lihat Detail</span>
+                                    <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none"
+                                        stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                     </svg>
                                 </a>
                             </div>
@@ -85,441 +237,315 @@
         </div>
     </section>
 
-    <!-- Fasilitas & Pengajar - Diperbaiki -->
-    <section class="py-16 px-4 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+    <!-- Fasilitas & Pengajar - Diperbarui -->
+    <section id="fasilitas" class="py-20 px-4 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <!-- Fasilitas -->
             <div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-8">Fasilitas yang Didapat</h2>
+                <div class="flex items-center gap-3 mb-8">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Fasilitas Unggulan</h2>
+                        <p class="text-gray-600">Semua yang Anda butuhkan untuk belajar membatik</p>
+                    </div>
+                </div>
+
                 <div class="space-y-6">
-                    <div
-                        class="flex items-start p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="bg-amber-100 p-3 rounded-lg mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-gray-800 mb-1">Alat Membatik Lengkap</h3>
-                            <p class="text-gray-600">Semua peralatan membatik disediakan, termasuk canting, wajan, kompor,
-                                dan lilin batik.</p>
-                        </div>
-                    </div>
+                    @php
+                        $facilities = [
+                            [
+                                'icon' =>
+                                    'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+                                'title' => 'Alat Membatik Lengkap',
+                                'desc' =>
+                                    'Semua peralatan membatik disediakan, termasuk canting, wajan, kompor, dan lilin batik.',
+                            ],
+                            [
+                                'icon' =>
+                                    'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
+                                'title' => 'Bahan Kain Batik',
+                                'desc' =>
+                                    'Kain mori berkualitas untuk memastikan hasil batik yang maksimal dan tahan lama.',
+                            ],
+                            [
+                                'icon' =>
+                                    'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.356-1.283.988-1.857l.548-.547a5.002 5.002 0 019.288 0l.548.547C18.644 16.717 19 17.576 19 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+                                'title' => 'Pengajar Profesional',
+                                'desc' =>
+                                    'Didampingi langsung oleh pengrajin batik berpengalaman dengan metode pengajaran yang mudah dipahami.',
+                            ],
+                            [
+                                'icon' =>
+                                    'M12 2a1 1 0 01.894.553l9 18A1 1 0 0121 22H3a1 1 0 01-.894-1.447l9-18A1 1 0 0112 2zm0 4.618L6.382 20h11.236L12 6.618zM11 10h2v5h-2v-5zm0 6h2v2h-2v-2z',
+                                'title' => 'Tempat Pelatihan',
+                                'desc' =>
+                                    'Pelatihan dilakukan di sentra batik dengan fasilitas lengkap dan suasana nyaman.',
+                            ],
+                        ];
+                    @endphp
 
-                    <div
-                        class="flex items-start p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="bg-amber-100 p-3 rounded-lg mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                            </svg>
+                    @foreach ($facilities as $facility)
+                        <div
+                            class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-blue-200">
+                            <div class="flex items-start gap-4">
+                                <div
+                                    class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="{{ $facility['icon'] }}"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg text-gray-800 mb-2">{{ $facility['title'] }}</h3>
+                                    <p class="text-gray-600 leading-relaxed">{{ $facility['desc'] }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-gray-800 mb-1">Bahan Kain Batik Premium</h3>
-                            <p class="text-gray-600">Kain mori prima kualitas terbaik untuk memastikan hasil batik yang
-                                maksimal.</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-start p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="bg-amber-100 p-3 rounded-lg mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-gray-800 mb-1">Pengajar Profesional</h3>
-                            <p class="text-gray-600">Didampingi langsung oleh pengrajin batik berpengalaman dengan metode
-                                pengajaran yang mudah dipahami.</p>
-                        </div>
-                    </div>
-
-                    <div
-                        class="flex items-start p-4 bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                        <div class="bg-amber-100 p-3 rounded-lg mr-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-lg text-gray-800 mb-1">Sertifikat Peserta</h3>
-                            <p class="text-gray-600">Sertifikat resmi sebagai bukti telah menyelesaikan program edukasi
-                                membatik.</p>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
 
             <!-- Profil Pengajar -->
             <div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center lg:text-left">Tim Pengajar Profesional</h2>
+                <div class="flex items-center gap-3 mb-8">
+                    <div
+                        class="w-12 h-12 bg-gradient-to-r from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">Tim Pengajar</h2>
+                        <p class="text-gray-600">Pengrajin profesional dengan pengalaman puluhan tahun</p>
+                    </div>
+                </div>
+
                 <div class="space-y-6">
-                    <div
-                        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                        <div class="flex flex-col md:flex-row items-center md:items-start gap-5">
-                            <img src="/images/Pengajar1.png"
-                                class="w-24 h-24 rounded-full object-cover border-4 border-amber-100" alt="Pengajar 1">
-                            <div class="text-center md:text-left">
-                                <h3 class="font-bold text-xl text-gray-800">Siti Aminah</h3>
-                                <p class="text-amber-600 font-medium mb-2">Pengrajin Batik Senior</p>
-                                <p class="text-gray-600">Memiliki pengalaman lebih dari 25 tahun dalam membatik dengan
-                                    spesialisasi teknik tulis dan cap tradisional.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @php
+                        $teachers = [
+                            [
+                                'image' => '/images/Pengajar1.png',
+                                'name' => 'Ibu Mesnari',
+                                'role' => 'Pengrajin Batik Senior',
+                                'exp' => '25+ Tahun Pengalaman',
+                                'desc' => 'Ahli dalam pewarnaan alami maupun sintetis dengan pengalaman 25 tahun.',
+                            ],
+                            [
+                                'image' => '/images/Pengajar2.png',
+                                'name' => 'Ibu Mahruha',
+                                'role' => 'Instruktur Batik',
+                                'exp' => '23+ Tahun Pengalaman',
+                                'desc' =>
+                                    'Spesialis motif batik gentongan tradisional madura dengan pengalaman 23 tahun.',
+                            ],
+                            [
+                                'image' => '/images/Pengajar3.png',
+                                'name' => 'Mbak Toyyina',
+                                'role' => 'Desainer Batik',
+                                'exp' => '18+ Tahun Pengalaman',
+                                'desc' =>
+                                    'Spesialis motif batik kontemporer dengan sentuhan tradisional madura selama 18 tahun.',
+                            ],
+                        ];
+                    @endphp
 
-                    <div
-                        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                        <div class="flex flex-col md:flex-row items-center md:items-start gap-5">
-                            <img src="/images/Pengajar2.png"
-                                class="w-24 h-24 rounded-full object-cover border-4 border-amber-100" alt="Pengajar 2">
-                            <div class="text-center md:text-left">
-                                <h3 class="font-bold text-xl text-gray-800">Hj Abdullah Rahman</h3>
-                                <p class="text-amber-600 font-medium mb-2">Instruktur Batik</p>
-                                <p class="text-gray-600">Bergelut di dunia batik selama 18 tahun dengan keahlian khusus
-                                    dalam pewarnaan alami dan motif tradisional.</p>
+                    @foreach ($teachers as $teacher)
+                        {{-- Spesialis teknik tulis dan cap tradisional dengan pengalaman lebih dari 25 tahun. --}}
+                        {{-- Ahli dalam pewarnaan alami dan motif tradisional dengan pengalaman 23 tahun. --}}
+                        <div
+                            class="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-amber-200">
+                            <div class="flex flex-col md:flex-row items-center md:items-start gap-5">
+                                <div class="relative">
+                                    <img src="{{ $teacher['image'] }}"
+                                        class="w-20 h-20 rounded-2xl object-cover border-4 border-amber-100 group-hover:border-amber-200 transition-colors duration-300"
+                                        alt="{{ $teacher['name'] }}">
+                                    <div
+                                        class="absolute -bottom-2 -right-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                                        {{ $teacher['exp'] }}
+                                    </div>
+                                </div>
+                                <div class="text-center md:text-left flex-1">
+                                    <h3 class="font-bold text-xl text-gray-800 mb-1">{{ $teacher['name'] }}</h3>
+                                    <p class="text-amber-600 font-semibold mb-2">{{ $teacher['role'] }}</p>
+                                    <p class="text-gray-600 text-sm leading-relaxed">{{ $teacher['desc'] }}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div
-                        class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
-                        <div class="flex flex-col md:flex-row items-center md:items-start gap-5">
-                            <img src="/images/Pengajar3.png"
-                                class="w-24 h-24 rounded-full object-cover border-4 border-amber-100" alt="Pengajar 3">
-                            <div class="text-center md:text-left">
-                                <h3 class="font-bold text-xl text-gray-800">Nurul Hayati</h3>
-                                <p class="text-amber-600 font-medium mb-2">Desainer Batik</p>
-                                <p class="text-gray-600">Ahli dalam merancang motif batik kontemporer dengan sentuhan
-                                    tradisional selama 12 tahun.</p>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimoni - Diperbaiki -->
-    <section class="py-16 bg-gradient-to-br from-gray-50 to-amber-50 px-4">
-        {{-- <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Apa Kata Peserta?</h2>
-                <div class="w-24 h-1 bg-amber-500 mx-auto"></div>
-                <p class="text-gray-600 mt-6 max-w-2xl mx-auto">Dengarkan pengalaman langsung dari peserta yang telah mengikuti program edukasi membatik kami.</p>
-            </div>
-
-            <div class="relative">
-                <div id="testimonial-wrapper" class="flex overflow-hidden rounded-2xl">
-                    <!-- Testimoni 1 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full">
-                        <div class="bg-white rounded-2xl shadow-lg p-8 mx-2 h-full">
-                            <div class="flex items-center mb-6">
-                                <div class="flex text-amber-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-lg mb-6 italic">"Belajar membatik di sini sangat menyenangkan! Saya jadi tahu proses batik tulis secara langsung dari awal hingga akhir. Pengajarnya sangat sabar dan profesional."</p>
-                            <div class="flex items-center">
-                                <div class="bg-gradient-to-r from-amber-400 to-amber-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mr-4">D</div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Dewi Lestari</p>
-                                    <p class="text-gray-500 text-sm">Peserta Paket Premium</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimoni 2 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full">
-                        <div class="bg-white rounded-2xl shadow-lg p-8 mx-2 h-full">
-                            <div class="flex items-center mb-6">
-                                <div class="flex text-amber-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-lg mb-6 italic">"Instruktur ramah dan sabar, cocok untuk pemula seperti saya. Semua alat disediakan lengkap dan bahan berkualitas. Sangat direkomendasikan untuk yang ingin belajar batik dari nol."</p>
-                            <div class="flex items-center">
-                                <div class="bg-gradient-to-r from-amber-400 to-amber-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mr-4">A</div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Andi Pratama</p>
-                                    <p class="text-gray-500 text-sm">Peserta Paket Dasar</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimoni 3 -->
-                    <div class="testimonial-slide flex-shrink-0 w-full">
-                        <div class="bg-white rounded-2xl shadow-lg p-8 mx-2 h-full">
-                            <div class="flex items-center mb-6">
-                                <div class="flex text-amber-500">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 text-lg mb-6 italic">"Pengalaman yang tidak terlupakan, saya bisa membuat batik karya sendiri yang bisa dibawa pulang. Lokasinya nyaman dan suasana belajar sangat menyenangkan."</p>
-                            <div class="flex items-center">
-                                <div class="bg-gradient-to-r from-amber-400 to-amber-500 w-12 h-12 rounded-full flex items-center justify-center text-white font-bold mr-4">S</div>
-                                <div>
-                                    <p class="font-semibold text-gray-800">Sinta Wulandari</p>
-                                    <p class="text-gray-500 text-sm">Peserta Paket Keluarga</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Tombol Navigasi -->
-                <button id="prev" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white hover:bg-amber-50 text-amber-600 w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    <!-- Pencapaian & Keunggulan - Diperbarui -->
+    <section class="py-20 bg-gradient-to-br from-gray-50 to-blue-50/50 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-medium mb-4">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                        </path>
                     </svg>
-                </button>
-                <button id="next" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 bg-white hover:bg-amber-50 text-amber-600 w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-                
-                <!-- Indikator -->
-                <div class="flex justify-center mt-8 space-x-2" id="testimonial-indicators">
-                    <button class="testimonial-indicator w-3 h-3 rounded-full bg-amber-200 transition-all duration-300"></button>
-                    <button class="testimonial-indicator w-3 h-3 rounded-full bg-amber-200 transition-all duration-300"></button>
-                    <button class="testimonial-indicator w-3 h-3 rounded-full bg-amber-200 transition-all duration-300"></button>
+                    Keunggulan Program
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-16 px-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Siap Memulai Perjalanan Membatik Anda?</h2>
-            <p class="text-xl mb-8 max-w-2xl mx-auto">Jangan lewatkan kesempatan langka untuk belajar langsung dari pengrajin batik Tanjung Bumi dengan teknik tradisional autentik.</p>
-            <a href="#paket" class="inline-block bg-white text-amber-600 hover:bg-gray-100 px-8 py-4 rounded-xl font-bold text-lg shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                Daftar Sekarang
-            </a>
-        </div>
-    </section> --}}
-
-        <!-- Testimonials Section -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 lg:p-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                    Apa <span class="text-blue-600">Kata Mereka</span> Tentang Kami
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                    Mengapa Memilih <span
+                        class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Kami</span>
                 </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Dipercaya oleh <span class="text-blue-600 font-semibold">ratusan pelanggan</span> yang puas dengan
-                    kualitas dan pelayanan kami
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                    Program edukasi membatik terbaik dengan standar kualitas tertinggi dan pengalaman belajar yang optimal
                 </p>
-                <div class="mt-6 inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow-lg">
-                    <div class="flex text-amber-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span class="text-gray-700 font-semibold">4.8/5 dari 287 reviews</span>
-                </div>
             </div>
 
-            <!-- Testimonials Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Batik yang saya beli kualitasnya luar biasa! Motifnya detail sekali dan bahannya nyaman dipakai.
-                        Pengiriman juga cepat."
-                    </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            D
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Dewi Sartika</p>
-                            <p class="text-sm text-gray-500">Jakarta</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- Achievement Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                @php
+                    $achievements = [
+                        [
+                            'icon' => 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6',
+                            'title' => 'Metode Terstruktur',
+                            'description' =>
+                                'Materi pembelajaran yang sistematis dari dasar hingga mahir, cocok untuk pemula maupun yang ingin mendalami batik',
+                            'color' => 'from-blue-500 to-blue-600',
+                        ],
+                        [
+                            'icon' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
+                            'title' => 'Pengajar Profesional',
+                            'description' =>
+                                'Didampingi langsung oleh pengrajin batik berpengalaman yang siap membimbing setiap langkah Anda dalam proses membatik',
+                            'color' => 'from-green-500 to-green-600',
+                        ],
+                        [
+                            'icon' =>
+                                'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.356-1.283.988-1.857l.548-.547a5.002 5.002 0 019.288 0l.548.547C18.644 16.717 19 17.576 19 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z',
+                            'title' => 'Komunitas Eksklusif',
+                            'description' =>
+                                'Bergabung dengan komunitas umkm batik untuk berbagi pengalaman dan mengembangkan jaringan profesional',
+                            'color' => 'from-purple-500 to-purple-600',
+                        ],
+                        [
+                            'icon' =>
+                                'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
+                            'title' => 'Fasilitas Terbaik',
+                            'description' =>
+                                'Akses penuh ke workshop dengan peralatan profesional dan bahan-bahan berkualitas',
+                            'color' => 'from-amber-500 to-amber-600',
+                        ],
+                        [
+                            'icon' =>
+                                'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
+                            'title' => 'Lokasi Strategis',
+                            'description' =>
+                                'Bertempat di sentra batik Tanjung Bumi dengan akses mudah dan suasana tradisional yang autentik',
+                            'color' => 'from-red-500 to-red-600',
+                        ],
+                        [
+                            'icon' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+                            'title' => 'Fleksibel Waktu',
+                            'description' =>
+                                'Jadwal belajar yang dapat disesuaikan dengan kebutuhan Anda, termasuk program weekend dan weekday',
+                            'color' => 'from-indigo-500 to-indigo-600',
+                        ],
+                    ];
+                @endphp
 
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Pelayanannya ramah dan responsive. Batiknya original Tanjung Bumi, bisa dilihat dari detail
-                        motifnya. Very recommended!"
-                    </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            A
+                @foreach ($achievements as $achievement)
+                    <div
+                        class="group bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-purple-200">
+                        <!-- Icon -->
+                        <div class="mb-6">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-r {{ $achievement['color'] }} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="{{ $achievement['icon'] }}"></path>
+                                </svg>
+                            </div>
                         </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Andi Pratama</p>
-                            <p class="text-sm text-gray-500">Surabaya</p>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                        <!-- Content -->
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-gray-900 transition-colors">
+                            {{ $achievement['title'] }}
+                        </h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            {{ $achievement['description'] }}
+                        </p>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Sudah beberapa kali belanja di sini dan selalu puas. Koleksi batiknya unik-unik dan kualitas
-                        terjaga. Seller terpercaya!"
-                    </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            S
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Sinta Nurhaliza</p>
-                            <p class="text-sm text-gray-500">Bandung</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
+
+            <!-- Stats Section -->
+            {{-- <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                @php
+                    $stats = [
+                        ['number' => '500+', 'label' => 'Peserta Terlatih'],
+                        ['number' => '98%', 'label' => 'Tingkat Kepuasan'],
+                        ['number' => '25+', 'label' => 'Tahun Pengalaman'],
+                        ['number' => '50+', 'label' => 'Motif Diajarkan'],
+                    ];
+                @endphp
+
+                @foreach ($stats as $stat)
+                    <div class="text-center">
+                        <div
+                            class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
+                            {{ $stat['number'] }}
+                        </div>
+                        <div class="text-gray-600 font-medium">{{ $stat['label'] }}</div>
+                    </div>
+                @endforeach
+            </div> --}}
 
             <!-- CTA Section -->
-            <div class="text-center bg-white rounded-2xl p-8 shadow-lg">
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">
-                    Sudah Terbukti Kualitasnya?
-                </h3>
-                <p class="text-gray-600 mb-6 max-w-2xl mx-auto text-lg">
-                    "Jangan ragu lagi! Bergabunglah dengan ratusan pelanggan puas kami dan miliki batik Tanjung Bumi asli
-                    dengan kualitas premium. Stok terbatas, pesan sekarang sebelum kehabisan!"
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#"
-                        class="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center space-x-3">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Pesan Sekarang</span>
-                    </a>
-                    <a href="{{ route('shop.index') }}"
-                        class="border-2 border-blue-500 text-blue-600 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-200 inline-flex items-center space-x-3">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Lihat Koleksi Lain</span>
-                    </a>
+            <div
+                class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
+                <!-- Background Pattern -->
+                <div
+                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent">
+                </div>
+
+                <div class="relative z-10">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6">
+                        Siap Memulai Perjalanan Membatik Anda?
+                    </h3>
+                    <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Jangan lewatkan kesempatan untuk belajar membatik langsung dari pengrajin profesional.
+                        Dapatkan pengalaman tak terlupakan dan ciptakan karya batik Anda sendiri!
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="#paket"
+                            class="group bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 rounded-2xl shadow-2xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center gap-3">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                            </svg>
+                            <span>Daftar Sekarang</span>
+                        </a>
+                        <a href="{{ route('shop.index') }}"
+                            class="group border-2 border-white/30 hover:border-white/50 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 inline-flex items-center gap-3">
+                            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            <span>Lihat Koleksi Batik</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const wrapper = document.getElementById('testimonial-wrapper');
-            const next = document.getElementById('next');
-            const prev = document.getElementById('prev');
-            const indicators = document.querySelectorAll('.testimonial-indicator');
-            const total = document.querySelectorAll('.testimonial-slide').length;
-            let index = 0;
-
-            function updateIndicators() {
-                indicators.forEach((indicator, i) => {
-                    if (i === index) {
-                        indicator.classList.remove('bg-amber-200', 'w-3');
-                        indicator.classList.add('bg-amber-500', 'w-8');
-                    } else {
-                        indicator.classList.remove('bg-amber-500', 'w-8');
-                        indicator.classList.add('bg-amber-200', 'w-3');
-                    }
-                });
-            }
-
-            function showSlide(i) {
-                if (i >= total) index = 0;
-                else if (i < 0) index = total - 1;
-                else index = i;
-
-                wrapper.style.transform = `translateX(-${index * 100}%)`;
-                updateIndicators();
-            }
-
-            next.addEventListener('click', () => showSlide(index + 1));
-            prev.addEventListener('click', () => showSlide(index - 1));
-
-            // Add click events to indicators
-            indicators.forEach((indicator, i) => {
-                indicator.addEventListener('click', () => showSlide(i));
-            });
-
-            // Auto slide every 5 seconds
-            setInterval(() => showSlide(index + 1), 5000);
-
-            // Initialize
-            updateIndicators();
-        });
-    </script>
 @endsection

@@ -41,13 +41,54 @@ class Event extends Model
     //     return $this->belongsToMany(Batik::class, 'event_batik')->withTimestamps();
     // }
 
+    // protected static function boot()
+    // {
+    //     parent::boot();
+    //     static::saving(function ($event) {
+    //         if (empty($event->slug)) {
+    //             $event->slug = Str::slug($event->title);
+    //         }
+    //     });
+    // }
+
+    // auto generate unique slug from title
     protected static function boot()
     {
         parent::boot();
-        static::saving(function ($event) {
-            if (empty($event->slug)) {
-                $event->slug = Str::slug($event->title);
+
+        // Sebelum membuat (create)
+        static::creating(function ($event) {
+            $event->slug = self::generateUniqueSlug($event->title);
+        });
+
+        // Sebelum mengupdate (update)
+        static::updating(function ($event) {
+            // Hanya ubah slug kalau title berubah
+            if ($event->isDirty('title')) {
+                $event->slug = self::generateUniqueSlug($event->title, $event->id);
             }
         });
+    }
+
+    /**
+     * Generate unique slug dari title
+     */
+    protected static function generateUniqueSlug($title, $ignoreId = null)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Cek apakah slug sudah ada
+        while (
+            self::where('slug', $slug)
+                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        return $slug;
     }
 }

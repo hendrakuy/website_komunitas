@@ -14,14 +14,14 @@
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-chevron-right text-gray-400 text-xs mx-2"></i>
-                    <a href="{{ route('shop.index') }}"
+                    <a href="{{ route('shop.index', $filters) }}"
                         class="text-blue-500 hover:text-blue-700 transition-colors font-medium">
-                        Koleksi Batik
+                        Belanja
                     </a>
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-chevron-right text-gray-400 text-xs mx-2"></i>
-                    <span class="text-gray-600 font-medium truncate max-w-xs">{{ $batik->title }}</span>
+                    <span class="text-gray-600 font-medium truncate max-w-[150px] sm:max-w-xs">{{ $batik->title }}</span>
                 </li>
             </ol>
         </nav>
@@ -70,22 +70,22 @@
                         <span class="bg-blue-100 text-blue-600 text-sm font-medium px-3 py-1 rounded-full">
                             {{ $batik->category->name ?? 'Batik Tradisional' }}
                         </span>
-                        <div class="flex items-center space-x-1 text-amber-400">
+                        {{-- <div class="flex items-center space-x-1 text-amber-400">
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star"></i>
                             <i class="fas fa-star-half-alt"></i>
                             <span class="text-gray-600 text-sm ml-1">(4.8)</span>
-                        </div>
+                        </div> --}}
                     </div>
 
-                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                    <h1 class="text-2xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
                         {{ $batik->title }}
                     </h1>
 
                     <div class="flex items-baseline space-x-3">
-                        <span class="text-3xl font-bold text-blue-600">
+                        <span class="text-xl sm:text-3xl font-bold text-blue-600">
                             Rp {{ number_format($batik->price, 0, ',', '.') }}
                         </span>
                         {{-- <span class="text-lg text-gray-500 line-through">Rp 450.000</span>
@@ -115,7 +115,16 @@
                             Bahan & Material
                         </h4>
                         <div class="bg-gray-50 rounded-xl p-4">
-                            <p class="text-gray-700">{{ $batik->material ?? 'Katun Primissima' }}</p>
+                            @if ($batik->material)
+                                @foreach (explode(',', $batik->material) as $m)
+                                    <span
+                                        class="inline-block bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full mr-2 mb-2">
+                                        {{ trim($m) }}
+                                    </span>
+                                @endforeach
+                            @else
+                                <p class="text-gray-700">Katun Primissima</p>
+                            @endif
                         </div>
                     </div>
 
@@ -123,7 +132,7 @@
                     <div>
                         <h4 class="font-semibold text-gray-900 mb-3 flex items-center">
                             <i class="fas fa-ruler-combined text-blue-500 mr-2 text-sm"></i>
-                            Pilihan Ukuran
+                            Ukuran
                         </h4>
                         <div class="grid grid-cols-2 gap-2">
                             @foreach (explode(',', $batik->size) as $size)
@@ -150,6 +159,29 @@
                             <i class="fab fa-whatsapp text-lg"></i>
                             <span>Beli via WhatsApp</span>
                         </a>
+                        {{-- <form action="{{ route('order.create') }}" method="POST" class="space-y-4">
+                            @csrf
+                            <input type="hidden" name="total_amount" value="{{ $batik->price }}">
+                            <input type="hidden" name="note" value="Pesanan produk {{ $batik->title }}">
+
+                            <div>
+                                <label class="block text-gray-700">Nama Anda</label>
+                                <input type="text" name="name" required class="w-full border rounded-lg p-2"
+                                    placeholder="Masukkan nama Anda">
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700">Nomor WhatsApp</label>
+                                <input type="text" name="phone" required class="w-full border rounded-lg p-2"
+                                    placeholder="Contoh: 081234567890">
+                            </div>
+
+                            <button type="submit"
+                                class="group bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center space-x-3">
+                                <i class="fab fa-whatsapp text-lg"></i>
+                                <span>Beli via WhatsApp</span>
+                            </button>
+                        </form> --}}
                     </div>
 
                     {{-- <button class="w-full bg-white border-2 border-blue-500 text-blue-600 font-semibold py-4 px-6 rounded-xl hover:bg-blue-50 transition-all duration-200 flex items-center justify-center space-x-3">
@@ -198,9 +230,24 @@
                             <span class="text-gray-600 font-medium">Nama Produk</span>
                             <span class="text-gray-900 font-semibold">{{ $batik->title }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-b border-gray-100">
+                        {{-- <div class="flex justify-between py-3 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">Bahan Material</span>
                             <span class="text-gray-900 font-semibold">{{ $batik->material ?? 'Katun Primissima' }}</span>
+                        </div> --}}
+                        <div class="flex justify-between py-3 border-b border-gray-100 items-start">
+                            <span class="text-gray-600 font-medium">Bahan Material</span>
+                            <div class="flex flex-wrap justify-end max-w-[70%]">
+                                @if ($batik->material)
+                                    @foreach (explode(',', $batik->material) as $m)
+                                        <span
+                                            class="bg-blue-100 text-blue-800 text-sm px-2.5 py-1 rounded-full font-medium ml-2 mb-2">
+                                            {{ trim($m) }}
+                                        </span>
+                                    @endforeach
+                                @else
+                                    <span class="text-gray-900 font-semibold">Katun Primissima</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="flex justify-between py-3 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">Tema Motif</span>
@@ -214,16 +261,16 @@
                             <span class="text-gray-600 font-medium">Kualitas</span>
                             <span class="text-gray-900 font-semibold">{{ $batik->category->name ?? 'Batik Tulis' }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-b border-gray-100">
+                        {{-- <div class="flex justify-between py-3 border-b border-gray-100">
                             <span class="text-gray-600 font-medium">Milik UMKM</span>
-                            {{-- <span class="text-gray-900 font-semibold">{{ $batik->umkm->name ?? 'Asli Tanjung Bumi' }}</span>     --}}
+                            <span class="text-gray-900 font-semibold">{{ $batik->umkm->name ?? 'Asli Tanjung Bumi' }}</span>    
                             <span class=" bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full flex">
                                 {{ $batik->umkm->name ?? 'Asli Tanjung Bumi' }}
-                                {{-- <span class="bg-amber-100 text-amber-700 text-xs font-medium px-2 py-1 rounded-full">
+                                <span class="bg-amber-100 text-amber-700 text-xs font-medium px-2 py-1 rounded-full">
                                     UMKM
-                                </span> --}}
+                                </span>
                             </span>
-                        </div>
+                        </div> --}}
                         {{-- <div class="flex justify-between py-3">
                             <span class="text-gray-600 font-medium">Kualitas</span>
                             <span class="text-gray-900 font-semibold">{{ $batik->quality ?? 'Premium' }}</span>
@@ -378,7 +425,7 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span>Pesan Sekarang</span>
                     </a>
-                    <a href="{{ route('shop.index') }}"
+                    <a href="{{ route('shop.index', $filters) }}"
                         class="border-2 border-blue-500 text-blue-600 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-200 inline-flex items-center space-x-3">
                         <i class="fas fa-arrow-left"></i>
                         <span>Lihat Koleksi Lain</span>

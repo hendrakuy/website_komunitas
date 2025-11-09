@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class BatikResource extends Resource
 {
@@ -28,6 +29,8 @@ class BatikResource extends Resource
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static ?string $pluralModelLabel = 'Produk Batik';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Produk Batik';
 
     public static function form(Schema $schema): Schema
     {
@@ -61,22 +64,5 @@ class BatikResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
-    }
-
-    // Buat slug otomatis dari nama kategori
-    public static function mutateFormDataBeforeCreate(array $data): array
-    {
-        $data['slug'] = Str::slug($data['title']);
-        return $data;
-    }
-
-    public static function mutateFormDataBeforeSave(array $data): array
-    {
-        // Perbarui slug jika judul diubah
-        if (isset($data['title'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-
-        return $data;
     }
 }

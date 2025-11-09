@@ -64,6 +64,12 @@ class Batik extends Model
         return $this->morphMany(\App\Models\Media::class, 'mediable');
     }
 
+    // Relasi ke OrderItem
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
     // Relasi: Batik bisa muncul di banyak event (promo)
     // public function events()
     // {
@@ -71,13 +77,44 @@ class Batik extends Model
     //                 ->withTimestamps();
     // }
 
-    protected static function boot() 
+    // auto generate unique slug from title
+    protected static function boot()
     {
         parent::boot();
-        static::saving(function ($batik) {
-            if (empty($batik->slug)) {
-                $batik->slug = Str::slug($batik->title);
+
+        // Sebelum membuat (create)
+        static::creating(function ($batik) {
+            $batik->slug = self::generateUniqueSlug($batik->title);
+        });
+
+        // Sebelum mengupdate (update)
+        static::updating(function ($batik) {
+            // Hanya ubah slug kalau title berubah
+            if ($batik->isDirty('title')) {
+                $batik->slug = self::generateUniqueSlug($batik->title, $batik->id);
             }
         });
+    }
+
+    /**
+     * Generate unique slug dari title
+     */
+    protected static function generateUniqueSlug($title, $ignoreId = null)
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Cek apakah slug sudah ada
+        while (
+            self::where('slug', $slug)
+                ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        return $slug;
     }
 }

@@ -18,10 +18,11 @@ class EdupackageForm
                 TextInput::make('title')
                     ->label('Nama Paket')
                     ->maxLength(255)
-                    ->required(),
-
-                TextInput::make('slug')
-                    ->required(),
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Nama paket wajib diisi',
+                        'max' => 'Nama paket maksimal 255 karakter',
+                    ]),
 
                 Textarea::make('description')
                     ->label('Deskripsi Paket')
@@ -55,6 +56,13 @@ class EdupackageForm
                     ->default(0.0)
                     ->prefix('Rp'),
 
+                TextInput::make('kapasitas')
+                    ->label('Kapasitas')
+                    ->required()
+                    ->numeric()
+                    ->default(0)
+                    ->prefix('Orang'),
+
                 TextInput::make('whatsapp_link')
                     ->label('Link WhatsApp')
                     ->url()
@@ -64,6 +72,17 @@ class EdupackageForm
                 FileUpload::make('image')
                     ->label('Gambar Paket')
                     ->directory('uploads/edupackages')
+                    ->imagePreviewHeight('150')
+                    ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
+                    ->openable()
+                    ->downloadable()
+                    ->maxSize(10048) // Maksimal 2MB
+                    ->preserveFilenames()
+                    ->visibility('public')
+                    ->disk('public')
+                    ->previewable(false)
+                    ->enableOpen()
+                    ->helperText('Maksimum ukuran file 10MB.')
                     ->image(),
 
                 Toggle::make('is_active')

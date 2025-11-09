@@ -73,16 +73,18 @@ class BatikForm
                 Forms\Components\FileUpload::make('image')
                     ->label('Foto Batik')
                     ->image()
-                    ->imagePreviewHeight('150') // tampilkan thumbnail kecil
+                    ->imagePreviewHeight('150') 
                     ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
-                    ->openable()                // biar bisa klik buat lihat full image
-                    ->downloadable()            // tombol download
-                    ->directory('uploads/batik') // simpan di folder ini
-                    ->maxSize(10240)             // maksimal ukuran file 10MB
-                    ->preserveFilenames()       // biar nama file gak diganti hash panjang
-                    ->visibility('public')      // disimpan di disk public
+                    ->openable()                
+                    ->downloadable()            
+                    ->directory('uploads/batik') 
+                    ->maxSize(10240)             
+                    ->preserveFilenames()       
+                    ->visibility('public')      
+                    ->disk('public')
                     ->previewable(false)
                     ->enableOpen()
+                    ->helperText('Maksimum ukuran file 10MB.')
                     ->columnSpanFull(),
             ]);
     }

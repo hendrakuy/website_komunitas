@@ -1,16 +1,19 @@
 @extends('layouts.app')
 
+@section('title', 'Batik Paseseh - Kegiatan')
+
 @section('hero')
     <!-- Modern Hero Section -->
-    <section
-        class="relative flex items-center justify-center overflow-hidden min-h-[70vh] sm:min-h-[80vh] md:min-h-screen">
+    <section class="relative flex items-center justify-center overflow-hidden min-h-[70vh] sm:min-h-[80vh] md:min-h-screen">
         <!-- Background Image -->
         <div class="absolute inset-0 bg-cover bg-center"
             style="background-image: url('{{ asset('images/BG_Kegiatan.png') }}');">
         </div>
 
         <!-- Overlay Gradasi Warna -->
-        <div class="absolute inset-0 bg-gray-900/55"></div>
+        <div class="absolute inset-0 bg-gray-900/45"></div>
+        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-purple-900/50 to-indigo-900/60"></div> --}}
+
         {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900/80 via-purple-800/60 to-indigo-900/70"></div> --}}
         <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10"></div>
 
@@ -45,9 +48,12 @@
         </div>
 
         <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <div class="w-6 h-10 border-2 border-amber-400 rounded-full flex justify-center">
-                <div class="w-1 h-3 bg-amber-400 rounded-full mt-2 animate-pulse"></div>
+        <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+            <div class="animate-bounce">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                    </path>
+                </svg>
             </div>
         </div>
     </section>
@@ -148,9 +154,12 @@
                                 {{ $event->title }}
                             </h3>
 
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+                            {{-- <p class="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
                                 {{ $event->description }}
-                            </p>
+                            </p> --}}
+
+                            <p class="text-gray-600 mb-4 line-clamp-2">{!! Str::limit(strip_tags($event->description), 120) !!}</p>
+
 
                             <!-- Meta Information -->
                             <div class="flex items-center justify-between text-sm text-gray-500 mb-4">
@@ -194,21 +203,23 @@
                 @endforelse
             </div>
 
-            <!-- Load More Section -->
-            <div id="load-more-section" class="text-center mt-12">
-                <button id="load-more-btn"
-                    class="group inline-flex items-center space-x-3 bg-white border-2 border-blue-500 text-blue-600 font-bold py-4 px-8 rounded-2xl hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
-                    <i class="fas fa-plus-circle group-hover:rotate-90 transition-transform duration-300"></i>
-                    <span>Muat Lebih Banyak</span>
-                    <i class="fas fa-arrow-down group-hover:translate-y-1 transition-transform duration-300"></i>
-                </button>
-                <div id="loading-spinner" class="hidden mt-4">
-                    <div class="inline-flex items-center space-x-3 text-blue-600">
-                        <div class="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-                        <span class="font-medium">Memuat event...</span>
+            @if ($events->total() > $events->perPage())
+                <!-- Load More Section -->
+                <div id="load-more-section" class="text-center mt-12">
+                    <button id="load-more-btn" data-next-page="2"
+                        class="group inline-flex items-center space-x-3 bg-white border-2 border-blue-500 text-blue-600 font-bold py-4 px-8 rounded-2xl hover:bg-blue-500 hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl">
+                        <i class="fas fa-plus-circle group-hover:rotate-90 transition-transform duration-300"></i>
+                        <span>Muat Lebih Banyak</span>
+                        <i class="fas fa-arrow-down group-hover:translate-y-1 transition-transform duration-300"></i>
+                    </button>
+                    <div id="loading-spinner" class="hidden mt-4">
+                        <div class="inline-flex items-center space-x-3 text-blue-600">
+                            <div class="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                            <span class="font-medium">Memuat event...</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 

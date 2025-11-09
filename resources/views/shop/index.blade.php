@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Batik Paseseh - Shop')
+
 @section('hero')
     {{-- Modern Hero Section --}}
     <section
@@ -14,7 +16,7 @@
         <div class="text-center max-w-4xl px-4 z-10">
             <h1 class="text-3xl md:text-5xl font-bold mb-4 text-white tracking-tight">Koleksi Eksklusif Batik Tanjung Bumi
             </h1>
-            <p class="text-lg md:text-xl text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
+            <p class="text-md md:text-lg text-blue-100 mb-8 max-w-3xl mx-auto leading-relaxed">
                 Temukan keindahan batik autentik dengan motif tradisional dan kualitas terbaik. Setiap helai kain
                 menceritakan warisan budaya Indonesia.
             </p>
@@ -26,7 +28,7 @@
                         <i class="fas fa-search"></i>
                     </div>
                     <input type="text" name="q" value="{{ request('q') }}"
-                        placeholder="Cari batik, motif, atau kategori..."
+                        placeholder="Cari batik ..."
                         class="w-full py-4 px-3 text-gray-700 focus:outline-none placeholder-gray-400">
                     <button type="submit"
                         class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-4 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-medium">
@@ -47,7 +49,7 @@
         <div class="flex flex-col md:flex-row gap-8">
             {{-- Modern Sidebar Filter --}}
             <aside class="md:w-80 flex-shrink-0">
-                <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-6">
+                <div class="bg-white rounded-2xl shadow-lg p-6 sticky top-24">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-bold text-gray-800">Filter Produk</h2>
                         <a href="{{ route('shop.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">
@@ -55,57 +57,51 @@
                         </a>
                     </div>
 
-                    <form method="GET" action="{{ route('shop.index') }}" class="space-y-8">
-                        {{-- Filter Harga --}}
-                        {{-- <div x-data="priceSlider()" class="space-y-4">
-                            <h3 class="font-semibold text-gray-700 flex items-center">
-                                <i class="fas fa-tag text-blue-500 mr-2 text-sm"></i>
-                                Kisaran Harga
+                    <form method="GET" action="{{ route('shop.index') }}" class="space-y-8" x-data="filterForm()">
+                        <!-- Filter Harga -->
+                        <div x-data="priceRange()" x-init="init()">
+                            <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
+                                <i class="fas fa-tags text-blue-500 mr-2 text-sm"></i> Filter Harga
                             </h3>
 
-                            <div class="pt-2">
+                            <div class="space-y-3">
+                                <!-- Label harga -->
+                                <div class="flex justify-between text-sm text-gray-600">
+                                    <span x-text="formatPrice(min)"></span>
+                                    <span x-text="formatPrice(max)"></span>
+                                </div>
+
+                                <!-- Slider Container -->
                                 <div class="relative h-8">
-                                    <!-- Track -->
-                                    <div class="h-2 bg-gray-200 rounded-full relative">
-                                        <div class="absolute h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
-                                            :style="{
-                                                left: ((min - 100000) / 400000 * 100) + '%',
-                                                right: (100 - (max - 100000) / 400000 * 100) + '%'
-                                            }">
-                                        </div>
-                                    </div>
+                                    <!-- Track Background -->
+                                    <div class="absolute top-3 h-2 w-full bg-gray-200 rounded-lg"></div>
 
-                                    <!-- Min Slider -->
-                                    <input type="range" min="100000" max="500000" step="10000" x-model="min"
-                                        @input="updateMin" @mousedown="active = 'min'"
-                                        class="absolute top-0 w-full h-2 opacity-0 cursor-pointer appearance-none"
-                                        style="z-index: 1;">
+                                    <!-- Active Track -->
+                                    <div class="absolute top-3 h-2 bg-blue-500 rounded-lg"
+                                        :style="`left:${(min/minLimit)*100}%; right:${100-(max/maxLimit)*100}%`"></div>
 
-                                    <!-- Max Slider -->
-                                    <input type="range" min="100000" max="500000" step="10000" x-model="max"
-                                        @input="updateMax" @mousedown="active = 'max'"
-                                        class="absolute top-0 w-full h-2 opacity-0 cursor-pointer appearance-none"
-                                        style="z-index: 1;">
+                                    <!-- Min Thumb -->
+                                    <input type="range" x-model="min" :min="minLimit" :max="maxLimit"
+                                        :step="step"
+                                        @input="updateMin($event.target.value); $parent.priceChanged = true"
+                                        class="absolute w-full h-2 top-3 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:shadow-lg">
 
-                                    <!-- Slider Handles -->
-                                    <div class="absolute top-0 w-full h-2 pointer-events-none">
-                                        <div class="absolute w-4 h-4 bg-white border-2 border-blue-500 rounded-full shadow -mt-1 transform -translate-x-1/2"
-                                            :style="{ left: ((min - 100000) / 400000 * 100) + '%' }"></div>
-                                        <div class="absolute w-4 h-4 bg-white border-2 border-purple-500 rounded-full shadow -mt-1 transform -translate-x-1/2"
-                                            :style="{ left: ((max - 100000) / 400000 * 100) + '%' }"></div>
-                                    </div>
+                                    <!-- Max Thumb -->
+                                    <input type="range" x-model="max" :min="minLimit" :max="maxLimit"
+                                        :step="step"
+                                        @input="updateMax($event.target.value); $parent.priceChanged = true"
+                                        class="absolute w-full h-2 top-3 appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-white [&::-webkit-slider-thumb]:shadow-lg [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-blue-500 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:shadow-lg">
                                 </div>
 
-                                <div class="flex justify-between text-sm text-gray-600 mt-4">
-                                    <span class="bg-gray-100 px-3 py-1 rounded-lg">Rp <span
-                                            x-text="min.toLocaleString()"></span></span>
-                                    <span class="bg-gray-100 px-3 py-1 rounded-lg">Rp <span
-                                            x-text="max.toLocaleString()"></span></span>
-                                </div>
-                                <input type="hidden" name="min_price" :value="min">
-                                <input type="hidden" name="max_price" :value="max">
+                                <!-- Hidden input buat kirim ke server (hanya jika harga diubah) -->
+                                <template x-if="shouldIncludePriceFilter()">
+                                    <div>
+                                        <input type="hidden" name="min_price" :value="min">
+                                        <input type="hidden" name="max_price" :value="max">
+                                    </div>
+                                </template>
                             </div>
-                        </div> --}}
+                        </div>
 
                         <!-- Kategori -->
                         <div>
@@ -128,40 +124,7 @@
                             </ul>
                         </div>
 
-                        {{-- Motif / Desain --}}
-                        {{-- <div>
-                            <h3 class="font-semibold text-gray-700 mb-3 flex items-center">
-                                <i class="fas fa-palette text-blue-500 mr-2 text-sm"></i>
-                                Motif / Desain
-                            </h3>
-                            <ul class="space-y-2">
-                                <li>
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="checkbox" name="motif[]" value="mega" 
-                                            {{ in_array('mega', (array) request('motif')) ? 'checked' : '' }}
-                                            class="rounded text-blue-600 focus:ring-blue-500">
-                                        <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Mega Mendung</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="checkbox" name="motif[]" value="parang" 
-                                            {{ in_array('parang', (array) request('motif')) ? 'checked' : '' }}
-                                            class="rounded text-blue-600 focus:ring-blue-500">
-                                        <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Parang</span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="flex items-center space-x-3 cursor-pointer group">
-                                        <input type="checkbox" name="motif[]" value="flora" 
-                                            {{ in_array('flora', (array) request('motif')) ? 'checked' : '' }}
-                                            class="rounded text-blue-600 focus:ring-blue-500">
-                                        <span class="text-gray-700 group-hover:text-blue-600 transition-colors">Flora</span>
-                                    </label>
-                                </li>
-                            </ul>
-                        </div> --}}
-
+                        {{-- Tombol submit --}}
                         <button type="submit"
                             class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-xl font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-md hover:shadow-lg">
                             Terapkan Filter
@@ -179,38 +142,53 @@
                         <p class="text-gray-600 mt-1">{{ $batiks->total() }} produk ditemukan</p>
                     </div>
 
-                    <div class="flex items-center space-x-4">
+                    <form method="GET" action="{{ route('shop.index') }}" class="flex items-center space-x-4">
+                        <!-- Preserve existing filters -->
+                        @foreach (request()->except('sort') as $key => $value)
+                            @if (is_array($value))
+                                @foreach ($value as $item)
+                                    <input type="hidden" name="{{ $key }}[]" value="{{ $item }}">
+                                @endforeach
+                            @else
+                                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                            @endif
+                        @endforeach
+
                         <span class="text-gray-700 font-medium">Urutkan:</span>
-                        <select
+                        <select name="sort" onchange="this.form.submit()"
                             class="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option>Terbaru</option>
-                            <option>Harga Terendah</option>
-                            <option>Harga Tertinggi</option>
-                            <option>Nama A-Z</option>
+                            <option value="latest" {{ request('sort') == 'latest' ? 'selected' : '' }}>Terbaru</option>
+                            <option value="price_low" {{ request('sort') == 'price_low' ? 'selected' : '' }}>Harga Terendah
+                            </option>
+                            <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Harga
+                                Tertinggi</option>
+                            {{-- <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Nama A-Z
+                            </option> --}}
                         </select>
-                    </div>
+                    </form>
                 </div>
 
                 {{-- Product Cards --}}
                 @if ($batiks->count() > 0)
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
                         @foreach ($batiks as $batik)
                             <div
-                                class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
+                                class="bg-white rounded-xl sm:rounded-2xl shadow-sm sm:shadow-md overflow-hidden hover:shadow-lg sm:hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group">
                                 <div class="relative overflow-hidden">
                                     {{-- Product Image --}}
                                     @if (!empty($batik->image))
                                         <img src="{{ asset('storage/' . $batik->image) }}" alt="{{ $batik->title }}"
-                                            class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500">
+                                            class="w-full h-40 sm:h-48 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-500">
                                     @else
-                                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center">
-                                            <i class="fas fa-image text-gray-400 text-4xl"></i>
+                                        <div
+                                            class="w-full h-40 sm:h-48 lg:h-64 bg-gray-100 flex items-center justify-center">
+                                            <i class="fas fa-image text-gray-300 text-2xl sm:text-4xl"></i>
                                         </div>
                                     @endif
 
                                     {{-- Category Badge --}}
-                                    <div class="absolute top-4 left-4">
-                                        <span class="bg-blue-500 text-white text-xs font-medium px-3 py-1 rounded-full">
+                                    <div class="absolute top-2 sm:top-4 left-2 sm:left-4">
+                                        <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
                                             {{ $batik->category->name ?? 'Batik' }}
                                         </span>
                                     </div>
@@ -218,35 +196,42 @@
                                     {{-- Quick Action Overlay --}}
                                     <div
                                         class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                                        <a href="{{ route('shop.detail', $batik->slug) }}"
-                                            class="bg-white text-blue-600 px-4 py-2 rounded-lg font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-md">
+                                        <a href="{{ route('shop.detail', $batik->slug) }}@if (request()->query()) ?{{ http_build_query(request()->query()) }} @endif"
+                                            class="bg-white text-blue-600 px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-medium transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-md text-xs sm:text-sm">
                                             Lihat Detail
                                         </a>
                                     </div>
                                 </div>
 
-                                <div class="p-5">
-                                    <h3 class="font-bold text-gray-800 text-lg mb-2 line-clamp-1">{{ $batik->title }}</h3>
+                                <div class="p-3 sm:p-4 lg:p-5">
+                                    <h3
+                                        class="font-bold text-gray-800 text-sm sm:text-base lg:text-lg mb-1 sm:mb-2 line-clamp-1">
+                                        {{ $batik->title }}</h3>
 
                                     @if (!empty($batik->description))
-                                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">{{ $batik->description }}</p>
+                                        <p
+                                            class="text-gray-600 text-xs sm:text-sm mb-2 sm:mb-4 line-clamp-2 leading-tight sm:leading-relaxed">
+                                            {{ $batik->description }}</p>
                                     @endif
 
-                                    <div class="flex justify-between items-center">
-                                        <div class="text-blue-600 font-bold text-xl">
+                                    <div
+                                        class="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
+                                        <div class="text-blue-600 font-bold text-base sm:text-lg lg:text-xl">
                                             Rp {{ number_format($batik->price, 0, ',', '.') }}
                                         </div>
 
-                                        <div class="flex space-x-2">
+                                        <div class="flex space-x-1 sm:space-x-2">
                                             @if ($batik->specs && is_array($batik->specs))
                                                 @if (isset($batik->specs['material']))
-                                                    <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                                                    <span
+                                                        class="bg-gray-100 text-gray-700 text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded truncate max-w-20 sm:max-w-none">
                                                         {{ $batik->specs['material'] }}
                                                     </span>
                                                 @endif
 
                                                 @if (isset($batik->specs['size']))
-                                                    <span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">
+                                                    <span
+                                                        class="bg-gray-100 text-gray-700 text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 rounded truncate max-w-16 sm:max-w-none">
                                                         {{ $batik->specs['size'] }}
                                                     </span>
                                                 @endif
@@ -254,8 +239,8 @@
                                         </div>
                                     </div>
 
-                                    <a href="{{ route('shop.detail', $batik->slug) }}"
-                                        class="mt-4 w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 block shadow-md hover:shadow-lg">
+                                    <a href="{{ route('shop.detail', $batik->slug) }}@if (request()->query()) ?{{ http_build_query(request()->query()) }} @endif"
+                                        class="mt-2 sm:mt-4 w-full bg-gradient-to-r from-blue-500 to-purple-500 text-white text-center py-2 sm:py-3 rounded-lg font-medium hover:from-blue-600 hover:to-purple-600 transition-all duration-300 block shadow-md hover:shadow-lg text-xs sm:text-sm">
                                         Beli Sekarang
                                     </a>
                                 </div>
@@ -264,16 +249,17 @@
                     </div>
                 @else
                     {{-- Empty State --}}
-                    <div class="bg-white rounded-2xl shadow-md p-12 text-center">
+                    <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm sm:shadow-md p-6 sm:p-8 lg:p-12 text-center">
                         <div class="max-w-md mx-auto">
-                            <i class="fas fa-search text-gray-400 text-6xl mb-6"></i>
-                            <h3 class="text-2xl font-bold text-gray-700 mb-4">Produk Tidak Ditemukan</h3>
-                            <p class="text-gray-600 mb-8">
+                            <i class="fas fa-search text-gray-300 text-4xl sm:text-6xl mb-4 sm:mb-6"></i>
+                            <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-700 mb-3 sm:mb-4">Produk Tidak
+                                Ditemukan</h3>
+                            <p class="text-gray-500 text-sm sm:text-base mb-6 sm:mb-8 leading-relaxed">
                                 Maaf, tidak ada produk yang sesuai dengan filter pencarian Anda. Coba ubah kriteria
                                 pencarian atau lihat semua produk.
                             </p>
                             <a href="{{ route('shop.index') }}"
-                                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 inline-block">
+                                class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-300 inline-block text-sm sm:text-base">
                                 Lihat Semua Produk
                             </a>
                         </div>
@@ -283,7 +269,7 @@
                 {{-- Pagination --}}
                 @if ($batiks->hasPages())
                     <div class="mt-12 flex justify-center">
-                        {{ $batiks->links('vendor.pagination.custom-tailwind') }}
+                        {{ $batiks->appends(request()->query())->links('vendor.pagination.custom-tailwind') }}
                     </div>
                 @endif
             </section>
@@ -291,49 +277,70 @@
     </div>
 @endsection
 
+{{-- Custom JS --}}
 <script>
-    function priceSlider() {
+    function filterForm() {
         return {
-            min: {{ request('min_price', 100000) }},
-            max: {{ request('max_price', 500000) }},
-            active: null,
-            updateMin() {
-                if (this.min > this.max - 10000) {
-                    this.min = this.max - 10000; // Cegah min > max
-                }
-                if (this.min < 100000) {
-                    this.min = 100000;
-                }
-            },
-            updateMax() {
-                if (this.max < this.min + 10000) {
-                    this.max = this.min + 10000; // Cegah max < min
-                }
-                if (this.max > 500000) {
-                    this.max = 500000;
-                }
-            },
+            priceChanged: false,
+            originalMin: {{ request('min_price', 150000) }},
+            originalMax: {{ request('max_price', 5000000) }},
+
             init() {
-                // Tambahkan listener untuk update z-index dinamis
-                this.$watch('min', () => this.updateZIndex());
-                this.$watch('max', () => this.updateZIndex());
+                // Cek apakah harga sudah diubah dari nilai default
+                this.priceChanged = this.originalMin !== 150000 || this.originalMax !== 5000000;
             },
-            updateZIndex() {
-                // Logika sederhana: Jika min dan max dekat, prioritaskan yang active
-                const minInput = this.$el.querySelector('input[x-model="min"]');
-                const maxInput = this.$el.querySelector('input[x-model="max"]');
-                if (Math.abs(this.min - this.max) < 20000) { // Jika terlalu dekat
-                    if (this.active === 'min') {
-                        minInput.style.zIndex = 3;
-                        maxInput.style.zIndex = 2;
-                    } else {
-                        minInput.style.zIndex = 2;
-                        maxInput.style.zIndex = 3;
-                    }
-                } else {
-                    minInput.style.zIndex = 1;
-                    maxInput.style.zIndex = 1;
+        }
+    }
+
+    function priceRange() {
+        return {
+            min: {{ request('min_price', 150000) }},
+            max: {{ request('max_price', 5000000) }},
+            minLimit: 150000,
+            maxLimit: 5000000,
+            step: 10000,
+            defaultMin: 150000,
+            defaultMax: 5000000,
+
+            init() {
+                // Pastikan min tidak lebih besar dari max
+                if (this.min > this.max) {
+                    this.min = this.max - this.step;
                 }
+
+                // Pastikan nilai berada dalam batas yang ditentukan
+                this.min = Math.max(this.min, this.minLimit);
+                this.max = Math.min(this.max, this.maxLimit);
+            },
+
+            updateMin(value) {
+                const newMin = parseInt(value);
+                if (newMin <= this.max) {
+                    this.min = newMin;
+                } else {
+                    this.min = this.max - this.step;
+                }
+            },
+
+            updateMax(value) {
+                const newMax = parseInt(value);
+                if (newMax >= this.min) {
+                    this.max = newMax;
+                } else {
+                    this.max = this.min + this.step;
+                }
+            },
+
+            formatPrice(value) {
+                return 'Rp' + value.toLocaleString('id-ID');
+            },
+
+            isPriceChanged() {
+                return this.min !== this.defaultMin || this.max !== this.defaultMax;
+            },
+
+            shouldIncludePriceFilter() {
+                return this.isPriceChanged();
             }
         }
     }

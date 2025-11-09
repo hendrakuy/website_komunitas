@@ -9,6 +9,8 @@ use Filament\Actions\RestoreAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Actions;
+use Illuminate\Support\Str;
+use App\Models\Batik;
 
 class EditBatik extends EditRecord
 {
@@ -18,12 +20,13 @@ class EditBatik extends EditRecord
     {
         return [
             DeleteAction::make()
-                ->label('Hapus')
+                ->label('Hapus Produk Batik')
                 ->color('danger')
                 ->icon('heroicon-o-trash')
                 ->requiresConfirmation(true)
                 ->modalHeading('Hapus Produk Batik')
                 ->modalSubheading('Apakah Anda yakin ingin menghapus produk batik ini? Tindakan ini tidak dapat dibatalkan.')
+                ->modalButton('Ya, Hapus')
                 ->successNotificationTitle('Produk Batik berhasil dihapus'),
             ForceDeleteAction::make(),
             RestoreAction::make(),
@@ -42,23 +45,23 @@ class EditBatik extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
-    protected function getFormActions(): array
-    {
-        return [
-            // Tombol Simpan
-            Actions\Action::make('save')
-                ->label('Simpan')
-                ->color('success')
-                ->icon('heroicon-o-check-circle')
-                ->action('save')
-                ->requiresConfirmation(false),
+    // protected function getFormActions(): array
+    // {
+    //     return [
+    //         // Tombol Simpan
+    //         Actions\Action::make('save')
+    //             ->label('Simpan')
+    //             ->color('success')
+    //             ->icon('heroicon-o-check-circle')
+    //             ->action('save')
+    //             ->requiresConfirmation(false),
 
-            // Tombol Batal
-            Actions\Action::make('cancel')
-                ->label('Batal')
-                ->color('warning')
-                ->icon('heroicon-o-x-mark')
-                ->url($this->getResource()::getUrl('index')),
-        ];
-    }
+    //         // Tombol Batal
+    //         Actions\Action::make('cancel')
+    //             ->label('Batal')
+    //             ->color('warning')
+    //             ->icon('heroicon-o-x-mark')
+    //             ->url($this->getResource()::getUrl('index')),
+    //     ];
+    // }
 }

@@ -13,7 +13,10 @@ class ListJourneys extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make('create')
+                ->label('Buat Perjalanan')
+                ->icon('heroicon-o-plus')
+                ->url(static::getResource()::getUrl('create')),
         ];
     }
 }

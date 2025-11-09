@@ -46,7 +46,7 @@ class UmkmForm
                     ->label('Logo UMKM')
                     ->image()
                     ->directory('uploads/umkm/logo')
-                    ->maxSize(2048)
+                    ->maxSize(10048)
                     ->preserveFilenames()
                     ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
                     ->visibility('public')
@@ -56,13 +56,13 @@ class UmkmForm
                     ->openable()
                     ->downloadable()
                     // ->columnSpanFull()
-                    ->helperText('Maksimal 2MB. Format: jpg, png, gif.'),
+                    ->helperText('Maksimal ukuran file 10MB'),
 
                 FileUpload::make('background_image')
                     ->label('Gambar Latar Belakang UMKM')
                     ->image()
                     ->directory('uploads/umkm/background')
-                    // ->maxSize(2048)
+                    ->maxSize(10048)
                     ->preserveFilenames()
                     ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
                     ->visibility('public')
@@ -72,7 +72,7 @@ class UmkmForm
                     ->openable()
                     ->downloadable()
                     // ->columnSpanFull()
-                    ->helperText('Maksimal 2MB. Format: jpg, png, gif.'),
+                    ->helperText('Maksimal ukuran file 10MB'),
             ]);
     }
 }

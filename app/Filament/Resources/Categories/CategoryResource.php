@@ -14,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class CategoryResource extends Resource
 {
@@ -26,6 +27,8 @@ class CategoryResource extends Resource
     protected static ?string $navigationLabel = 'Kategori Batik';
 
     protected static ?string $pluralModelLabel = 'Kategori Batik';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Produk Batik';
 
     public static function form(Schema $schema): Schema
     {
@@ -53,16 +56,35 @@ class CategoryResource extends Resource
         ];
     }
 
-    // Buat slug otomatis dari nama kategori
+// Buat slug otomatis dari nama kategori
     public static function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['slug'] = Str::slug($data['name']);
+        $slug = Str::slug($data['name']);
+        $count = Category::where('slug', 'LIKE', "{$slug}%")->count();
+
+        // Kalau sudah ada yang sama, tambahkan angka di belakang
+        if ($count > 0) {
+            $slug .= '-' . ($count + 1);
+        }
+
+        $data['slug'] = $slug;
         return $data;
     }
-
+    
+    // Perbarui slug jika nama kategori diubah
     public static function mutateFormDataBeforeSave(array $data): array
     {
-        $data['slug'] = Str::slug($data['name']);
+        if (isset($data['name'])) {
+            $slug = Str::slug($data['name']);
+            $count = Category::where('slug', 'LIKE', "{$slug}%")
+                ->where('id', '!=', $data['id'] ?? 0)
+                ->count();
+            if ($count > 0) {
+                $slug .= '-' . ($count + 1);
+            }
+            $data['slug'] = $slug;
+        }
+
         return $data;
     }
 

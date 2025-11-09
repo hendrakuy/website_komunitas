@@ -13,7 +13,10 @@ class ListEdupackages extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make('create')
+                ->label('Tambah Paket Edukasi')
+                ->icon('heroicon-o-plus')
+                ->url(static::getResource()::getUrl('create')),
         ];
     }
 }

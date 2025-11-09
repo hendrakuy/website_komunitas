@@ -31,22 +31,25 @@ class InstagramPostsTable
                     ->searchable()
                     ->sortable(),
 
-                // TextColumn::make('link')
-                //     ->label('Link')
-                //     ->limit(50)
-                //     ->searchable()
-                //     ->sortable()
-                //     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+                TextColumn::make('link')
+                    ->label('Link Instagram')
+                    ->limit(50)
+                    ->searchable()
+                    ->sortable(),
             ])
             ->recordActions([
                 EditAction::make(),
             ])
             ->toolbarActions([
                 DeleteBulkAction::make()
-                    ->label('Hapus Postingan'),
+                    ->label('Hapus Postingan')
+                    ->color('danger')
+                    ->icon('heroicon-o-trash')
+                    ->requiresConfirmation(true)
+                    ->modalHeading('Hapus Postingan Instagram')
+                    ->modalSubheading('Apakah Anda yakin ingin menghapus postingan Instagram yang dipilih? Tindakan ini tidak dapat dibatalkan.')
+                    ->modalButton('Ya, Hapus')
+                    ->successNotificationTitle('Postingan Instagram berhasil dihapus'),
             ]);
     }
 }

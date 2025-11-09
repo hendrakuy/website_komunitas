@@ -71,10 +71,8 @@ class BatiksTable
                     ->requiresConfirmation(true)
                     ->modalHeading('Hapus Produk Batik')
                     ->modalSubheading('Apakah Anda yakin ingin menghapus produk batik yang dipilih? Tindakan ini tidak dapat dibatalkan.')
+                    ->modalButton('Ya, Hapus')
                     ->successNotificationTitle('Produk Batik berhasil dihapus'),
-                    // ->successNotificationBody('Produk Batik berhasil dihapus.')
-                // RestoreBulkAction::make()->label('Pulihkan'),
-                // ForceDeleteBulkAction::make()->label('Hapus Permanen'),
             ]);
     }
 }

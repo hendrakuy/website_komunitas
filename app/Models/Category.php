@@ -18,19 +18,52 @@ class Category extends Model
         'description',
     ];
 
-    // auto generate slug from name
+    public function batiks()
+    {
+        return $this->hasMany(Batik::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
-        static::saving(function ($category) {
-            if (empty($category->slug)) {
-                $category->slug = Str::slug($category->name);
+
+        // Saat membuat (create)
+        static::creating(function ($category) {
+            if (empty($category->slug) && !empty($category->name)) {
+                $category->slug = static::generateUniqueSlug($category->name);
+            }
+        });
+
+        // Saat mengupdate (update)
+        static::updating(function ($category) {
+            if ($category->isDirty('name') && !empty($category->name)) {
+                $category->slug = static::generateUniqueSlug($category->name, $category->id);
             }
         });
     }
 
-    public function batiks()
+    /**
+     * Generate unique slug dari name
+     */
+    protected static function generateUniqueSlug($name, $ignoreId = null)
     {
-        return $this->hasMany(Batik::class);
+        if (empty($name)) {
+            return null;
+        }
+
+        $slug = Str::slug($name);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (
+            static::where('slug', $slug)
+            ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+            ->exists()
+        ) {
+            $slug = "{$originalSlug}-{$count}";
+            $count++;
+        }
+
+        return $slug;
     }
 }

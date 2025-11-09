@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class UmkmResource extends Resource
 {
@@ -22,13 +23,13 @@ class UmkmResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    // protected static ?string $navigationGroup = 'Umkms';
-
     protected static ?string $navigationLabel = 'Kelola UMKM';
 
     protected static ?string $pluralModelLabel = 'Kelola UMKM';
 
     protected static ?string $pluralLabel = 'UMKM';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Info Beranda';
 
     public static function form(Schema $schema): Schema
     {

@@ -16,6 +16,11 @@ class CreateCategory extends CreateRecord
         return 'Tambah Kategori';
     }
 
+    public function getBreadcrumb(): string
+    {
+        return 'Tambah Kategori';
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

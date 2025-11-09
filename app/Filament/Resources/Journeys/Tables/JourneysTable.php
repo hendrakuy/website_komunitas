@@ -15,7 +15,7 @@ class JourneysTable
     {
         return $table
             ->columns([
-                ImageColumn::make('iamge')
+                ImageColumn::make('image')
                     ->label('Gambar')
                     ->getStateUsing(fn($record) => $record->image ? asset('storage/' . $record->image) : null)
                     ->disk('public')
@@ -25,22 +25,28 @@ class JourneysTable
 
                 TextColumn::make('year')
                     ->label('Tahun')
-                    // ->sortable()
+                    ->sortable()
                     ->searchable(),
 
                 TextColumn::make('title')
                     ->label('Judul'),
-            ])
-            ->filters([
-                //
+
+                TextColumn::make('content')
+                    ->label('Deskripsi')
+                    ->limit(50),
             ])
             ->recordActions([
-                EditAction::make(),
+                EditAction::make()
+                    ->label('Edit'),
             ])
             ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
+                DeleteBulkAction::make()
+                    ->label('Hapus Perjalanan')
+                    ->requiresConfirmation(true)
+                    ->modalHeading('Hapus Perjalanan')
+                    ->modalSubheading('Apakah Anda yakin ingin menghapus perjalanan ini? Tindakan ini tidak dapat dibatalkan.')
+                    ->modalButton('Ya, Hapus')
+                    ->successNotificationTitle('Perjalanan berhasil dihapus'),
             ]);
     }
 }

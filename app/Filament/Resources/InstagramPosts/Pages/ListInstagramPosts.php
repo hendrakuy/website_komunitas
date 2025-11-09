@@ -13,7 +13,10 @@ class ListInstagramPosts extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make('create')
+                ->label('Tambah Konten Instagram')
+                ->icon('heroicon-o-plus')
+                ->url(static::getResource()::getUrl('create')),
         ];
     }
 }

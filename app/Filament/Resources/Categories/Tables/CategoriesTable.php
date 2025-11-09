@@ -15,8 +15,10 @@ class CategoriesTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->label('Nama Kategori')
                     ->searchable(),
                 TextColumn::make('slug')
+                    ->label('Slug Kategori')
                     ->searchable(),
             ])
             ->recordActions([
@@ -24,7 +26,14 @@ class CategoriesTable
             ])
             ->toolbarActions([
                 DeleteBulkAction::make()
-                    ->label('Hapus Kategori'),
+                    ->label('Hapus Kategori')
+                    ->color('danger')
+                    ->icon('heroicon-o-trash')
+                    ->requiresConfirmation(true)
+                    ->modalHeading('Hapus Kategori')
+                    ->modalSubheading('Apakah Anda yakin ingin menghapus kategori ini? Tindakan ini tidak dapat dibatalkan.')
+                    ->modalButton('Ya, Hapus')
+                    ->successNotificationTitle('Kategori berhasil dihapus'),
             ]);
     }
 }

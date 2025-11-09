@@ -34,24 +34,4 @@ class CreateUmkm extends CreateRecord
             ->success()
             ->send();
     }
-
-    protected function getFormActions(): array
-    {
-        return [
-            // Tombol Simpan
-            Actions\Action::make('save')
-                ->label('Simpan')
-                ->color('success')
-                ->icon('heroicon-o-check-circle')
-                ->action('create')
-                ->requiresConfirmation(false),
-
-            // Tombol Batal
-            Actions\Action::make('cancel')
-                ->label('Batal')
-                ->color('warning')
-                ->icon('heroicon-o-x-mark')
-                ->url($this->getResource()::getUrl('index')),
-        ];
-    }
 }

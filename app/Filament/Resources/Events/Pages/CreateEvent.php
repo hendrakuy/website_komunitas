@@ -34,25 +34,4 @@ class CreateEvent extends CreateRecord
             ->success()
             ->send();
     }
-
-    protected function getFormActions(): array
-    {
-        return [
-            // Tombol Simpan
-            Actions\Action::make('save')
-                ->label('Simpan')
-                ->color('success')
-                ->icon('heroicon-o-check-circle')
-                ->action('create')
-                ->requiresConfirmation(false),
-                // ->successNotificationTitle('Event berhasil ditambahkan'),
-
-            // Tombol Batal
-            Actions\Action::make('cancel')
-                ->label('Batal')
-                ->color('warning')
-                ->url($this->getResource()::getUrl('index'))
-                ->icon('heroicon-o-x-mark'),
-        ];
-    }
 }

@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use UnitEnum;
 
 class InstagramPostResource extends Resource
 {
@@ -25,6 +26,8 @@ class InstagramPostResource extends Resource
     protected static ?string $pluralLabel = 'Konten Instagram';
 
     protected static ?string $recordTitleAttribute = 'caption';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Info Beranda';
 
     public static function form(Schema $schema): Schema
     {

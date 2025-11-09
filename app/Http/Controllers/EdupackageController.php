@@ -10,7 +10,7 @@ class EdupackageController extends Controller
     // Menampilkan semua paket
     public function index()
     {
-        $packages = Edupackage::where('is_active', true)->latest()->get();
+        $packages = Edupackage::where('is_active', true)->oldest()->get();
         return view('pages.education.index', compact('packages'));
     }
 

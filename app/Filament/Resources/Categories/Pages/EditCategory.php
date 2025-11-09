@@ -7,6 +7,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Str;
 use Filament\Notifications\Notification;
+use App\Models\Category;
 
 class EditCategory extends EditRecord
 {
@@ -19,10 +20,26 @@ class EditCategory extends EditRecord
         ];
     }
 
+    // Ubah dari static ke instance method
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        if ($this->record->name !== $data['name']) {
-            $data['slug'] = Str::slug($data['name']);
+        // Ambil record lama (kalau sedang edit)
+        $record = $this->record ?? null;
+
+        if (isset($data['name'])) {
+            // Hanya buat slug baru kalau name diubah atau slug kosong
+            if (!$record || $record->name !== $data['name'] || empty($record->slug)) {
+                $slug = Str::slug($data['name']);
+                $count = Category::where('slug', 'LIKE', "{$slug}%")
+                    ->where('id', '!=', $record?->id)
+                    ->count();
+
+                if ($count > 0) {
+                    $slug .= '-' . ($count + 1);
+                }
+
+                $data['slug'] = $slug;
+            }
         }
 
         return $data;

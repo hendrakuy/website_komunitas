@@ -28,41 +28,27 @@ class JourneyForm
                     ->maxLength(255)
                     ->required()
                     ->columnSpan(1),
-                    
-                Textarea::make('content')
-                    ->label('Cerita')
-                    ->rows(5)
-                    ->columnSpanFull(),
 
-                // RichEditor::make('description')
-                //     ->label('Deskripsi')
-                //     ->toolbarButtons([
-                //         'bold',
-                //         'italic',
-                //         'underline',
-                //         'strike',
-                //         'link',
-                //         'bulletList',
-                //         'orderedList',
-                //         'blockquote',
-                //         'codeBlock',
-                //         'undo',
-                //         'redo',
-                //     ])
-                //     ->columnSpanFull()
-                //     ->required(),
+                RichEditor::make('content')
+                    ->label('Deskripsi')
+                    ->toolbarButtons([
+                        'bold', 'italic', 'underline', 'bulletList', 'orderedList', 'link'
+                    ])
+                    ->columnSpanFull(),
 
                 FileUpload::make('image')
                     ->label('Gambar')
                     ->directory('uploads/journeys') // Direktori penyimpanan
                     ->image()
+                    ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
                     ->preserveFilenames()
-                    ->maxSize(2048) // Maksimum ukuran file dalam KB
+                    ->maxSize(10048) // Maksimum ukuran file dalam KB
                     ->disk('public')
                     ->visibility('public')
                     ->columnSpanFull()
                     ->nullable()
-                    ->helperText('Maksimum ukuran file 2MB.'),
+                    ->previewable(false)
+                    ->helperText('Maksimum ukuran file 10MB.'),
             ]);
     }
 }

@@ -19,6 +19,15 @@ class InstagramPost extends Model
         'order',
     ];
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
     // public function getThumbnailUrlAttribute()
     // {
     //     return asset('storage/' . str_replace('uploads/instagram_post/', 'uploads/instagram_post/thumbnails/', $this->image));

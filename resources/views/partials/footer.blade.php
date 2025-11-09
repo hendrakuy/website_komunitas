@@ -22,21 +22,21 @@
                     </h2>
                 </div>
                 
-                <p class="text-blue-100 leading-relaxed text-lg">
+                <p class="text-blue-100 leading-relaxed text-base md:text-lg">
                     Melestarikan keindahan Batik Tanjung Bumi, warisan budaya tak ternilai yang menjadi kebanggaan Madura dan Indonesia.
                 </p>
                 
                 <!-- Social Media -->
                 <div class="flex space-x-3">
-                    <a href="#" class="group bg-blue-700 hover:bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                    {{-- <a href="#" class="group bg-blue-700 hover:bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         <i class="fab fa-facebook-f text-white group-hover:text-blue-100"></i>
-                    </a>
-                    <a href="#" class="group bg-pink-600 hover:bg-pink-500 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                    </a> --}}
+                    <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank" class="group bg-pink-600 hover:bg-pink-500 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         <i class="fab fa-instagram text-white group-hover:text-pink-100"></i>
                     </a>
-                    <a href="#" class="group bg-blue-400 hover:bg-blue-300 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                    {{-- <a href="#" class="group bg-blue-400 hover:bg-blue-300 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         <i class="fab fa-twitter text-white group-hover:text-blue-50"></i>
-                    </a>
+                    </a> --}}
                     <a href="#" class="group bg-red-600 hover:bg-red-500 w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
                         <i class="fab fa-youtube text-white group-hover:text-red-100"></i>
                     </a>
@@ -86,7 +86,7 @@
             </h3>
             <ul class="space-y-4">
                 <li>
-                    <a href="#" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
+                    <a href="{{ route('aboutus') }}" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
                         <i class="fas fa-info-circle text-amber-400 mr-3 text-sm group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">Tentang Kami</span>
                     </a>
@@ -98,13 +98,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
+                    <a href="{{ route('event.index') }}" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
                         <i class="fas fa-newspaper text-amber-400 mr-3 text-sm group-hover:scale-110 transition-transform"></i>
-                        <span class="font-medium">Blog & Artikel</span>
+                        <span class="font-medium">Event & Promo</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
+                    <a href="{{ route('penghargaan') }}" class="group flex items-center text-blue-100 hover:text-white transition-all duration-300 transform hover:translate-x-2">
                         <i class="fas fa-trophy text-amber-400 mr-3 text-sm group-hover:scale-110 transition-transform"></i>
                         <span class="font-medium">Penghargaan</span>
                     </a>
@@ -124,7 +124,7 @@
                         <i class="fas fa-map-marker-alt text-white text-sm"></i>
                     </div>
                     <div class="ml-4">
-                        <p class="font-semibold text-white">Alamat Workshop</p>
+                        <p class="font-semibold text-white">Alamat Galery</p>
                         <p class="text-blue-100 text-sm mt-1 leading-relaxed">
                             Desa Paseseh, Kec. Tanjung Bumi<br>Kabupaten Bangkalan, Jawa Timur
                         </p>
@@ -191,15 +191,15 @@
                 
                 <!-- Additional Links -->
                 <div class="flex items-center space-x-6 text-sm">
-                    <a href="#" class="text-blue-200 hover:text-white transition-colors">
+                    <a href="{{ route('privacy') }}" class="text-blue-200 hover:text-white transition-colors">
                         Kebijakan Privasi
                     </a>
-                    <a href="#" class="text-blue-200 hover:text-white transition-colors">
+                    <a href="{{ route('term') }}" class="text-blue-200 hover:text-white transition-colors">
                         Syarat & Ketentuan
                     </a>
-                    <a href="#" class="text-blue-200 hover:text-white transition-colors">
+                    {{-- <a href="#" class="text-blue-200 hover:text-white transition-colors">
                         Sitemap
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>

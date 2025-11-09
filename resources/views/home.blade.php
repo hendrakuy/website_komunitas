@@ -34,9 +34,11 @@
 
 @extends('layouts.app')
 
+@section('title', 'Beranda')
+
 @section('hero')
     {{-- Hero Section --}}
-    <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen flex items-center justify-center overflow-hidden">
         <!-- Background -->
         <div class="absolute inset-0">
             <img src="/images/BG_Beranda.png" alt="Background Batik" class="w-full h-full object-cover object-center">
@@ -114,16 +116,16 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
                         <div class="text-center lg:text-left">
-                            <div class="text-2xl md:text-3xl font-bold text-amber-400">500+</div>
+                            <div class="text-2xl md:text-3xl font-bold text-amber-400">{{ $batiks->count() }}</div>
                             <div class="text-sm text-blue-200">Desain Batik</div>
                         </div>
                         <div class="text-center lg:text-left">
-                            <div class="text-2xl md:text-3xl font-bold text-amber-400">50+</div>
+                            <div class="text-2xl md:text-3xl font-bold text-amber-400">{{ $umkms->count() }}+</div>
                             <div class="text-sm text-blue-200">Pengrajin</div>
                         </div>
                         <div class="text-center lg:text-left">
-                            <div class="text-2xl md:text-3xl font-bold text-amber-400">10+</div>
-                            <div class="text-sm text-blue-200">Penghargaan</div>
+                            <div class="text-2xl md:text-3xl font-bold text-amber-400">100%</div>
+                            <div class="text-sm text-blue-200">Original</div>
                         </div>
                     </div>
                 </div>
@@ -137,8 +139,8 @@
                             </div>
                             <div
                                 class="relative w-full h-full bg-gradient-to-br from-white to-gray-100 rounded-full shadow-2xl overflow-hidden border-8 border-white/20 backdrop-blur-sm">
-                                <img src="/images/model_batik_hero.png" alt="Model Batik Tanjung Bumi"
-                                    class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700">
+                                <img src="/images/home-bg-master.png" alt="Model Batik Tanjung Bumi"
+                                    class="w-full h-full object-cover object-top transform hover:scale-105 transition-transform duration-700">
                             </div>
                             <div
                                 class="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl shadow-2xl flex items-center justify-center transform rotate-12 animate-float-slow">
@@ -154,13 +156,13 @@
                             </div>
                         </div>
 
-                        <div
+                        {{-- <div
                             class="absolute bottom-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-2xl">
                             <div class="text-center">
                                 <div class="text-amber-400 font-bold text-2xl">25+</div>
                                 <div class="text-white text-sm font-semibold">Tahun Pengalaman</div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -192,225 +194,305 @@
                     </span>
                 </h1>
 
-                <p class="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+                <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-lg sm:max-w-2xl md:max-w-3xl mx-auto leading-relaxed">
                     Kampung Batik Paseseh merupakan komunitas yang memiliki
-                    <span class="font-semibold text-amber-600">10 UMKM terkenal di Tanjung Bumi</span>.
+                    <span class="font-semibold text-amber-600 text-sm sm:text-base md:text-lg">10 UMKM terkenal di Tanjung Bumi</span>.
                     Setiap UMKM memiliki produk unggulan yang mereka produksi dengan keunikan dan kualitas terbaik.
                 </p>
             </div>
 
             {{-- UMKM Grid --}}
-            <div id="umkm-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
-                @foreach ($umkms->take(4) as $umkm)
-                    <div
-                        class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
-                        <div class="relative h-48">
-                            <img src="{{ asset('storage/' . $umkm->background_image) }}" alt="{{ $umkm->name }}"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
-                            </div>
+            <div class="relative">
+                {{-- Mobile Horizontal Scroll Container --}}
+                <div class="lg:hidden relative">
+                    <div id="umkm-scroll-mobile"
+                        class="flex overflow-x-auto pb-6 snap-x snap-mandatory scrollbar-hide space-4 pl-4 -mx-4">
+                        @foreach ($umkms as $umkm)
+                            <div class="flex-shrink-0 w-80 snap-center mr-4">
+                                <div
+                                    class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden h-full">
+                                    <div class="relative h-40">
+                                        <img src="{{ asset('storage/' . $umkm->background_image) }}"
+                                            alt="{{ $umkm->name }}"
+                                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
+                                        </div>
 
-                            {{-- Logo Overlay --}}
-                            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-[9999]">
-                                <div class="relative">
-                                    <img src="{{ asset('storage/' . $umkm->logo) }}" alt="Logo {{ $umkm->name }}"
-                                        class="w-20 h-20 rounded-full border-4 border-white shadow-xl bg-white relative z-[10000]">
-                                    <div
-                                        class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping z-[9998]">
+                                        {{-- Logo Overlay --}}
+                                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 z-10">
+                                            <div class="relative">
+                                                <img src="{{ asset('storage/' . $umkm->logo) }}"
+                                                    alt="Logo {{ $umkm->name }}"
+                                                    class="w-16 h-16 rounded-full border-4 border-white shadow-xl bg-white relative z-20">
+                                                <div
+                                                    class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping z-10">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pt-8 pb-4 px-4 text-center">
+                                        <h3
+                                            class="text-lg font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                            {{ $umkm->name }}
+                                        </h3>
+
+                                        <div class="flex items-center justify-center text-xs text-gray-500 mb-3">
+                                            <svg class="w-3 h-3 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            <span class="truncate">{{ $umkm->address }}</span>
+                                        </div>
+
+                                        <p class="text-gray-600 text-xs leading-relaxed line-clamp-2 mb-3">
+                                            {{ Str::limit($umkm->about, 80) }}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="pt-10 pb-6 px-6 text-center">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
-                                {{ $umkm->name }}
-                            </h3>
-
-                            <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span>{{ $umkm->address }}</span>
-                            </div>
-
-                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
-                                {{ Str::limit($umkm->about, 100) }}
-                            </p>
-
-                            {{-- <div class="flex justify-center space-x-3">
-                                <a href="{{ route('event.index', $umkm->id) }}"
-                                    class="inline-flex items-center px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg hover:bg-amber-600 transition-colors">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Detail
-                                </a>
-
-                                <a href="https://wa.me/{{ $umkm->phone }}" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.209-3.553-8.496" />
-                                    </svg>
-                                    WhatsApp
-                                </a>
-                            </div> --}}
-                        </div>
+                        @endforeach
                     </div>
-                @endforeach
 
-                {{-- Hidden UMKM Cards --}}
-                @foreach ($umkms->skip(4) as $umkm)
-                    <div
-                        class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 hidden more-umkm">
-                        <div class="relative h-48">
-                            <img src="{{ asset('storage/' . $umkm->background_image) }}" alt="{{ $umkm->name }}"
-                                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
-                            </div>
-
-                            {{-- Logo Overlay --}}
-                            <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
-                                <div class="relative">
-                                    <img src="{{ asset('storage/' . $umkm->logo) }}" alt="Logo {{ $umkm->name }}"
-                                        class="w-20 h-20 rounded-full border-4 border-white shadow-xl bg-white">
-                                    <div class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="pt-10 pb-6 px-6 text-center">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
-                                {{ $umkm->name }}
-                            </h3>
-
-                            <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd"
-                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span>{{ $umkm->address }}</span>
-                            </div>
-
-                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
-                                {{ Str::limit($umkm->about, 100) }}
-                            </p>
-
-                            {{-- <div class="flex justify-center space-x-3">
-                                <a href="{{ route('event.index', $umkm->id) }}"
-                                    class="inline-flex items-center px-4 py-2 bg-amber-500 text-white text-sm font-medium rounded-lg hover:bg-amber-600 transition-colors">
-                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Detail
-                                </a>
-
-                                <a href="https://wa.me/{{ $umkm->phone }}" target="_blank"
-                                    class="inline-flex items-center px-4 py-2 bg-green-500 text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors">
-                                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893-.001-3.189-1.262-6.209-3.553-8.496" />
-                                    </svg>
-                                    WhatsApp
-                                </a>
-                            </div> --}}
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            {{-- Load More Button --}}
-            <div class="text-center">
-                <button id="lihatLengkapBtn"
-                    class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:from-amber-600 hover:to-orange-600 overflow-hidden">
-
-                    <span class="relative z-10 flex items-center">
-                        <svg class="w-5 h-5 mr-3 transition-transform duration-300 group-hover:rotate-180" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    {{-- Mobile Navigation Arrows --}}
+                    <button id="scroll-left-mobile"
+                        class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg z-10 opacity-0 transition-opacity duration-300">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                         </svg>
-                        Lihat Semua UMKM
-                        <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
-                            {{ $umkms->count() }}
+                    </button>
+
+                    <button id="scroll-right-mobile"
+                        class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg z-10 opacity-0 transition-opacity duration-300">
+                        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
+                {{-- Desktop Grid Layout --}}
+                <div id="umkm-list"
+                    class="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                    @foreach ($umkms->take(4) as $umkm)
+                        <div
+                            class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
+                            <div class="relative h-48">
+                                <img src="{{ asset('storage/' . $umkm->background_image) }}" alt="{{ $umkm->name }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
+                                </div>
+
+                                {{-- Logo Overlay --}}
+                                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 z-[9999]">
+                                    <div class="relative">
+                                        <img src="{{ asset('storage/' . $umkm->logo) }}" alt="Logo {{ $umkm->name }}"
+                                            class="w-20 h-20 rounded-full border-4 border-white shadow-xl bg-white relative z-[10000]">
+                                        <div
+                                            class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping z-[9998]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-10 pb-6 px-6 text-center">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                    {{ $umkm->name }}
+                                </h3>
+
+                                <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>{{ $umkm->address }}</span>
+                                </div>
+
+                                <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                                    {{ Str::limit($umkm->about, 100) }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+
+                    {{-- Hidden UMKM Cards for Desktop --}}
+                    @foreach ($umkms->skip(4) as $umkm)
+                        <div
+                            class="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2 hidden more-umkm">
+                            <div class="relative h-48">
+                                <img src="{{ asset('storage/' . $umkm->background_image) }}" alt="{{ $umkm->name }}"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent">
+                                </div>
+
+                                {{-- Logo Overlay --}}
+                                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
+                                    <div class="relative">
+                                        <img src="{{ asset('storage/' . $umkm->logo) }}" alt="Logo {{ $umkm->name }}"
+                                            class="w-20 h-20 rounded-full border-4 border-white shadow-xl bg-white">
+                                        <div
+                                            class="absolute inset-0 rounded-full border-2 border-amber-400/30 animate-ping">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pt-10 pb-6 px-6 text-center">
+                                <h3
+                                    class="text-xl font-bold text-gray-900 mb-2 group-hover:text-amber-600 transition-colors">
+                                    {{ $umkm->name }}
+                                </h3>
+
+                                <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+                                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>{{ $umkm->address }}</span>
+                                </div>
+
+                                <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                                    {{ Str::limit($umkm->about, 100) }}
+                                </p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                {{-- Load More Button (Desktop Only) --}}
+                <div class="hidden lg:block text-center mt-8">
+                    <button id="lihatLengkapBtn"
+                        class="group relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:from-amber-600 hover:to-orange-600 overflow-hidden">
+
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-300 group-hover:rotate-180"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                            Lihat Semua UMKM
+                            <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
+                                {{ $umkms->count() }}
+                            </span>
                         </span>
-                    </span>
 
-                    {{-- Animated Background --}}
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {{-- Animated Background --}}
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                    </button>
+                </div>
+
+                {{-- Statistics Section --}}
+                <div class="mt-12 lg:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 text-center">
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-lg">
+                        <div class="text-2xl lg:text-3xl font-bold text-amber-600 mb-1 lg:mb-2">{{ $umkms->count() }}+
+                        </div>
+                        <div class="text-xs lg:text-base text-gray-600">UMKM Aktif</div>
                     </div>
-                </button>
-            </div>
-
-            {{-- Statistics Section --}}
-            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="text-3xl font-bold text-amber-600 mb-2">{{ $umkms->count() }}+</div>
-                    <div class="text-gray-600">UMKM Aktif</div>
-                </div>
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="text-3xl font-bold text-amber-600 mb-2">10+</div>
-                    <div class="text-gray-600">Tahun Pengalaman</div>
-                </div>
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="text-3xl font-bold text-amber-600 mb-2">{{ $batiks->count() }}</div>
-                    <div class="text-gray-600">Produk Unggulan</div>
-                </div>
-                <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
-                    <div class="text-3xl font-bold text-amber-600 mb-2">100%</div>
-                    <div class="text-gray-600">Original Batik</div>
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-lg">
+                        <div class="text-2xl lg:text-3xl font-bold text-amber-600 mb-1 lg:mb-2">15+</div>
+                        <div class="text-xs lg:text-base text-gray-600">Tahun Pengalaman</div>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-lg">
+                        <div class="text-2xl lg:text-3xl font-bold text-amber-600 mb-1 lg:mb-2">{{ $batiks->count() }}+
+                        </div>
+                        <div class="text-xs lg:text-base text-gray-600">Produk Unggulan</div>
+                    </div>
+                    <div class="bg-white/80 backdrop-blur-sm rounded-xl lg:rounded-2xl p-4 lg:p-6 shadow-lg">
+                        <div class="text-2xl lg:text-3xl font-bold text-amber-600 mb-1 lg:mb-2">100%</div>
+                        <div class="text-xs lg:text-base text-gray-600">Original Batik</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    {{-- JavaScript for Load More --}}
+    {{-- JavaScript for Mobile Scroll and Load More --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Scroll Functionality
+            const mobileScrollContainer = document.getElementById('umkm-scroll-mobile');
+            const scrollLeftBtn = document.getElementById('scroll-left-mobile');
+            const scrollRightBtn = document.getElementById('scroll-right-mobile');
+
+            if (mobileScrollContainer && scrollLeftBtn && scrollRightBtn) {
+                // Show/hide arrows on hover
+                mobileScrollContainer.addEventListener('mouseenter', function() {
+                    scrollLeftBtn.classList.remove('opacity-0');
+                    scrollRightBtn.classList.remove('opacity-0');
+                });
+
+                mobileScrollContainer.addEventListener('mouseleave', function() {
+                    scrollLeftBtn.classList.add('opacity-0');
+                    scrollRightBtn.classList.add('opacity-0');
+                });
+
+                // Scroll functionality
+                scrollRightBtn.addEventListener('click', function() {
+                    mobileScrollContainer.scrollBy({
+                        left: 300,
+                        behavior: 'smooth'
+                    });
+                });
+
+                scrollLeftBtn.addEventListener('click', function() {
+                    mobileScrollContainer.scrollBy({
+                        left: -300,
+                        behavior: 'smooth'
+                    });
+                });
+
+                // Hide left arrow initially
+                scrollLeftBtn.classList.add('opacity-0');
+            }
+
+            // Desktop Load More Functionality
             const loadMoreBtn = document.getElementById('lihatLengkapBtn');
             const hiddenUmkms = document.querySelectorAll('.more-umkm');
             let isExpanded = false;
 
-            loadMoreBtn.addEventListener('click', function() {
-                hiddenUmkms.forEach(umkm => {
-                    umkm.classList.toggle('hidden');
+            if (loadMoreBtn && hiddenUmkms.length > 0) {
+                loadMoreBtn.addEventListener('click', function() {
+                    hiddenUmkms.forEach(umkm => {
+                        umkm.classList.toggle('hidden');
+                    });
+
+                    if (isExpanded) {
+                        loadMoreBtn.innerHTML = `
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            Lihat Semua UMKM
+                            <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
+                                {{ $umkms->count() }}
+                            </span>
+                        </span>
+                    `;
+                    } else {
+                        loadMoreBtn.innerHTML = `
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                            Tampilkan Sedikit
+                            <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
+                                {{ $umkms->count() }}
+                            </span>
+                        </span>
+                    `;
+                    }
+
+                    isExpanded = !isExpanded;
                 });
-
-                if (isExpanded) {
-                    loadMoreBtn.innerHTML = `
-                <span class="relative z-10 flex items-center">
-                    <svg class="w-5 h-5 mr-3 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                    Lihat Semua UMKM
-                    <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
-                        {{ $umkms->count() }}
-                    </span>
-                </span>
-            `;
-                } else {
-                    loadMoreBtn.innerHTML = `
-                <span class="relative z-10 flex items-center">
-                    <svg class="w-5 h-5 mr-3 transition-transform duration-300 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                    Tampilkan Sedikit
-                    <span class="ml-2 px-2 py-1 text-xs bg-white/20 rounded-full">
-                        {{ $umkms->count() }}
-                    </span>
-                </span>
-            `;
-                }
-
-                isExpanded = !isExpanded;
-            });
+            }
         });
     </script>
 @endsection
@@ -442,24 +524,32 @@
                 <h2 class="font-playfair text-4xl md:text-5xl font-semibold text-[#1E41FB]">Batik Tanjung Bumi</h2>
             </div>
 
-            <div class="space-y-4 text-gray-700 text-[14px] md:text-[16px] leading-relaxed">
+            <div class="space-y-4 text-gray-700 text-sm md:text-base leading-relaxed">
                 <p>
-                    Batik tulis Tanjung Bumi ini sudah lama ada, berawal dari kejenuhan para kaum ibu di kawasan pesisir
-                    mengisi waktu luang sambil menunggu suami datang kembali dari berlayar di lautan. Batik ini memiliki
-                    ciri khusus yang menjadi pembeda dengan batik tulis dari daerah lainnya. Adanya motif burung yang pasti
-                    terdapat di batik Tanjung Bumi ini, serta penggunaan warna merah yang sangat mewakili karakter penduduk
+                    Batik tulis Tanjung Bumi ini sudah lama ada, berawal dari kejenuhan para kaum ibu di kawasan
+                    pesisir
+                    mengisi waktu luang sambil menunggu suami datang kembali dari berlayar di lautan. Batik ini
+                    memiliki
+                    ciri khusus yang menjadi pembeda dengan batik tulis dari daerah lainnya. Adanya motif burung
+                    yang pasti
+                    terdapat di batik Tanjung Bumi ini, serta penggunaan warna merah yang sangat mewakili karakter
+                    penduduk
                     pesisir khususnya Pulau Madura.
                 </p>
 
                 <p>
-                    Dari segi seni, tampilan serta corak para pengrajin batik tulis di desa ini berbeda – beda. Hal ini bisa
-                    dapat anda buktikan langsung dengan mengunjungi beberapa pengrajin yang ada di kawasan tersebut. Semakin
+                    Dari segi seni, tampilan serta corak para pengrajin batik tulis di desa ini berbeda – beda. Hal
+                    ini bisa
+                    dapat anda buktikan langsung dengan mengunjungi beberapa pengrajin yang ada di kawasan tersebut.
+                    Semakin
                     menambha kekayaan motif batik Tanjung Bumi yang ternyata hampir memiliki 1000 jenis motif.
                 </p>
 
                 <p>
-                    Berbagai macam motif, seperti motif Rongterong, Ramo, Perkaper, Serat Kayu dan sebagainya. Ada satu
-                    jenis batik yang menjadi andalan yakni jenis batik Gentongan. Nama batik Gentongan sendiri berasal dari
+                    Berbagai macam motif, seperti motif Rongterong, Ramo, Perkaper, Serat Kayu dan sebagainya. Ada
+                    satu
+                    jenis batik yang menjadi andalan yakni jenis batik Gentongan. Nama batik Gentongan sendiri
+                    berasal dari
                     kata Gentong atau sejenis tempat besar yang biasa digunakan untuk menampung air.
                 </p>
             </div>
@@ -487,7 +577,7 @@
                 <span class="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Instagram</span>
                 Feed
             </h2>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
                 Ikuti perjalanan kreatif kami dan lihat karya batik terbaru langsung dari workshop
             </p>
         </div>
@@ -607,14 +697,14 @@
                             @endforeach
 
                             <!-- Follow CTA Card -->
-                            <a href="https://instagram.com/batikpaseseh" target="_blank"
+                            <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank"
                                 class="group bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1 flex flex-col items-center justify-center text-center p-6">
                                 <div
                                     class="bg-white/20 backdrop-blur-sm rounded-full p-4 mb-4 transform group-hover:scale-110 transition-transform duration-300">
                                     <i class="fab fa-instagram text-white text-2xl"></i>
                                 </div>
                                 <h4 class="text-white font-bold text-lg mb-2">Follow Us</h4>
-                                <p class="text-white/80 text-sm mb-4">@batikpaseseh</p>
+                                <p class="text-white/80 text-sm mb-4">@kembangpote_batikpaseseh</p>
                                 <div
                                     class="bg-white text-purple-600 font-semibold py-2 px-6 rounded-full text-sm transform group-hover:scale-105 transition-transform duration-300">
                                     Follow Instagram
@@ -625,7 +715,7 @@
 
                     <!-- View More Button -->
                     <div class="text-center mt-8 pt-8 border-t border-white/20">
-                        <a href="https://instagram.com/batikpaseseh" target="_blank"
+                        <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank"
                             class="group inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold py-4 px-8 rounded-2xl hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:-translate-y-1">
                             <i class="fab fa-instagram"></i>
                             <span>Lihat Semua Postingan</span>

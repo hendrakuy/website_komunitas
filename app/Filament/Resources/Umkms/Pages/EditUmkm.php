@@ -39,24 +39,4 @@ class EditUmkm extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
-
-    protected function getFormActions(): array
-    {
-        return [
-            // Tombol Simpan
-            Actions\Action::make('save')
-                ->label('Simpan')
-                ->color('success')
-                ->icon('heroicon-o-check-circle')
-                ->action('save')
-                ->requiresConfirmation(false),
-
-            // Tombol Batal
-            Actions\Action::make('cancel')
-                ->label('Batal')
-                ->color('warning')
-                ->icon('heroicon-o-x-mark')
-                ->url($this->getResource()::getUrl('index')),
-        ];
-    }
 }

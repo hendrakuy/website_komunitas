@@ -47,21 +47,21 @@ class EventsTable
                     ->falseIcon('heroicon-o-calendar')
                     ->color(fn($state) => $state ? 'warning' : 'gray'),
             ])
-            // ->filters([
-            //     Tables\Filters\TernaryFilter::make('is_promo')
-            //         ->label('Hanya Promosi')
-            //         ->placeholder('Semua')
-            //         ->trueLabel('Promosi')
-            //         ->falseLabel('Event Biasa'),
+            ->filters([
+                Tables\Filters\TernaryFilter::make('is_promo')
+                    ->label('Hanya Promosi')
+                    ->placeholder('Semua')
+                    ->trueLabel('Promosi')
+                    ->falseLabel('Event Biasa'),
 
-            //     Tables\Filters\Filter::make('aktif')
-            //         ->label('Sedang Aktif')
-            //         ->query(
-            //             fn($query) =>
-            //             $query->where('start_at', '<=', now())
-            //                 ->where('end_at', '>=', now())
-            //         ),
-            // ])
+                Tables\Filters\Filter::make('aktif')
+                    ->label('Sedang Aktif')
+                    ->query(
+                        fn($query) =>
+                        $query->where('start_at', '<=', now())
+                            ->where('end_at', '>=', now())
+                    ),
+            ])
             ->recordActions([
                 EditAction::make(),
             ])

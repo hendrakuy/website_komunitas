@@ -15,7 +15,15 @@ class EditEvent extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make(),
+            DeleteAction::make()
+                ->label('Hapus Event')
+                ->color('danger')
+                ->icon('heroicon-o-trash')
+                ->requiresConfirmation(true)
+                ->modalHeading('Hapus Event')
+                ->modalSubheading('Apakah Anda yakin ingin menghapus event ini? Tindakan ini tidak dapat dibatalkan.')
+                ->modalButton('Ya, Hapus')
+                ->successNotificationTitle('Event berhasil dihapus'),
         ];
     }
 
@@ -29,14 +37,5 @@ class EditEvent extends EditRecord
     protected function getRedirectUrl(): ?string
     {
         return $this->getResource()::getUrl('index');
-    }
-
-    protected function mutateFormDataBeforeSave(array $data): array
-    {
-        if ($this->record->name !== $data['title']) {
-            $data['slug'] = Str::slug($data['title']);
-        }
-
-        return $data;
     }
 }

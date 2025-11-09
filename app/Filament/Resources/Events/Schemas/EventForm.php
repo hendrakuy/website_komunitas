@@ -22,28 +22,11 @@ class EventForm
                     ->maxLength(255)
                     ->columnSpanFull(),
 
-                // TextInput::make('slug')
-                //     ->required(),
-
-                // Textarea::make('description')
-                //     ->label('Deskripsi Event')
-                //     ->columnSpanFull(),
-
                 RichEditor::make('description')
                     ->label('Deskripsi Event')
                     ->columnSpanFull()
                     ->toolbarButtons([
-                        'bold',
-                        'italic',
-                        'underline',
-                        'strike',
-                        'bulletList',
-                        'orderedList',
-                        'link',
-                        // 'codeBlock',
-                        'blockquote',
-                        'redo',
-                        'undo',
+                        'bold', 'italic', 'underline', 'bulletList', 'orderedList', 'link'
                     ])
                     ->required(),
 
@@ -54,18 +37,23 @@ class EventForm
                     ->label('Waktu Berakhir'),
 
                 Toggle::make('is_promo')
+                    ->label('Apakah ini promosi?')
                     ->required(),
 
                 FileUpload::make('image')
                     ->label('Gambar Event')
                     ->image()
+                    ->imagePreviewHeight('150')
+                    ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
                     ->directory('uploads/events') // Direktori penyimpanan
                     ->preserveFilenames() // Pertahankan nama file asli
-                    ->maxSize(2048) // Maksimum ukuran file dalam KB
+                    ->maxSize(10048) // Maksimum ukuran file dalam KB
                     ->disk('public')
                     ->columnSpanFull()
+                    ->visibility('public')
+                    ->previewable(false)
                     ->nullable()
-                    ->helperText('Maksimum ukuran file 2MB.'),
+                    ->helperText('Maksimum ukuran file 10MB.'),
             ]);
     }
 }

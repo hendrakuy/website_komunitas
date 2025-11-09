@@ -13,9 +13,16 @@ class CategoryForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
-                // TextInput::make('slug'),
+                    ->label('Nama Kategori')
+                    ->maxLength(255)
+                    ->required()
+                    ->validationMessages([
+                        'required' => 'Nama kategori wajib diisi',
+                        'max' => 'Nama kategori maksimal 255 karakter',
+                    ]),
+
                 Textarea::make('description')
+                    ->label('Deskripsi Kategori')
                     ->columnSpanFull(),
             ]);
     }

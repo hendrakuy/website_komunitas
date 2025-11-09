@@ -18,19 +18,18 @@ class InstagramPostForm
                 FileUpload::make('image')
                     ->label('Gambar Instagram Post')
                     ->image()
-                    ->directory('uploads/instagram_post') // Direktori penyimpanan
-                    ->preserveFilenames() // Pertahankan nama file asli
-                    ->maxSize(2048) // Maksimum ukuran file dalam KB
+                    ->directory('uploads/instagram_post')
+                    ->preserveFilenames() 
+                    ->maxSize(10048) 
                     ->disk('public')
                     ->visibility('public')
                     ->columnSpanFull()
                     ->nullable()
                     ->imagePreviewHeight('200')
+                    ->previewable(false)
+                    ->getUploadedFileNameForStorageUsing(fn($file) => str_replace(' ', '_', $file->getClientOriginalName()))
                     // ->getUploadedFileUrlUsing(fn($file) => asset('storage/' . str_replace('uploads/instagram_post/', 'uploads/instagram_post/thumbnails/', $file)))
-                    // ->afterStateUpdated(function ($state) {
-                    //     \Spatie\LaravelImageOptimizer\Facades\ImageOptimizer::optimize(storage_path("app/public/{$state}"));
-                    // })
-                    ->helperText('Maksimum ukuran file 2MB.'),
+                    ->helperText('Maksimum ukuran file 10MB.'),
 
                 Textarea::make('caption')
                     ->label('Caption')

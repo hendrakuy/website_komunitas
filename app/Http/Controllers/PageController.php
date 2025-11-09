@@ -7,6 +7,8 @@ use App\Models\Event;
 use App\Models\Umkm;
 use App\Models\Batik;
 use App\Models\InstagramPost;
+use App\Models\Award;
+use App\Models\Edupackage;
 
 class PageController extends Controller
 {
@@ -14,7 +16,10 @@ class PageController extends Controller
     {
         $umkms = Umkm::take(10)->get();
         $batiks = Batik::all();
-        $instagramPosts = InstagramPost::orderBy('created_at', 'desc')->take(6)->get();
+        $instagramPosts = InstagramPost::active()
+            ->latest()
+            ->take(6)
+            ->get();
 
         return view('home', compact('umkms', 'batiks', 'instagramPosts'));
     }
@@ -31,7 +36,10 @@ class PageController extends Controller
 
     public function penghargaan()
     {
-        return view('komunitas.penghargaan');
+        $awards = Award::all();
+        $umkms = Umkm::take(10)->get();
+        $batiks = Batik::all();
+        return view('komunitas.penghargaan', compact('awards', 'umkms', 'batiks'));
     }
 
     public function wisata()
@@ -47,7 +55,8 @@ class PageController extends Controller
     public function event()
     {
         // ambil semua event, urutkan berdasarkan tanggal mulai terbaru
-        $events = \App\Models\Event::orderBy('start_at', 'desc')->get();
+        $perPage = 6;
+        $events = Event::orderBy('start_at', 'desc')->paginate($perPage)->withQueryString();
 
         // tampilkan halaman event
         return view('pages.event', compact('events'));
@@ -55,6 +64,10 @@ class PageController extends Controller
 
     public function eventDetail($slug)
     {
+        $umkms = Umkm::take(10)->get();
+        $batiks = Batik::all();
+        $edukasi = Edupackage::all();
+        $award = Award::all();
         // cari event berdasarkan slug
         $event = \App\Models\Event::where('slug', $slug)->firstOrFail();
 
@@ -65,13 +78,13 @@ class PageController extends Controller
                               ->get();
 
         // tampilkan halaman detail event
-        return view('pages.event-detail', compact('event', 'relatedEvents'));
+        return view('pages.event-detail', compact('event', 'relatedEvents', 'umkms', 'batiks', 'edukasi', 'award'));
     }
     
-    public function edukasi()
-    {
-        return view('edukasi');
-    }
+    // public function edukasi()
+    // {
+    //     return view('edukasi');
+    // }
     public function aboutus()
     {
         return view('aboutus');

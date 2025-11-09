@@ -14,6 +14,7 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use UnitEnum;
 
 class EventResource extends Resource
 {
@@ -26,6 +27,8 @@ class EventResource extends Resource
     protected static ?string $navigationLabel = 'Event & Promo';
 
     protected static ?string $pluralModelLabel = 'Event & Promo';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Kelola Event & Promo';
 
     public static function form(Schema $schema): Schema
     {
@@ -51,21 +54,5 @@ class EventResource extends Resource
             'create' => CreateEvent::route('/create'),
             'edit' => EditEvent::route('/{record}/edit'),
         ];
-    }
-
-    public static function mutateFormDataBeforeCreate(array $data): array
-    {
-        // Buat slug dari judul
-        $data['slug'] = Str::slug($data['title']);
-
-        return $data;
-    }
-
-    public static function mutateFormDataBeforeSave(array $data): array
-    {
-        // Perbarui slug jika judul diubah
-        $data['slug'] = Str::slug($data['title']);
-
-        return $data;
     }
 }

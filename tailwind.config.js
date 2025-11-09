@@ -26,7 +26,9 @@ theme: {
     },
   }
 },
-plugins: []
+plugins: [
+  require('@tailwindcss/typography'),
+],
 }
 
 
