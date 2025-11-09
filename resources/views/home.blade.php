@@ -116,7 +116,7 @@
                     <!-- Quick Stats -->
                     <div class="grid grid-cols-3 gap-6 pt-8 max-w-md mx-auto lg:mx-0">
                         <div class="text-center lg:text-left">
-                            <div class="text-2xl md:text-3xl font-bold text-amber-400">{{ $batiks->count() }}</div>
+                            <div class="text-2xl md:text-3xl font-bold text-amber-400">{{ $batiks->count() }}+</div>
                             <div class="text-sm text-blue-200">Desain Batik</div>
                         </div>
                         <div class="text-center lg:text-left">

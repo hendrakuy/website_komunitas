@@ -9,7 +9,7 @@
                     <li>
                         <a href="{{ route('home') }}"
                             class="text-blue-600 hover:text-blue-800 transition-all duration-300 font-medium flex items-center">
-                            <i class="fas fa-home mr-2"></i>
+                            {{-- <i class="fas fa-home mr-2"></i> --}}
                             Beranda
                         </a>
                     </li>
@@ -17,8 +17,8 @@
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <a href="{{ route('event.index') }}"
                             class="text-blue-600 hover:text-blue-800 transition-all duration-300 font-medium ml-3 flex items-center">
-                            <i class="fas fa-calendar-alt mr-2"></i>
-                            Event & Promo
+                            {{-- <i class="fas fa-calendar-alt mr-2"></i> --}}
+                            Kegiatan
                         </a>
                     </li>
                     <li class="flex items-center">
@@ -26,7 +26,7 @@
                         <span
                             class="text-gray-700 font-medium ml-3 truncate max-w-[140px] sm:max-w-[200px] md:max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap flex items-center"
                             title="{{ $event->title }}">
-                            <i class="fas fa-file-alt mr-2 text-blue-500 shrink-0"></i>
+                            {{-- <i class="fas fa-file-alt mr-2 text-blue-500 shrink-0"></i> --}}
                             <span class="truncate">{{ Str::limit($event->title, 50) }}</span>
                         </span>
                     </li>
@@ -59,7 +59,7 @@
                 {{-- Enhanced Event Info Overlay --}}
                 <div class="absolute bottom-0 left-0 right-0 p-8 md:p-12 text-white">
                     <div class="max-w-4xl">
-                        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">{{ $event->title }}
+                        <h1 class="text-2xl md:text-5xl font-bold mb-6 leading-tight tracking-tight">{{ $event->title }}
                         </h1>
 
                         <div class="flex flex-wrap items-center gap-4 md:gap-6 text-lg">
@@ -67,7 +67,7 @@
                                 class="flex items-center bg-white/20 backdrop-blur-lg rounded-full px-5 py-3 border border-white/30 transform transition-all duration-300 hover:bg-white/30">
                                 <i class="far fa-calendar-alt mr-3"></i>
                                 <span
-                                    class="font-medium">{{ \Carbon\Carbon::parse($event->start_at)->translatedFormat('d F Y') }}</span>
+                                    class="font-medium text-sm md:text-base">{{ \Carbon\Carbon::parse($event->start_at)->translatedFormat('d F Y') }}</span>
                             </div>
 
                             @if ($event->location)
@@ -101,7 +101,7 @@
                         {{-- Enhanced Action Buttons --}}
                         <div class="flex flex-wrap gap-4 mt-10 pt-6 border-t border-gray-100">
                             <a href="{{ route('event.index') }}"
-                                class="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl font-medium transform hover:-translate-y-1">
+                                class="inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-700 text-white px-6 py-3 rounded-xl hover:from-blue-700 hover:to-indigo-800 transition-all shadow-lg hover:shadow-xl text-sm md:text-base font-medium transform hover:-translate-y-1">
                                 <i class="fas fa-arrow-left mr-3"></i>
                                 Kembali ke Event
                             </a>
@@ -190,7 +190,7 @@
                             <div class="bg-white/20 p-2 rounded-lg mr-3">
                                 <i class="fas fa-info-circle"></i>
                             </div>
-                            <h3 class="text-xl font-bold">Informasi Event</h3>
+                            <h3 class="text-lg md:text-xl font-bold">Informasi Event</h3>
                         </div>
 
                         <div class="space-y-4">
