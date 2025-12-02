@@ -1,99 +1,88 @@
+<style>
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
 @extends('layouts.app')
 
 @section('title', 'Batik Paseseh - Edukasi')
 
 @section('hero')
     <!-- Hero Section - Responsif Diperbarui -->
-    <header
-        class="relative min-h-[70vh] sm:min-h-[80vh] md:min-h-screen overflow-hidden flex items-center justify-center"
-        style="background-image: url('{{ asset('images/Bg_Aboutus.png') }}');">
+    <section class="relative flex items-center justify-center overflow-hidden min-h-[60vh] sm:min-h-[70vh] md:min-h-[85vh]">
+        <!-- Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center"
+            style="background-image: url('{{ asset('images/bg_edukasi.jpg') }}');"></div>
 
-        {{-- bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 --}}
+        <!-- Darker Overlay for better text contrast -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-gray-900/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 
-        <!-- Background Pattern -->
-        {{-- <div
-            class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-600/20 via-transparent to-transparent">
-        </div> --}}
+        <!-- Animated Decorative Circles -->
+        <div class="absolute top-10 left-10 w-20 h-20 bg-amber-400/20 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute bottom-20 right-20 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl animate-pulse"
+            style="animation-delay: 1s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-blue-400/20 rounded-full blur-xl animate-pulse"
+            style="animation-delay: 0.5s;"></div>
 
-        <!-- Overlay Gradient -->
-        {{-- <div class="absolute inset-0 bg-gradient-to-br from-blue-900/60 via-purple-900/50 to-indigo-900/60"></div> --}}
-        <div class="absolute inset-0 bg-gray-900/45"></div>
-
-        <!-- Decorative Elements -->
-        <div class="absolute top-10 left-10 w-16 sm:w-20 h-16 sm:h-20 bg-amber-400/10 rounded-full blur-xl"></div>
-        <div class="absolute bottom-10 right-10 w-24 sm:w-32 h-24 sm:h-32 bg-purple-500/10 rounded-full blur-2xl"></div>
-        <div class="absolute top-1/3 right-1/4 w-10 sm:w-16 h-10 sm:h-16 bg-blue-400/10 rounded-full blur-lg"></div>
-
-        <!-- Main Content -->
-        <div class="relative z-20 text-center text-white px-4 sm:px-6 md:px-8 max-w-5xl">
-            <!-- Badge -->
+        <!-- Content -->
+        <div class="relative z-10 text-center max-w-5xl mx-auto px-4 sm:px-6">
+            <!-- Badge / Label with better contrast -->
             <div
-                class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/20 mb-6 sm:mb-8 mt-6 sm:mt-8">
-                <div class="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
-                <span class="text-xs sm:text-sm font-medium">Pengalaman Membatik Autentik</span>
+                class="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6 border border-white/30 shadow-lg">
+                <svg class="w-5 h-5 text-amber-300" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                <span class="text-sm font-semibold text-white">Paket Edukasi</span>
             </div>
 
-            <h1
-                class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 tracking-tight bg-gradient-to-r from-white to-amber-100 bg-clip-text text-transparent leading-tight">
-                Paket Edukasi <span class="text-amber-400">Membatik</span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                <span
+                    class="bg-gradient-to-r from-white via-amber-100 to-white bg-clip-text text-transparent drop-shadow-lg">
+                    Edukasi Membatik Eksklusif
+                </span>
             </h1>
 
-            <p
-                class="text-base sm:text-lg md:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed text-blue-100 px-2">
-                Rasakan seni membatik langsung dari tangan pengrajin profesional Tanjung Bumi.
-                Pelajari teknik tradisional autentik dan ciptakan karya batik Anda sendiri.
+            <p class="text-lg sm:text-xl md:text-2xl font-medium mb-3 text-white drop-shadow-md">
+                Rasakan pengalaman membatik tradisional di <span class="text-amber-300 font-semibold">Kampung Batik
+                    Paseseh</span>
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a href="#paket"
-                    class="group bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-amber-500/25 flex items-center gap-3">
-                    <span>Jelajahi Paket</span>
-                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6">
-                        </path>
-                    </svg>
-                </a>
+            <p class="text-sm sm:text-base md:text-lg text-white mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                Pelajari teknik autentik dari pengrajin profesional dan ciptakan karya batik Anda sendiri.
+            </p>
 
-                <a href="#fasilitas"
-                    class="group border-2 border-white/30 hover:border-white/50 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg backdrop-blur-sm transition-all duration-300 hover:bg-white/10 flex items-center gap-3">
-                    <span>Lihat Fasilitas</span>
-                    <svg class="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M19 14l-7 7m0 0l-7-7m7 7V3">
-                        </path>
-                    </svg>
-                </a>
-            </div>
-
-            <!-- Stats -->
-            {{-- <div class="grid grid-cols-3 gap-4 sm:gap-8 mt-10 sm:mt-16">
-                <div class="text-center">
-                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">500+</div>
-                    <div class="text-blue-200 text-xs sm:text-sm">Peserta Edukasi</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">98%</div>
-                    <div class="text-blue-200 text-xs sm:text-sm">Kepuasan Peserta</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-xl sm:text-2xl md:text-3xl font-bold text-amber-400">25+</div>
-                    <div class="text-blue-200 text-xs sm:text-sm">Tahun Pengalaman</div>
-                </div>
-            </div> --}}
+            <!-- CTA Button -->
+            <a href="#paket"
+                class="group inline-flex items-center space-x-3 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold py-3 md:py-4 px-6 md:px-8 rounded-2xl shadow-2xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 border-2 border-amber-300/30">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+</svg>
+                <span class="text-sm sm:text-base">Jelajahi Paket</span>
+                <svg class="w-5 h-5 group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+            </a>
         </div>
 
         <!-- Scroll Indicator -->
         <div class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20">
             <div class="animate-bounce">
-                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
-                    </path>
+                <svg class="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
             </div>
         </div>
-    </header>
+    </section>
 @endsection
 
 @section('content')
@@ -187,8 +176,8 @@
                 </p>
             </div>
 
-            <!-- Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <!-- Desktop: Grid Layout -->
+            <div class="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 @foreach ($packages as $package)
                     <div
                         class="group bg-white rounded-2xl sm:rounded-3xl shadow-md sm:shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-amber-200 relative">
@@ -233,6 +222,84 @@
                         </div>
                     </div>
                 @endforeach
+            </div>
+
+            <!-- Mobile/Tablet: Horizontal Scroll with Navigation -->
+            <div class="lg:hidden relative">
+                <!-- Navigation Buttons -->
+                <button data-scroll-nav="prev" data-scroll-target="packages-scroll"
+                    class="scroll-nav-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-4 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 sm:p-3 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+
+                <button data-scroll-nav="next" data-scroll-target="packages-scroll"
+                    class="scroll-nav-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-4 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 sm:p-3 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+
+                <!-- Scrollable Container -->
+                <div id="packages-scroll" class="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4"
+                    data-scroll-container>
+                    <div class="flex space-x-4 sm:space-x-6 min-w-max px-1">
+                        @foreach ($packages as $package)
+                            <div
+                                class="snap-center group bg-white rounded-2xl sm:rounded-3xl shadow-md sm:shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-amber-200 relative flex-shrink-0 w-80 sm:w-96">
+
+                                <!-- Gambar -->
+                                <div class="overflow-hidden relative">
+                                    <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->title }}"
+                                        class="w-full h-52 sm:h-60 object-cover group-hover:scale-110 transition-transform duration-700" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                                </div>
+
+                                <!-- Konten -->
+                                <div class="p-5 sm:p-6">
+                                    <h2
+                                        class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-gray-800 group-hover:text-amber-600 transition-colors duration-300">
+                                        {{ $package->title }}
+                                    </h2>
+
+                                    <p
+                                        class="text-gray-600 mb-5 sm:mb-6 leading-relaxed line-clamp-3 text-sm sm:text-base">
+                                        {{ $package->description }}
+                                    </p>
+
+                                    <div class="flex flex-col gap-4 mt-6">
+                                        <div>
+                                            <span class="font-bold text-amber-600 text-base sm:text-lg">
+                                                Rp {{ number_format($package->price, 0, ',', '.') }}
+                                            </span>
+                                            <p class="text-gray-500 text-xs sm:text-sm">
+                                                Untuk {{ $package->kapasitas ?? '—' }} orang
+                                            </p>
+                                        </div>
+                                        <a href="{{ route('edupackage.detail', $package->slug) }}"
+                                            class="group/btn w-full bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-5 py-2.5 sm:py-3 rounded-lg sm:rounded-xl font-semibold transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center gap-2 text-sm sm:text-base">
+                                            <span>Lihat Detail</span>
+                                            <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Scroll Indicators -->
+                <div class="flex justify-center mt-4 sm:mt-6">
+                    <div class="scroll-indicator h-1 w-20 sm:w-24 bg-gray-200 rounded-full overflow-hidden">
+                        <div class="scroll-indicator-progress h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -333,14 +400,14 @@
                     @php
                         $teachers = [
                             [
-                                'image' => '/images/Pengajar1.png',
+                                'image' => '/images/bu_mesnari_2.jpg',
                                 'name' => 'Ibu Mesnari',
                                 'role' => 'Pengrajin Batik Senior',
                                 'exp' => '25+ Tahun Pengalaman',
                                 'desc' => 'Ahli dalam pewarnaan alami maupun sintetis dengan pengalaman 25 tahun.',
                             ],
                             [
-                                'image' => '/images/Pengajar2.png',
+                                'image' => '/images/bu_mahruha.jpg',
                                 'name' => 'Ibu Mahruha',
                                 'role' => 'Instruktur Batik',
                                 'exp' => '23+ Tahun Pengalaman',
@@ -348,7 +415,7 @@
                                     'Spesialis motif batik gentongan tradisional madura dengan pengalaman 23 tahun.',
                             ],
                             [
-                                'image' => '/images/Pengajar3.png',
+                                'image' => '/images/mbak_toyyina_2.jpg',
                                 'name' => 'Mbak Toyyina',
                                 'role' => 'Desainer Batik',
                                 'exp' => '18+ Tahun Pengalaman',
@@ -366,7 +433,7 @@
                             <div class="flex flex-col md:flex-row items-center md:items-start gap-5">
                                 <div class="relative">
                                     <img src="{{ $teacher['image'] }}"
-                                        class="w-20 h-20 rounded-2xl object-cover border-4 border-amber-100 group-hover:border-amber-200 transition-colors duration-300"
+                                        class="w-20 h-20 rounded-2xl object-cover object-top border-4 border-amber-100 group-hover:border-amber-200 transition-colors duration-300"
                                         alt="{{ $teacher['name'] }}">
                                     <div
                                         class="absolute -bottom-2 -right-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white text-xs px-2 py-1 rounded-full font-semibold">
@@ -486,28 +553,6 @@
                 @endforeach
             </div>
 
-            <!-- Stats Section -->
-            {{-- <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-                @php
-                    $stats = [
-                        ['number' => '500+', 'label' => 'Peserta Terlatih'],
-                        ['number' => '98%', 'label' => 'Tingkat Kepuasan'],
-                        ['number' => '25+', 'label' => 'Tahun Pengalaman'],
-                        ['number' => '50+', 'label' => 'Motif Diajarkan'],
-                    ];
-                @endphp
-
-                @foreach ($stats as $stat)
-                    <div class="text-center">
-                        <div
-                            class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">
-                            {{ $stat['number'] }}
-                        </div>
-                        <div class="text-gray-600 font-medium">{{ $stat['label'] }}</div>
-                    </div>
-                @endforeach
-            </div> --}}
-
             <!-- CTA Section -->
             <div
                 class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
@@ -520,28 +565,28 @@
                     <h3 class="text-3xl md:text-4xl font-bold mb-6">
                         Siap Memulai Perjalanan Membatik Anda?
                     </h3>
-                    <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                    <p class="text-blue-100 text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
                         Jangan lewatkan kesempatan untuk belajar membatik langsung dari pengrajin profesional.
                         Dapatkan pengalaman tak terlupakan dan ciptakan karya batik Anda sendiri!
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <a href="#paket"
                             class="group bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 rounded-2xl shadow-2xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center gap-3">
-                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none"
+                            <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:scale-110 transition-transform" fill="none"
                                 stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                            <span>Daftar Sekarang</span>
+                            <span class="text-sm md:text-base">Daftar Sekarang</span>
                         </a>
                         <a href="{{ route('shop.index') }}"
                             class="group border-2 border-white/30 hover:border-white/50 text-white hover:bg-white/10 font-semibold px-8 py-4 rounded-2xl backdrop-blur-sm transition-all duration-300 inline-flex items-center gap-3">
-                            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-4 h-4 md:w-5 md:h-5 group-hover:-translate-x-1 transition-transform"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                             </svg>
-                            <span>Lihat Koleksi Batik</span>
+                            <span class="text-sm md:text-base">Lihat Koleksi Batik</span>
                         </a>
                     </div>
                 </div>
@@ -549,3 +594,5 @@
         </div>
     </section>
 @endsection
+
+@vite('resources/js/scroll-horizontal.js')

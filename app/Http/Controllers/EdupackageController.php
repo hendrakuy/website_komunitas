@@ -18,6 +18,12 @@ class EdupackageController extends Controller
     public function show($slug)
     {
         $package = Edupackage::where('slug', $slug)->firstOrFail();
-        return view('pages.education.detail', compact('package'));
+        $whatsappNumber = '6285104005780';
+        $message = "Halo, saya tertarik dengan *{$package->title}*. Bisa saya dapatkan informasi lebih lanjut?";
+
+        $encodedMessage = urlencode($message);
+        $whatsapp_link = "https://wa.me/{$whatsappNumber}?text={$encodedMessage}";
+
+        return view('pages.education.detail', compact('package', 'whatsapp_link'));
     }
 }

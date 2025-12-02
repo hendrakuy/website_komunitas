@@ -21,7 +21,7 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-shopping-cart';
 
-    protected static ?string $recordTitleAttribute = 'invoice_code';
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationLabel = 'Pesanan';
 

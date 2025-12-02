@@ -52,7 +52,7 @@
                         </svg>
                         Jelajahi Wisata
                     </a>
-                    <a href="#"
+                    {{-- <a href="#"
                         class="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
@@ -63,7 +63,7 @@
                                 d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
                         Lihat Lokasi
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>
@@ -127,18 +127,6 @@
                                 <div
                                     class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 </div>
-                                {{-- <div class="absolute top-3 right-3">
-                                    <span
-                                        class="inline-flex items-center px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm text-sm font-medium text-gray-800">
-                                        <svg class="w-4 h-4 mr-1 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                            </path>
-                                        </svg>
-                                        {{ number_format(4.5 + rand(0, 10) / 10, 1) }}
-                                    </span>
-                                </div> --}}
                             </div>
 
                             <div class="p-5">
@@ -206,16 +194,17 @@
             <div class="mt-16 text-center">
                 <div class="bg-gradient-to-r from-blue-600 to-purple-700 rounded-2xl p-8 md:p-12 text-white shadow-xl">
                     <h3 class="text-2xl md:text-3xl font-bold mb-4">Siap Menjelajahi Keindahan Madura?</h3>
-                    <p class="text-lg mb-6 max-w-2xl mx-auto">Rencanakan perjalanan Anda sekarang dan dapatkan pengalaman
+                    <p class="text-base md:text-lg mb-6 max-w-2xl mx-auto">Rencanakan perjalanan Anda sekarang dan dapatkan pengalaman
                         wisata yang tak terlupakan di Kampung Batik Paseseh.</p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="#"
-                            class="px-6 py-3 bg-white text-blue-700 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                        {{-- <a href="#"
+                            class="text-sm md:text-base px-6 py-3 bg-white text-blue-700 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
                             Hubungi Pemandu Wisata
-                        </a>
-                        <a href="#"
-                            class="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
-                            Lihat Paket Wisata
+                        </a> --}}
+                        <a href="#wisata"
+                            class="text-sm md:text-base px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-300">
+                            <i class="text-xs md:text-sm fas fa-info-circle mr-2"></i>
+                            Lihat Wisata
                         </a>
                     </div>
                 </div>

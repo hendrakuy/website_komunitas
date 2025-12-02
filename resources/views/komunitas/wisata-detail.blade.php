@@ -9,7 +9,7 @@
             <img src="{{ $wisata->image ? asset('storage/' . $wisata->image) : '/images/default-wisata.jpg' }}"
                 alt="{{ $wisata->title }}" class="w-full h-full object-cover opacity-20"
                 onerror="this.src='/images/default-wisata.jpg'">
-            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/80"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-900/40 to-purple-900/40"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
@@ -49,7 +49,11 @@
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span class="ml-1 text-sm font-medium text-white md:ml-2">{{ $wisata->title }}</span>
+                                <span
+                                    class="ml-1 text-sm font-medium text-white md:ml-2
+                                    block max-w-[120px] truncate sm:max-w-none sm:whitespace-normal">
+                                    {{ $wisata->title }}
+                                </span>
                             </div>
                         </li>
                     </ol>
@@ -128,7 +132,7 @@
                     </div>
 
                     <!-- Features -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <div
                             class="bg-blue-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
                             <div class="flex items-center mb-4">
@@ -167,96 +171,121 @@
                 <!-- Sidebar -->
                 <div class="lg:col-span-1">
                     <!-- Quick Info Card -->
-                    <div {{-- sticky --}}
-                        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-8 text-white shadow-2xl top-8 animate-fade-in-right">
-                        <h3 class="text-2xl font-bold mb-6">Informasi Kunjungan</h3>
+                    <div
+                        class="bg-gradient-to-br from-blue-600 to-purple-700 rounded-2xl p-5 sm:p-6 md:p-8 text-white shadow-2xl animate-fade-in-right">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Informasi Kunjungan</h3>
 
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-3 text-yellow-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <div class="space-y-3 sm:space-y-4 text-sm sm:text-base">
+                            <!-- Jam Buka -->
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-3 mt-1 text-yellow-400 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                 </svg>
                                 <div>
-                                    <p class="font-semibold">Jam Operasional</p>
-                                    <p class="text-blue-100">08:00 - 17:00 WIB</p>
+                                    <p class="font-semibold">Jam Buka</p>
+                                    <p class="text-blue-100">Setiap hari</p>
+                                    {{-- <p class="text-blue-100">24 jam</p> --}}
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-3 text-yellow-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Tiket Masuk -->
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-3 mt-1 text-yellow-400 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
                                     </path>
                                 </svg>
                                 <div>
                                     <p class="font-semibold">Tiket Masuk</p>
-                                    <p class="text-blue-100">Gratis</p>
+                                    <p class="text-blue-100">Informasi tiket belum tersedia</p>
                                 </div>
                             </div>
 
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-3 text-yellow-400" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
-                                    </path>
-                                </svg>
-                                <div>
-                                    <p class="font-semibold">Fasilitas</p>
-                                    <p class="text-blue-100">Parkir, Toilet, Warung Makan</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- CTA Buttons -->
-                        <div class="mt-8 space-y-4">
-                            <a href="#"
-                                class="w-full bg-white text-blue-700 font-semibold py-3 px-6 rounded-xl hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
+                            <!-- Lokasi -->
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-3 mt-1 text-yellow-400 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
                                     </path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
-                                Lihat di Google Maps
-                            </a>
-                            {{-- <a href="#"
-                                class="w-full bg-yellow-500 text-white font-semibold py-3 px-6 rounded-xl hover:bg-yellow-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
+                                <div>
+                                    <p class="font-semibold">Lokasi</p>
+                                    <p class="text-blue-100">Mudah diakses dengan kendaraan pribadi atau umum</p>
+                                </div>
+                            </div>
+
+                            <!-- Fasilitas -->
+                            <div class="flex items-start">
+                                <svg class="w-5 h-5 mr-3 mt-1 text-yellow-400 flex-shrink-0" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                     </path>
                                 </svg>
-                                Pesan Tur Sekarang
-                            </a> --}}
+                                <div>
+                                    <p class="font-semibold">Fasilitas</p>
+                                    <p class="text-blue-100">Area parkir, spot foto, dan area istirahat</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Rating & Reviews -->
-                    <div class="mt-8 bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-xl font-bold text-gray-900">Rating & Ulasan</h3>
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                    </path>
-                                </svg>
-                                <span class="ml-1 font-bold text-gray-900">4.8</span>
-                            </div>
+                    <!-- Tips Berkunjung -->
+                    <div
+                        class="mt-6 sm:mt-8 bg-white rounded-2xl shadow-lg p-4 sm:p-6 border border-gray-100 text-sm sm:text-base">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <svg class="w-5 h-5 sm:w-6 sm:h-6 text-blue-600 mr-2" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900">Tips Berkunjung</h3>
                         </div>
-                        <p class="text-gray-600 mb-4">Berdasarkan 124 ulasan pengunjung</p>
-                        <button
-                            class="w-full bg-gray-100 text-gray-700 font-medium py-3 px-6 rounded-xl hover:bg-gray-200 transition-all duration-300">
-                            Lihat Semua Ulasan
-                        </button>
+
+                        <ul class="space-y-2 sm:space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Datang pagi atau sore hari untuk cuaca yang lebih nyaman</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Gunakan pakaian dan alas kaki yang nyaman</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Jaga kebersihan dan kelestarian lingkungan</span>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0"
+                                    fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span>Bawa kamera untuk mengabadikan momen</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -265,63 +294,212 @@
 
     <!-- Related Wisata Section -->
     <!-- Related Wisata Section -->
-    <div class="py-16 bg-gray-50 relative">
-        <div class="max-w-7xl mx-auto px-4 md:px-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Destinasi Lainnya</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+    <div class="py-12 md:py-16 lg:py-20 bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Header -->
+            <div class="text-center mb-10 md:mb-12 lg:mb-16">
+                <div class="inline-flex items-center space-x-2 bg-blue-100 px-4 py-2 rounded-full mb-4">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span class="text-sm font-semibold text-blue-700">Jelajahi Lebih</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 md:mb-4">
+                    Destinasi Lainnya
+                </h2>
+                <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
                     Jelajahi lebih banyak destinasi menarik di sekitar Kampung Batik Paseseh
                 </p>
             </div>
 
-            <!-- Tombol Kiri -->
-            <button id="relatedScrollLeft"
-                class="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-blue-700 rounded-full shadow-md p-2 hidden md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
-            </button>
-
-            <!-- Scroll Container -->
-            <div id="relatedScroll"
-                class="flex md:grid md:grid-cols-3 gap-8 overflow-x-auto md:overflow-visible scroll-smooth snap-x snap-mandatory px-2 md:px-0">
+            <!-- Desktop: Grid Layout -->
+            <div class="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 @foreach ($relatedWisatas as $related)
                     <a href="{{ route('wisata.detail', $related->slug) }}"
-                        class="group flex-none snap-center w-72 sm:w-80 md:w-auto bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
-                        <div class="relative overflow-hidden">
+                        class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+
+                        <!-- Image Container -->
+                        <div class="relative overflow-hidden h-56 bg-gradient-to-br from-gray-100 to-gray-200">
                             <img src="{{ $related->image ? asset('storage/' . $related->image) : '/images/default-wisata.jpg' }}"
                                 alt="{{ $related->title }}"
-                                class="w-full h-48 object-cover group-hover:scale-110 transition duration-700"
+                                class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                 onerror="this.src='/images/default-wisata.jpg'">
                             <div
-                                class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             </div>
+
+                            <!-- Overlay Badge -->
+                            {{-- <div
+                                class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                <span class="text-xs font-semibold text-blue-600">Lihat Detail</span>
+                            </div> --}}
                         </div>
+
+                        <!-- Content -->
                         <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $related->title }}</h3>
-                            <p class="text-gray-600 text-sm line-clamp-2">
-                                {!! Str::limit(strip_tags($related->description), 80) !!}
+                            <h3
+                                class="text-xl font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight min-h-[56px]">
+                                {{ $related->title }}
+                            </h3>
+                            <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 min-h-[63px]">
+                                {!! Str::limit(strip_tags($related->description), 100) !!}
                             </p>
+
+                            <!-- Read More -->
+                            <div
+                                class="mt-4 pt-4 border-t border-gray-100 flex items-center text-blue-600 font-semibold text-sm">
+                                <span>Selengkapnya</span>
+                                <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
+                                </svg>
+                            </div>
                         </div>
                     </a>
                 @endforeach
             </div>
 
-            <!-- Tombol Kanan -->
-            <button id="relatedScrollRight"
-                class="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white text-blue-700 rounded-full shadow-md p-2 hidden md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                </svg>
-            </button>
+            <!-- Mobile/Tablet: Horizontal Scroll with Navigation -->
+            <div class="lg:hidden relative">
+                @if ($relatedWisatas->count() > 0)
+                    <!-- Navigation Buttons -->
+                    <button data-scroll-nav="prev" data-scroll-target="related-wisata-scroll"
+                        class="scroll-nav-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 sm:-translate-x-4 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 sm:p-3 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+
+                    <button data-scroll-nav="next" data-scroll-target="related-wisata-scroll"
+                        class="scroll-nav-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 sm:translate-x-4 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 sm:p-3 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+
+                    <!-- Scrollable Container -->
+                    <div id="related-wisata-scroll"
+                        class="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4"
+                        data-scroll-container>
+                        <div class="flex space-x-4 sm:space-x-6 min-w-max px-1">
+                            @foreach ($relatedWisatas as $related)
+                                <a href="{{ route('wisata.detail', $related->slug) }}"
+                                    class="snap-center group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 flex-shrink-0 w-80 sm:w-96">
+
+                                    <!-- Image Container -->
+                                    <div class="relative overflow-hidden h-52 bg-gradient-to-br from-gray-100 to-gray-200">
+                                        <img src="{{ $related->image ? asset('storage/' . $related->image) : '/images/default-wisata.jpg' }}"
+                                            alt="{{ $related->title }}"
+                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                            onerror="this.src='/images/default-wisata.jpg'">
+                                        <div
+                                            class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        </div>
+
+                                        <!-- Overlay Badge -->
+                                        {{-- <div
+                                            class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                                            <span class="text-xs font-semibold text-blue-600">Lihat Detail</span>
+                                        </div> --}}
+
+                                        <!-- Category Badge -->
+                                        <div
+                                            class="absolute bottom-3 left-3 bg-blue-500/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                            <svg class="w-3 h-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                            Destinasi Wisata
+                                        </div>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <div class="p-5">
+                                        <h3
+                                            class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors leading-tight">
+                                            {{ $related->title }}
+                                        </h3>
+                                        <p class="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                                            {!! Str::limit(strip_tags($related->description), 80) !!}
+                                        </p>
+
+                                        <!-- Read More -->
+                                        <div
+                                            class="pt-3 border-t border-gray-100 flex items-center text-blue-600 font-semibold text-xs">
+                                            <span>Selengkapnya</span>
+                                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicators -->
+                    <div class="flex justify-center mt-6">
+                        <div class="scroll-indicator h-1 w-20 sm:w-24 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="scroll-indicator-progress h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-300"
+                                style="width: 0%"></div>
+                        </div>
+                    </div>
+                @else
+                    <div class="text-center py-12">
+                        <div class="inline-block bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                            <div
+                                class="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-2">Belum Ada Destinasi Lain</h3>
+                            <p class="text-gray-600 text-sm">Destinasi wisata lainnya akan segera hadir.</p>
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+            <!-- View All Button -->
+            @if ($relatedWisatas->count() > 3)
+                <div class="text-center mt-10 md:mt-12">
+                    <a href="{{ route('wisata.index') }}"
+                        class="inline-flex items-center bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold text-sm md:text-base shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group">
+                        <span>Lihat Semua Destinasi</span>
+                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </a>
+                </div>
+            @endif
         </div>
     </div>
 @endsection
 
 @push('styles')
     <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         .animate-fade-in-up {
             animation: fadeInUp 0.8s ease-out;
         }
@@ -363,6 +541,4 @@
     </style>
 @endpush
 
-@section('scripts')
-    <script src="{{ asset('js/related-scroll.js') }}"></script>
-@endsection
+@vite('resources/js/scroll-horizontal.js')

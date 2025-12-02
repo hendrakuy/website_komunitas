@@ -7,6 +7,8 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Spatie\ImageOptimizer\Image;
+use Filament\Tables\Columns\ImageColumn;
 
 class AwardsTable
 {
@@ -17,12 +19,19 @@ class AwardsTable
                 TextColumn::make('title')
                     ->label('Judul Penghargaan')
                     ->searchable(),
-                TextColumn::make('video_url')
-                    ->label('URL Video')
-                    ->searchable(),
+                ImageColumn::make('image')
+                    ->label('Gambar')
+                    ->getStateUsing(fn($record) => $record->image ? asset('storage/' . $record->image) : null)
+                    ->disk('public')
+                    ->circular()
+                    ->height(60)
+                    ->width(60),
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit(50)
+                    ->toggleable(),
+                TextColumn::make('year')
+                    ->label('Tahun')
                     ->toggleable(),
             ])
             ->recordActions([

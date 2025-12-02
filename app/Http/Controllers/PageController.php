@@ -52,34 +52,34 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
-    public function event()
-    {
-        // ambil semua event, urutkan berdasarkan tanggal mulai terbaru
-        $perPage = 6;
-        $events = Event::orderBy('start_at', 'desc')->paginate($perPage)->withQueryString();
+    // public function event()
+    // {
+    //     // ambil semua event, urutkan berdasarkan tanggal mulai terbaru
+    //     $perPage = 6;
+    //     $events = Event::orderBy('start_at', 'desc')->paginate($perPage)->withQueryString();
 
-        // tampilkan halaman event
-        return view('pages.event', compact('events'));
-    }
+    //     // tampilkan halaman event
+    //     return view('pages.event', compact('events'));
+    // }
 
-    public function eventDetail($slug)
-    {
-        $umkms = Umkm::take(10)->get();
-        $batiks = Batik::all();
-        $edukasi = Edupackage::all();
-        $award = Award::all();
-        // cari event berdasarkan slug
-        $event = \App\Models\Event::where('slug', $slug)->firstOrFail();
+    // public function eventDetail($slug)
+    // {
+    //     $umkms = Umkm::take(10)->get();
+    //     $batiks = Batik::all();
+    //     $edukasi = Edupackage::all();
+    //     $award = Award::all();
+    //     // cari event berdasarkan slug
+    //     $event = \App\Models\Event::where('slug', $slug)->firstOrFail();
 
-        // ambil 3 event lain untuk rekomendasi
-        $relatedEvents = \App\Models\Event::where('id', '!=', $event->id)
-                              ->orderBy('start_at', 'desc')
-                              ->take(3)
-                              ->get();
+    //     // ambil 3 event lain untuk rekomendasi
+    //     $relatedEvents = \App\Models\Event::where('id', '!=', $event->id)
+    //                           ->orderBy('start_at', 'desc')
+    //                           ->take(3)
+    //                           ->get();
 
-        // tampilkan halaman detail event
-        return view('pages.event-detail', compact('event', 'relatedEvents', 'umkms', 'batiks', 'edukasi', 'award'));
-    }
+    //     // tampilkan halaman detail event
+    //     return view('pages.event-detail', compact('event', 'relatedEvents', 'umkms', 'batiks', 'edukasi', 'award'));
+    // }
     
     // public function edukasi()
     // {

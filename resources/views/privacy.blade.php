@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Kebijakan Privasi - Kampung Batik Paseseh')
+@section('title', 'Batik Paseseh - Kebijakan Privasi')
 
 @section('content')
     <!-- Hero Section -->

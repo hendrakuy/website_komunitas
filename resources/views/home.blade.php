@@ -30,6 +30,15 @@
     .animate-float-medium {
         animation: float-medium 4s ease-in-out infinite;
     }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
 </style>
 
 @extends('layouts.app')
@@ -155,14 +164,6 @@
                                 BATIK TANJUNG BUMI • BATIK TANJUNG BUMI
                             </div>
                         </div>
-
-                        {{-- <div
-                            class="absolute bottom-8 right-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 shadow-2xl">
-                            <div class="text-center">
-                                <div class="text-amber-400 font-bold text-2xl">25+</div>
-                                <div class="text-white text-sm font-semibold">Tahun Pengalaman</div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -194,9 +195,11 @@
                     </span>
                 </h1>
 
-                <p class="text-sm sm:text-base md:text-lg text-gray-600 max-w-lg sm:max-w-2xl md:max-w-3xl mx-auto leading-relaxed">
+                <p
+                    class="text-sm sm:text-base md:text-lg text-gray-600 max-w-lg sm:max-w-2xl md:max-w-3xl mx-auto leading-relaxed">
                     Kampung Batik Paseseh merupakan komunitas yang memiliki
-                    <span class="font-semibold text-amber-600 text-sm sm:text-base md:text-lg">10 UMKM terkenal di Tanjung Bumi</span>.
+                    <span class="font-semibold text-amber-600 text-sm sm:text-base md:text-lg">10 UMKM terkenal di Tanjung
+                        Bumi</span>.
                     Setiap UMKM memiliki produk unggulan yang mereka produksi dengan keunikan dan kualitas terbaik.
                 </p>
             </div>
@@ -587,7 +590,8 @@
             <div
                 class="bg-gradient-to-br from-purple-600 via-pink-500 to-amber-500 rounded-3xl shadow-2xl overflow-hidden">
                 <div class="p-6 md:p-8 lg:p-12">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+                    <!-- Desktop: Grid Layout -->
+                    <div class="hidden lg:grid grid-cols-2 gap-6 md:gap-8">
                         <!-- Featured Post (Left) -->
                         @if ($featuredPost = $instagramPosts->first())
                             <a href="{{ $featuredPost->link }}" target="_blank"
@@ -648,7 +652,7 @@
                         @endif
 
                         <!-- Grid Posts (Right) -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-2 gap-6">
                             @foreach ($instagramPosts->skip(1)->take(4) as $index => $post)
                                 <a href="{{ $post->link }}" target="_blank"
                                     class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1">
@@ -713,12 +717,113 @@
                         </div>
                     </div>
 
+                    <!-- Mobile/Tablet: Horizontal Scroll with Navigation -->
+                    <div class="lg:hidden relative">
+                        <!-- Navigation Buttons -->
+                        <button type="button" data-scroll-nav="prev" data-scroll-target="instagram-scroll"
+                            class="scroll-nav-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-purple-600 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <button type="button" data-scroll-nav="next" data-scroll-target="instagram-scroll"
+                            class="scroll-nav-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 bg-white/90 backdrop-blur-sm hover:bg-white text-purple-600 rounded-full p-3 shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <!-- Scrollable Container -->
+                        <div id="instagram-scroll"
+                            class="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4"
+                            data-scroll-container>
+                            <div class="flex space-x-4 min-w-max px-1">
+                                <!-- All Posts in Horizontal Layout -->
+                                @foreach ($instagramPosts as $index => $post)
+                                    <a href="{{ $post->link }}" target="_blank"
+                                        class="snap-center group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1 flex-shrink-0 w-72 sm:w-80">
+                                        <!-- Image Container -->
+                                        <div class="relative h-64 overflow-hidden">
+                                            @if ($post->image)
+                                                <img src="{{ asset('storage/' . $post->image) }}"
+                                                    alt="{{ $post->caption }}"
+                                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                                            @else
+                                                <div
+                                                    class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                                                    <i class="fab fa-instagram text-gray-400 text-3xl"></i>
+                                                </div>
+                                            @endif
+
+                                            <!-- Gradient Overlay -->
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent">
+                                            </div>
+
+                                            <!-- Instagram Badge -->
+                                            <div
+                                                class="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
+                                                <i class="fab fa-instagram text-purple-600 text-sm"></i>
+                                            </div>
+
+                                            @if ($index === 0)
+                                                <!-- Featured Badge -->
+                                                <div
+                                                    class="absolute top-3 left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                                                    Featured
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <!-- Content -->
+                                        <div class="p-5">
+                                            <h4
+                                                class="font-bold text-gray-900 text-base line-clamp-2 group-hover:text-purple-600 transition-colors mb-3">
+                                                {{ $post->caption ?: $defaultTitles[$index] ?? 'Batik Tulis Tanjung Bumi' }}
+                                            </h4>
+                                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                                <span class="flex items-center space-x-2">
+                                                    <i class="far fa-heart"></i>
+                                                    <span>{{ $index === 0 ? '2.4k' : rand(500, 2000) }}</span>
+                                                </span>
+                                                <span class="flex items-center space-x-2">
+                                                    <i class="far fa-comment"></i>
+                                                    <span>{{ $index === 0 ? '156' : rand(50, 200) }}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforeach
+
+                                <!-- Follow CTA Card -->
+                                <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank"
+                                    class="snap-center group bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1 flex-shrink-0 w-72 sm:w-80 flex flex-col items-center justify-center text-center p-8">
+                                    <div
+                                        class="bg-white/20 backdrop-blur-sm rounded-full p-5 mb-4 transform group-hover:scale-110 transition-transform duration-300">
+                                        <i class="fab fa-instagram text-white text-3xl"></i>
+                                    </div>
+                                    <h4 class="text-white font-bold text-xl mb-2">Follow Us</h4>
+                                    <p class="text-white/90 text-base mb-4">@kembangpote_batikpaseseh</p>
+                                    <div
+                                        class="bg-white text-purple-600 font-semibold py-3 px-8 rounded-full text-sm transform group-hover:scale-105 transition-transform duration-300">
+                                        Follow Instagram
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Scroll Indicators -->
+                        <div class="flex justify-center mt-4 space-x-2">
+                            <div class="scroll-indicator h-1 w-16 bg-white/30 rounded-full overflow-hidden">
+                                <div class="scroll-indicator-progress h-full bg-white rounded-full transition-all duration-300"
+                                    style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- View More Button -->
                     <div class="text-center mt-8 pt-8 border-t border-white/20">
                         <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank"
                             class="group inline-flex items-center space-x-3 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold py-4 px-8 rounded-2xl hover:bg-white hover:text-purple-600 transition-all duration-300 transform hover:-translate-y-1">
                             <i class="fab fa-instagram"></i>
-                            <span>Lihat Semua Postingan</span>
+                            <span class="text-sm sm:text-base">Lihat Semua Postingan</span>
                             <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform duration-300"></i>
                         </a>
                     </div>
@@ -735,39 +840,6 @@
             'Karya Seni dalam Setiap Goresan',
         ];
     @endphp
-
-    {{-- Section produk setelah hero --}}
-    {{-- <div id="produk" class="container mx-auto px-6 py-12">
-        <h2 class="text-3xl font-bold mb-6">Produk Unggulan</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-white p-4 rounded-lg shadow">
-                <h3 class="font-semibold">Batik Tulis</h3>
-                <p class="text-sm text-slate-500">Deskripsi singkat produk.</p>
-            </div>
-        </div>
-    </div> --}}
 @endsection
 
-{{-- <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const typingElement = document.getElementById('typing');
-        const text = typingElement.getAttribute('data-text');
-        let index = 0;
-        
-        function typeWriter() {
-            if (index < text.length) {
-                typingElement.innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 100);
-            } else {
-                // Menambahkan blinking cursor setelah selesai mengetik
-                typingElement.classList.add('border-r-4', 'border-amber-400', 'animate-pulse');
-            }
-        }
-        
-        // Memulai efek mengetik
-        typeWriter();
-    });
-</script> --}}
-
-@vite('resources/js/typing.js')
+@vite('resources/js/scroll-horizontal.js')

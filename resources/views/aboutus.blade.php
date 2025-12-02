@@ -209,105 +209,186 @@
         }
     </script>
     <!-- Contact -->
-    <section class="max-w-6xl mx-auto py-12 px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section class="max-w-7xl mx-auto py-8 sm:py-12 lg:py-16 px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
+        
+        <!-- Info Card -->
+        <div class="order-2 lg:order-1">
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300 h-full">
+                <h3 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-6 sm:mb-8">
+                    Informasi Kontak
+                </h3>
+                
+                <div class="space-y-5 sm:space-y-6">
+                    <!-- Alamat -->
+                    <div class="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                        <div class="flex-shrink-0 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl shadow-md group-hover:scale-110 transition-transform">
+                            📍
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs sm:text-sm font-semibold text-blue-900 mb-1">Alamat</p>
+                            <p class="text-sm sm:text-base text-gray-700 leading-relaxed break-words">
+                                Desa Paseseh, Kecamatan Tanjung Bumi, Kabupaten Bangkalan
+                            </p>
+                        </div>
+                    </div>
 
-        <!-- Info -->
-        <div class="border border-blue-500 rounded-md p-6 space-y-4">
-            <p class="flex items-center gap-3 text-gray-700">
-                <span class="text-xl">📍</span> Desa Paseseh, Kecamatan Tanjung Bumi, Kabupaten Bangkalan
-            </p>
-            <p class="flex items-center gap-3 text-gray-700">
-                <span class="text-xl">📞</span> +6287846696379
-            </p>
-            <p class="flex items-center gap-3 text-gray-700">
-                <span class="text-xl">✉️</span> batikpaseseh@gmail.com
-            </p>
-            <p class="flex items-center gap-3 text-gray-700">
-                <span class="text-xl">⏰</span> Senin – Sabtu : 08.00 – 17.00 WIB <br> Minggu & Hari Libur : Tutup
-            </p>
+                    <!-- Email -->
+                    <div class="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                        <div class="flex-shrink-0 w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl shadow-md group-hover:scale-110 transition-transform">
+                            ✉️
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs sm:text-sm font-semibold text-blue-900 mb-1">Email</p>
+                            <a href="mailto:komunitaskembangpote@gmail.com" class="text-sm sm:text-base text-gray-700 hover:text-purple-600 font-medium break-all">
+                                komunitaskembangpote@gmail.com
+                            </a>
+                        </div>
+                    </div>
 
-            <!-- Social Media -->
-            <div class="flex gap-6 text-2xl mt-4">
-                {{-- <a href="#" class="text-gray-600 hover:text-blue-600"><i class="fab fa-facebook"></i></a> --}}
-                <a href="#" class="text-gray-600 hover:text-pink-500"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-gray-600 hover:text-red-600"><i class="fab fa-youtube"></i></a>
-                {{-- <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-twitter"></i></a> --}}
-                {{-- <a href="#" class="text-gray-600 hover:text-black"><i class="fab fa-tiktok"></i></a> --}}
+                    <!-- Jam Operasional -->
+                    <div class="flex items-start gap-4 group hover:translate-x-2 transition-transform duration-300">
+                        <div class="flex-shrink-0 w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center text-white text-xl shadow-md group-hover:scale-110 transition-transform">
+                            ⏰
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <p class="text-xs sm:text-sm font-semibold text-blue-900 mb-1">Jam Operasional</p>
+                            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">
+                                <span class="font-semibold text-green-700">Senin – Sabtu</span><br>
+                                08.00 – 17.00 WIB<br>
+                                <span class="font-semibold text-red-600">Minggu & Hari Libur: Tutup</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t-2 border-blue-200">
+                    <p class="text-sm font-semibold text-blue-900 mb-4">Ikuti Kami</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.instagram.com/kembangpote_batikpaseseh" target="_blank" class="w-12 h-12 bg-gradient-to-br from-pink-500 to-purple-600 rounded-xl flex items-center justify-center text-white text-xl hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-lg">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com/@kknttanjungbumi?si=GzvhzuFfrCQCklFq" target="_blank" class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-700 rounded-xl flex items-center justify-center text-white text-xl hover:scale-110 hover:rotate-6 transition-all duration-300 shadow-lg">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Form -->
-        <div class="border border-blue-500 rounded-md p-6 bg-blue-100 shadow-lg">
-            <h3 class="text-lg sm:text-xl font-semibold mb-6 text-center text-blue-800">Hubungi Kami</h3>
-
-            <form action="{{ route('contact.store') }}" method="POST" class="space-y-4">
-                @csrf
-
-                <div>
-                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-1">Nama *</label>
-                    <input id="nama" name="name" type="text" placeholder="Nama"
-                        class="w-full px-4 py-2 rounded-md text-sm border focus:outline-none bg-white @error('name') border-red-500 @enderror"
-                        value="{{ old('name') }}">
-                    @error('name')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+        <!-- Form Card -->
+        <div class="order-1 lg:order-2" id="form-card">
+            <div class="bg-white border-2 border-blue-200 rounded-2xl p-6 sm:p-8 shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-blue-900 mb-2">Hubungi Kami</h3>
+                    <p class="text-sm sm:text-base text-gray-600">Kami siap membantu Anda</p>
                 </div>
 
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-                    <input id="email" name="email" type="email" placeholder="Email"
-                        class="w-full px-4 py-2 rounded-md text-sm border focus:outline-none bg-white @error('email') border-red-500 @enderror"
-                        value="{{ old('email') }}">
-                    @error('email')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-4 sm:space-y-5" id="contactForm">
+                    @csrf
 
-                <div>
-                    <label for="telepon" class="block text-sm font-medium text-gray-700 mb-1">No. Telephone *</label>
-                    <input id="telepon" name="phone" type="text" placeholder="08..."
-                        class="w-full px-4 py-2 rounded-md text-sm border focus:outline-none bg-white @error('phone') border-red-500 @enderror"
-                        value="{{ old('phone') }}">
-                    @error('phone')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <!-- Nama -->
+                    <div class="relative">
+                        <label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Nama <span class="text-red-500">*</span>
+                        </label>
+                        <input id="nama" name="name" type="text" placeholder="Masukkan nama lengkap" required
+                            class="w-full px-4 py-3 rounded-xl text-sm border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-gray-50 focus:bg-white @error('name') border-red-500 @enderror"
+                            value="{{ old('name') }}">
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-2 flex items-center gap-1">
+                                <span>⚠️</span> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="subjek" class="block text-sm font-medium text-gray-700 mb-1">Subjek</label>
-                    <select id="subjek" name="subject"
-                        class="w-full px-4 py-2 rounded-md text-sm border focus:outline-none bg-white">
-                        <option value="">Pilih Subjek</option>
-                        <option value="Pemesanan">Pemesanan</option>
-                        <option value="Kemitraan">Kemitraan</option>
-                        <option value="Informasi">Informasi</option>
-                    </select>
-                </div>
+                    <!-- Email -->
+                    <div class="relative">
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Email <span class="text-red-500">*</span>
+                        </label>
+                        <input id="email" name="email" type="email" placeholder="nama@email.com" required
+                            class="w-full px-4 py-3 rounded-xl text-sm border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-gray-50 focus:bg-white @error('email') border-red-500 @enderror"
+                            value="{{ old('email') }}">
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-2 flex items-center gap-1">
+                                <span>⚠️</span> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="pesan" class="block text-sm font-medium text-gray-700 mb-1">Pesan *</label>
-                    <textarea id="pesan" name="message" rows="4" placeholder="Tulis Pesan"
-                        class="w-full px-4 py-2 rounded-md text-sm border focus:outline-none bg-white @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
-                    @error('message')
-                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <!-- Telepon -->
+                    <div class="relative">
+                        <label for="telepon" class="block text-sm font-semibold text-gray-700 mb-2">
+                            No. Telepon <span class="text-red-500">*</span>
+                        </label>
+                        <input id="telepon" name="phone" type="tel" placeholder="08xxxxxxxxxx" required
+                            pattern="[0-9]{10,13}"
+                            class="w-full px-4 py-3 rounded-xl text-sm border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-gray-50 focus:bg-white @error('phone') border-red-500 @enderror"
+                            value="{{ old('phone') }}">
+                        @error('phone')
+                            <p class="text-red-500 text-xs mt-2 flex items-center gap-1">
+                                <span>⚠️</span> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
-                <!-- Honeypot untuk anti-bot -->
-                <input type="text" name="website" style="display:none">
+                    <!-- Subjek -->
+                    <div class="relative">
+                        <label for="subjek" class="block text-sm font-semibold text-gray-700 mb-2">Subjek</label>
+                        <select id="subjek" name="subject"
+                            class="w-full px-4 py-3 rounded-xl text-sm border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-gray-50 focus:bg-white cursor-pointer">
+                            <option value="" disabled selected>-- Pilih Subjek --</option>
+                            <option value="Pemesanan" {{ old('subject') == 'Pemesanan' ? 'selected' : '' }}>Pemesanan</option>
+                            <option value="Kemitraan" {{ old('subject') == 'Kemitraan' ? 'selected' : '' }}>Kemitraan</option>
+                            <option value="Informasi" {{ old('subject') == 'Informasi' ? 'selected' : '' }}>Informasi</option>
+                        </select>
+                    </div>
 
-                <button type="submit"
-                    class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 text-sm">Kirim</button>
-            </form>
+                    <!-- Pesan -->
+                    <div class="relative">
+                        <label for="pesan" class="block text-sm font-semibold text-gray-700 mb-2">
+                            Pesan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea id="pesan" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required
+                            class="w-full px-4 py-3 rounded-xl text-sm border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-gray-50 focus:bg-white resize-none @error('message') border-red-500 @enderror">{{ old('message') }}</textarea>
+                        @error('message')
+                            <p class="text-red-500 text-xs mt-2 flex items-center gap-1">
+                                <span>⚠️</span> {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
 
-            @if (session('success'))
-                <div class="mt-4 p-3 bg-green-100 text-green-700 rounded text-sm">
-                    {{ session('success') }}
-                </div>
-            @endif
+                    <!-- Honeypot -->
+                    <input type="text" name="website" class="hidden" tabindex="-1" autocomplete="off">
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn"
+                        class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 rounded-xl hover:from-blue-700 hover:to-indigo-700 font-semibold text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2">
+                        <span id="btnText">Kirim Pesan</span>
+                        <svg id="btnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                        </svg>
+                        <svg id="loadingIcon" class="hidden w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </button>
+                </form>
+
+                <!-- Success Message -->
+                @if (session('success'))
+                    <div class="mt-6 p-4 bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-300 text-green-800 rounded-xl text-sm flex items-start gap-3 shadow-md animate-fade-in">
+                        <span class="text-xl">✅</span>
+                        <span class="flex-1">{{ session('success') }}</span>
+                    </div>
+                @endif
+            </div>
         </div>
 
-    </section>
+    </div>
+</section>
 
     <!-- Map -->
     <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-6 sm:mb-8">
@@ -321,14 +402,6 @@
     </div>
 
     <!-- WhatsApp Button -->
-    {{-- <div class="max-w-6xl mx-auto px-4 mt-6">
-        <a href="https://wa.me/6281357636803" target="_blank"
-            class="bg-green-500 text-white px-6 py-3 rounded-md flex justify-center items-center gap-2 hover:bg-green-600">
-            <i class="fab fa-whatsapp text-2xl"></i>
-            <span class="text-lg">Hubungi via WhatsApp</span>
-        </a>
-    </div> --}}
-
     <div class="max-w-6xl mx-auto px-4 mt-6">
         <hr class="border-t border-gray-300">
         <a href="https://wa.me/{{ config('contact.whatsapp') }}?text={{ urlencode('Halo admin, saya ingin tahu lebih lanjut tentang Komunitas Kembang Pote.') }}"

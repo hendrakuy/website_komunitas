@@ -33,7 +33,6 @@ class DashboardOverview extends BaseWidget
         $eventUpcoming = Event::where('start_at', '>', Carbon::now())->count();
         $eventPast = Event::where('start_at', '<=', Carbon::now())->count();
 
-        // $messagesUnread = ContactMessage::where('is_read', false)->count();
         $messagesThisWeek = ContactMessage::where('created_at', '>=', Carbon::now()->startOfWeek())->count();
 
         $instagramActive = InstagramPost::where('is_active', true)->count();
@@ -60,11 +59,9 @@ class DashboardOverview extends BaseWidget
             Stat::make('Manajemen Event', Event::count())
                 ->description("{$eventUpcoming} mendatang • {$eventPast} selesai")
                 ->descriptionIcon('heroicon-m-calendar-days')
+                ->chart($this->getEventChartData())
                 ->color('warning')
-                ->icon('heroicon-o-calendar')
-                ->extraAttributes([
-                    'class' => 'cursor-pointer',
-                ]),
+                ->icon('heroicon-o-calendar'),
 
             // Wisata Stats
             Stat::make('Destinasi Wisata', Wisata::count())
@@ -84,15 +81,9 @@ class DashboardOverview extends BaseWidget
             Stat::make('Konten Instagram', $instagramActive)
                 ->description("Dari {$instagramTotal} total postingan")
                 ->descriptionIcon('heroicon-m-photo')
+                ->chart($this->getInstagramChartData())
                 ->color('success')
                 ->icon('heroicon-o-camera'),
-
-            // Contact Message Stats
-            // Stat::make('Pesan Kontak', ContactMessage::count())
-            //     ->description($messagesUnread > 0 ? "{$messagesUnread} belum dibaca • {$messagesThisWeek} minggu ini" : "{$messagesThisWeek} pesan minggu ini")
-            //     ->descriptionIcon($messagesUnread > 0 ? 'heroicon-m-exclamation-circle' : 'heroicon-m-check-circle')
-            //     ->color($messagesUnread > 0 ? 'danger' : 'success')
-            //     ->icon('heroicon-o-envelope'),
 
             // Engagement Overview
             Stat::make('Tingkat Engagement', $this->calculateEngagementRate() . '%')
@@ -108,12 +99,13 @@ class DashboardOverview extends BaseWidget
      */
     private function getUmkmChartData(): array
     {
-        return Umkm::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(7))
-            ->groupBy('date')
-            ->orderBy('date')
-            ->pluck('count')
-            ->toArray();
+        $data = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $count = Umkm::whereDate('created_at', $date)->count();
+            $data[] = $count;
+        }
+        return $data;
     }
 
     /**
@@ -121,12 +113,41 @@ class DashboardOverview extends BaseWidget
      */
     private function getBatikChartData(): array
     {
-        return Batik::select(DB::raw('DATE(created_at) as date'), DB::raw('count(*) as count'))
-            ->where('created_at', '>=', Carbon::now()->subDays(7))
-            ->groupBy('date')
-            ->orderBy('date')
-            ->pluck('count')
-            ->toArray();
+        $data = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $count = Batik::whereDate('created_at', $date)->count();
+            $data[] = $count;
+        }
+        return $data;
+    }
+
+    /**
+     * Get Event chart data for last 7 days
+     */
+    private function getEventChartData(): array
+    {
+        $data = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $count = Event::whereDate('created_at', $date)->count();
+            $data[] = $count;
+        }
+        return $data;
+    }
+
+    /**
+     * Get Instagram post chart data for last 7 days
+     */
+    private function getInstagramChartData(): array
+    {
+        $data = [];
+        for ($i = 6; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->toDateString();
+            $count = InstagramPost::whereDate('created_at', $date)->count();
+            $data[] = $count;
+        }
+        return $data;
     }
 
     /**
@@ -142,7 +163,7 @@ class DashboardOverview extends BaseWidget
     }
 
     /**
-     * Polling interval for real-time updates (optional)
+     * Polling interval for real-time updates
      */
     protected ?string $pollingInterval = '30s';
 }

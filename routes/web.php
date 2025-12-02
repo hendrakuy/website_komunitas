@@ -11,6 +11,17 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WisataController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InstagramController;
+use App\Http\Controllers\EventController;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\VerificationController;
+
 
 // Halaman utama website
 Route::get('/', [PageController::class, 'home'])->name('home');
@@ -26,8 +37,8 @@ Route::get('/wisata', [WisataController::class, 'index'])->name('wisata.index');
 Route::get('/wisata/{slug}', [WisataController::class, 'wisataDetail'])->name('wisata.detail');
 
 // Halaman event dan detail event
-Route::get('/event', [PageController::class, 'event'])->name('event.index');
-Route::get('/event/{slug}', [PageController::class, 'eventDetail'])->name('event.detail');
+Route::get('/event', [EventController::class, 'index'])->name('event.index');
+Route::get('/event/{slug}', [EventController::class, 'show'])->name('event.show');
 
 // Route untuk halaman edukasi dan detail edukasi
 Route::get('/edukasi', [EdupackageController::class, 'index'])->name('edupackage.index');
@@ -57,3 +68,47 @@ Route::post('/contact/store', [ContactController::class, 'store'])
 // Route untuk halaman kebijakan privasi
 Route::view('/kebijakan-privasi', 'privacy')->name('privacy');
 Route::view('/syarat-dan-ketentuan', 'term')->name('term');
+Route::view('/cara-pemesanan', 'cara-pemesanan')->name('cara-pemesanan');
+
+// Route untuk memuat lebih banyak event melalui API
+Route::get('/api/events', [EventController::class, 'loadMore'])->name('api.events');
+
+// Route untuk mencetak semua order dalam format PDF
+Route::get('/orders/print/{order}', function (\App\Models\Order $order) {
+    $pdf = Pdf::loadView('pdf.order-single', ['order' => $order]);
+    return $pdf->download('Order-' . $order->order_number . '.pdf');
+})->name('orders.print-single');
+
+// Authentication Routes
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+
+    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::post('/register', [RegisterController::class, 'register']);
+
+    Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])
+        ->name('password.request');
+    Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+        ->name('password.email');
+
+    Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])
+        ->name('password.reset');
+    Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+        ->name('password.update');
+});
+
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/verify-email', [VerificationController::class, 'notice'])
+        ->name('verification.notice');
+
+    Route::get('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])
+        ->middleware(['signed'])
+        ->name('verification.verify');
+
+    Route::post('/email/verification-notification', [VerificationController::class, 'send'])
+        ->middleware(['throttle:6,1'])
+        ->name('verification.send');
+});

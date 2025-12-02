@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 
 <head>
     <meta charset="utf-8">
@@ -14,7 +14,6 @@
     <script src="//unpkg.com/alpinejs" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/scrollup.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <!-- Tambahkan di dalam <head> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-vzN1OqgW1Qp0lYF0vHMyvhU7LhrdPpM+u5aMxMGE+z0l3Dflr1pYbgz4m+3m3l6kt1DfiD+1rWlbYvAevHn1kA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />

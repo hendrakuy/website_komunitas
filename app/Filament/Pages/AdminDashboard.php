@@ -13,6 +13,11 @@ use Filament\Widgets;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 use UnitEnum;
 use App\Filament\Widgets\DashboardOverview;
+// use App\Filament\Widgets\UmkmRegistrationChart;
+use App\Filament\Widgets\ContentOverviewChart;
+use App\Filament\Widgets\OrderStatsOverview;
+use App\Filament\Widgets\OrderRevenueChart;
+use App\Filament\Widgets\TopProductsChart;
 
 class AdminDashboard extends Page
 {
@@ -26,6 +31,11 @@ class AdminDashboard extends Page
     {
         return [
             DashboardOverview::class,
+            OrderStatsOverview::class,
+            // UmkmRegistrationChart::class,
+            ContentOverviewChart::class,
+            OrderRevenueChart::class,
+            TopProductsChart::class,
         ];
     }
 

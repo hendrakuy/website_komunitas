@@ -234,10 +234,10 @@
 
         <!-- removed mobile menu from here -->
     </header>
-    
+
     <!-- moved mobile menu to body level to avoid stacking/clipping issues -->
-    <div x-cloak x-show="mobileMenuOpen" 
-        class="fixed inset-0 z-[9999] xl:hidden" style="display: none;">
+    <div x-cloak x-show="mobileMenuOpen" class="fixed inset-0 z-[9999] xl:hidden" x-transition.opacity.duration.300ms
+        style="display: none;">
 
         <!-- Backdrop with gradient -->
         <div class="fixed inset-0 bg-gradient-to-br from-blue-900/90 to-purple-800/90 backdrop-blur-sm z-40"
@@ -245,7 +245,7 @@
 
         <!-- Menu Panel -->
         <div
-            class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-b from-blue-900 to-purple-800 shadow-2xl">
+            class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gradient-to-b from-blue-900 to-purple-800 shadow-2xl transform transition-all duration-500">
             <div class="flex flex-col h-full">
                 <!-- Header -->
                 <div class="flex items-center justify-between p-6 border-b border-white/10">
@@ -305,8 +305,7 @@
                         </button>
 
                         <!-- Dropdown Content -->
-                        <div x-show="mobileProductMenuOpen" x-collapse class="space-y-2 pl-4"
-                            style="display: none;">
+                        <div x-show="mobileProductMenuOpen" x-collapse class="space-y-2 pl-4" style="display: none;">
                             <!-- Perjalanan -->
                             <a href="{{ route('perjalanan') }}" @click="mobileMenuOpen = false"
                                 class="group flex items-center space-x-3 rounded-xl p-3 text-sm font-semibold text-white/90 hover:bg-blue-500/30 hover:text-white transition-all duration-300 border-l-2 border-transparent hover:border-blue-400">
@@ -394,26 +393,27 @@
 
                 <!-- CTA Section -->
                 <div class="p-6 border-t border-white/10">
-                    <a href="{{ route('shop.index') }}" @click="mobileMenuOpen = false"
+                    {{-- <a href="{{ route('shop.index') }}" @click="mobileMenuOpen = false"
                         class="group w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center space-x-3">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Belanja Sekarang</span>
-                    </a>
+                    </a> --}}
 
                     <!-- Contact Info -->
                     <div class="mt-6 space-y-3 text-center">
-                        <div class="flex items-center justify-center space-x-2 text-white/80 text-sm">
+                        {{-- <div class="flex items-center justify-center space-x-2 text-white/80 text-sm">
                             <i class="fas fa-phone-alt text-amber-400"></i>
                             <span>+62 867-4423-482</span>
-                        </div>
+                        </div> --}}
                         <div class="flex items-center justify-center space-x-2 text-white/80 text-sm">
-                            <i class="fas fa-envelope text-amber-400"></i>
-                            <span>batikpasseeh@gmail.com</span>
+                            <!-- Contoh ikon: copyright -->
+                            <i class="fas fa-copyright text-amber-400"></i>
+                            <span>2025 | Batik Paseseh</span>
                         </div>
                     </div>
 
                     <!-- Social Media -->
-                    <div class="flex justify-center space-x-4 mt-6">
+                    {{-- <div class="flex justify-center space-x-4 mt-6">
                         <a href="#"
                             class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
                             <i class="fab fa-instagram text-white text-sm"></i>
@@ -426,7 +426,7 @@
                             class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center hover:bg-white/20 transition-all duration-300 transform hover:scale-110">
                             <i class="fab fa-whatsapp text-white text-sm"></i>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

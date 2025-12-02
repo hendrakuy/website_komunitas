@@ -13,7 +13,8 @@ class Award extends Model
 
     protected $fillable = [
         'title',
-        'video_url',
+        'year',
+        'image',
         'description',
     ];
 }

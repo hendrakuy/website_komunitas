@@ -282,25 +282,25 @@
     function filterForm() {
         return {
             priceChanged: false,
-            originalMin: {{ request('min_price', 150000) }},
-            originalMax: {{ request('max_price', 5000000) }},
+            originalMin: {{ request('min_price', 230000) }},
+            originalMax: {{ request('max_price', 7000000) }},
 
             init() {
                 // Cek apakah harga sudah diubah dari nilai default
-                this.priceChanged = this.originalMin !== 150000 || this.originalMax !== 5000000;
+                this.priceChanged = this.originalMin !== 230000 || this.originalMax !== 7000000;
             },
         }
     }
 
     function priceRange() {
         return {
-            min: {{ request('min_price', 150000) }},
-            max: {{ request('max_price', 5000000) }},
-            minLimit: 150000,
-            maxLimit: 5000000,
+            min: {{ request('min_price', 230000) }},
+            max: {{ request('max_price', 7000000) }},
+            minLimit: 230000,
+            maxLimit: 7000000,
             step: 10000,
-            defaultMin: 150000,
-            defaultMax: 5000000,
+            defaultMin: 230000,
+            defaultMax: 7000000,
 
             init() {
                 // Pastikan min tidak lebih besar dari max

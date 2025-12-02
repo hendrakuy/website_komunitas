@@ -14,16 +14,22 @@ class ShopController extends Controller
         $query = Batik::with(['category', 'media', 'umkm']);
 
         // Filter pencarian (search bar)
-        if ($request->filled('q')) {
-            $query->where('title', 'like', '%' . $request->q . '%');
-        }
-
-        if ($request->filled('q')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('title', 'like', '%' . $request->q . '%');
-                // ->orWhere('description', 'like', '%' . $request->q . '%');
+        $searchQuery = trim($request->q);
+        if (!empty($searchQuery)) {
+            $query->where(function ($q) use ($searchQuery) {
+                $q->where('title', 'like', '%' . $searchQuery . '%');
             });
         }
+        // if ($request->filled('q')) {
+        //     $query->where('title', 'like', '%' . $request->q . '%');
+        // }
+
+        // if ($request->filled('q')) {
+        //     $query->where(function ($q) use ($request) {
+        //         $q->where('title', 'like', '%' . $request->q . '%');
+        //         // ->orWhere('description', 'like', '%' . $request->q . '%');
+        //     });
+        // }
 
         // Filter kategori
         if ($request->filled('category')) {
@@ -52,7 +58,7 @@ class ShopController extends Controller
             $maxPrice = $request->max_price;
 
             // Hanya terapkan filter jika berbeda dari nilai default
-            if ($minPrice != 150000 || $maxPrice != 5000000) {
+            if ($minPrice != 230000 || $maxPrice != 7000000) {
                 $query->whereBetween('price', [$minPrice, $maxPrice]);
             }
         }
@@ -96,7 +102,7 @@ class ShopController extends Controller
         $message = urlencode('Halo, saya tertarik membeli ' . $cleanTitle . '. Apakah masih tersedia?');
 
         // Gunakan format wa.me untuk kompatibilitas lebih baik
-        $whatsappLink = 'https://wa.me/6287846696379?text=' . $message;
+        $whatsappLink = 'https://wa.me/6285104005780?text=' . $message;
 
         // Ambil parameter filter dari request
         $filters = $request->query();

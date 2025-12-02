@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $batik->title . ' - Batik Paseseh')
+
 @section('content')
     <!-- Main Container -->
     <div class="max-w-7xl mx-auto px-4 py-6">
@@ -21,7 +23,12 @@
                 </li>
                 <li class="flex items-center">
                     <i class="fas fa-chevron-right text-gray-400 text-xs mx-2"></i>
-                    <span class="text-gray-600 font-medium truncate max-w-[150px] sm:max-w-xs">{{ $batik->title }}</span>
+                    {{-- <span class="text-gray-600 font-medium truncate max-w-[150px] sm:max-w-xs">{{ $batik->title }}</span> --}}
+                    <span
+                        class="text-sm font-medium text-gray-600
+                                    block max-w-[185px] truncate sm:max-w-none sm:whitespace-normal">
+                        {{ $batik->title }}
+                    </span>
                 </li>
             </ol>
         </nav>
@@ -213,96 +220,99 @@
         </div>
 
         <!-- Product Details & Specifications -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 mb-16">
-            <h2 class="text-2xl font-bold text-gray-900 mb-8 flex items-center">
-                <i class="fas fa-info-circle text-blue-500 mr-3 text-xl"></i>
+        <div class="bg-white rounded-2xl shadow-lg p-4 sm:p-6 lg:p-8 mb-16">
+            <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6 sm:mb-8 flex items-center">
+                <i class="fas fa-info-circle text-blue-500 mr-2 sm:mr-3 text-lg sm:text-xl"></i>
                 Informasi Detail Produk
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Tabs Navigation (Mobile Only) -->
+            <div class="flex gap-2 mb-6 md:hidden">
+                <button onclick="switchTab('specifications')" id="tab-specifications"
+                    class="flex-1 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 bg-blue-500 text-white">
+                    <i class="fas fa-list-ul mr-2"></i>
+                    Spesifikasi
+                </button>
+                <button onclick="switchTab('care')" id="tab-care"
+                    class="flex-1 py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 bg-gray-100 text-gray-600">
+                    <i class="fas fa-heart mr-2"></i>
+                    Perawatan
+                </button>
+            </div>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
                 <!-- Specifications -->
-                <div class="space-y-6">
-                    <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
+                <div id="content-specifications" class="space-y-6">
+                    <h3
+                        class="text-base sm:text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 hidden md:block">
                         Spesifikasi Produk
                     </h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Nama Produk</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->title }}</span>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex justify-between py-2 sm:py-3 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium text-sm sm:text-base">Nama Produk</span>
+                            <span
+                                class="text-gray-900 font-semibold text-sm sm:text-base text-right ml-4">{{ $batik->title }}</span>
                         </div>
-                        {{-- <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Bahan Material</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->material ?? 'Katun Primissima' }}</span>
-                        </div> --}}
-                        <div class="flex justify-between py-3 border-b border-gray-100 items-start">
-                            <span class="text-gray-600 font-medium">Bahan Material</span>
-                            <div class="flex flex-wrap justify-end max-w-[70%]">
-                                @if ($batik->material)
-                                    @foreach (explode(',', $batik->material) as $m)
-                                        <span
-                                            class="bg-blue-100 text-blue-800 text-sm px-2.5 py-1 rounded-full font-medium ml-2 mb-2">
-                                            {{ trim($m) }}
-                                        </span>
-                                    @endforeach
-                                @else
-                                    <span class="text-gray-900 font-semibold">Katun Primissima</span>
-                                @endif
+                        <div class="flex justify-between py-2 sm:py-3 border-b border-gray-100 items-start">
+                            <span class="text-gray-600 font-medium text-sm sm:text-base">Bahan Material</span>
+                            <div class="flex flex-wrap justify-end max-w-[60%] sm:max-w-[70%]">
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs sm:text-sm px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full font-medium ml-1 sm:ml-2 mb-1 sm:mb-2">
+                                    {{ $batik->material }}
+                                </span>
                             </div>
                         </div>
-                        <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Tema Motif</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->title }}</span>
+                        <div class="flex justify-between py-2 sm:py-3 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium text-sm sm:text-base">Tema Motif</span>
+                            <span
+                                class="text-gray-900 font-semibold text-sm sm:text-base text-right ml-4">{{ $batik->title }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Ukuran Tersedia</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->size }}</span>
+                        <div class="flex justify-between py-2 sm:py-3 border-b border-gray-100">
+                            <span class="text-gray-600 font-medium text-sm sm:text-base">Ukuran Tersedia</span>
+                            <span class="text-gray-900 font-semibold text-sm sm:text-base">{{ $batik->size }}</span>
                         </div>
-                        <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Kualitas</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->category->name ?? 'Batik Tulis' }}</span>
+                        <div class="flex justify-between py-2 sm:py-3">
+                            <span class="text-gray-600 font-medium text-sm sm:text-base">Kualitas</span>
+                            <span
+                                class="text-gray-900 font-semibold text-sm sm:text-base">{{ $batik->category->name ?? 'Batik Tulis' }}</span>
                         </div>
-                        {{-- <div class="flex justify-between py-3 border-b border-gray-100">
-                            <span class="text-gray-600 font-medium">Milik UMKM</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->umkm->name ?? 'Asli Tanjung Bumi' }}</span>    
-                            <span class=" bg-green-100 text-green-700 font-semibold px-3 py-1 rounded-full flex">
-                                {{ $batik->umkm->name ?? 'Asli Tanjung Bumi' }}
-                                <span class="bg-amber-100 text-amber-700 text-xs font-medium px-2 py-1 rounded-full">
-                                    UMKM
-                                </span>
-                            </span>
-                        </div> --}}
-                        {{-- <div class="flex justify-between py-3">
-                            <span class="text-gray-600 font-medium">Kualitas</span>
-                            <span class="text-gray-900 font-semibold">{{ $batik->quality ?? 'Premium' }}</span>
-                        </div> --}}
                     </div>
                 </div>
 
                 <!-- Care Instructions -->
-                <div class="space-y-6">
-                    <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">
+                <div id="content-care" class="space-y-6 hidden md:block">
+                    <h3
+                        class="text-base sm:text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 hidden md:block">
                         Petunjuk Perawatan
                     </h3>
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl">
-                            <i class="fas fa-hand-sparkles text-blue-500 mt-1"></i>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start space-x-3 p-3 sm:p-4 bg-blue-50 rounded-xl">
+                            <i class="fas fa-hand-sparkles text-blue-500 mt-1 text-sm sm:text-base"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Cuci dengan Tangan</h4>
-                                <p class="text-gray-600 text-sm mt-1">Gunakan air dingin dan deterjen lembut</p>
+                                <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Cuci dengan Tangan</h4>
+                                <p class="text-gray-600 text-xs sm:text-sm mt-1">Gunakan air dingin dan deterjen lembut</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl">
-                            <i class="fas fa-wind text-blue-500 mt-1"></i>
+                        <div class="flex items-start space-x-3 p-3 sm:p-4 bg-blue-50 rounded-xl">
+                            <i class="fas fa-wind text-blue-500 mt-1 text-sm sm:text-base"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Keringkan di Tempat Teduh</h4>
-                                <p class="text-gray-600 text-sm mt-1">Hindari sinar matahari langsung</p>
+                                <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Keringkan di Tempat Teduh</h4>
+                                <p class="text-gray-600 text-xs sm:text-sm mt-1">Hindari sinar matahari langsung</p>
                             </div>
                         </div>
-                        <div class="flex items-start space-x-3 p-4 bg-blue-50 rounded-xl">
-                            <i class="fas fa-tshirt text-blue-500 mt-1"></i>
+                        <div class="flex items-start space-x-3 p-3 sm:p-4 bg-blue-50 rounded-xl">
+                            <i class="fas fa-tshirt text-blue-500 mt-1 text-sm sm:text-base"></i>
                             <div>
-                                <h4 class="font-semibold text-gray-900">Setrika Suhu Rendah</h4>
-                                <p class="text-gray-600 text-sm mt-1">Gunakan kain pelindung saat menyetrika</p>
+                                <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Setrika Suhu Rendah</h4>
+                                <p class="text-gray-600 text-xs sm:text-sm mt-1">Gunakan kain pelindung saat menyetrika</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3 p-3 sm:p-4 bg-blue-50 rounded-xl">
+                            <i class="fas fa-droplet text-blue-500 mt-1 text-sm sm:text-base"></i>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 text-sm sm:text-base">Hindari Pemutih</h4>
+                                <p class="text-gray-600 text-xs sm:text-sm mt-1">Jangan gunakan bahan kimia keras</p>
                             </div>
                         </div>
                     </div>
@@ -310,125 +320,112 @@
             </div>
         </div>
 
-        <!-- Testimonials Section -->
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 lg:p-12 mb-12">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                    Apa <span class="text-blue-600">Kata Mereka</span> Tentang Kami
+        <script>
+            function switchTab(tabName) {
+                // Update button styles
+                const allTabs = ['specifications', 'care'];
+                allTabs.forEach(tab => {
+                    const button = document.getElementById(`tab-${tab}`);
+                    const content = document.getElementById(`content-${tab}`);
+
+                    if (tab === tabName) {
+                        button.classList.remove('bg-gray-100', 'text-gray-600');
+                        button.classList.add('bg-blue-500', 'text-white');
+                        content.classList.remove('hidden');
+                    } else {
+                        button.classList.remove('bg-blue-500', 'text-white');
+                        button.classList.add('bg-gray-100', 'text-gray-600');
+                        content.classList.add('hidden');
+                    }
+                });
+            }
+        </script>
+
+        <!-- Why Choose Us Section -->
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-6 sm:p-8 lg:p-12 mb-12">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+                    Mengapa Memilih <span class="text-blue-600">Batik Kami?</span>
                 </h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                    Dipercaya oleh <span class="text-blue-600 font-semibold">ratusan pelanggan</span> yang puas dengan
-                    kualitas dan pelayanan kami
+                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
+                    Dipercaya oleh <span class="text-blue-600 font-semibold">ratusan pelanggan</span> untuk kualitas dan
+                    keaslian batik Tanjung Bumi
                 </p>
-                <div class="mt-6 inline-flex items-center space-x-2 bg-white px-6 py-3 rounded-full shadow-lg">
-                    <div class="flex text-amber-400">
+                <div
+                    class="mt-4 sm:mt-6 inline-flex items-center space-x-2 bg-white px-4 sm:px-6 py-2 sm:py-3 rounded-full shadow-lg">
+                    <div class="flex text-amber-400 text-sm sm:text-base">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <span class="text-gray-700 font-semibold">4.8/5 dari 287 reviews</span>
+                    <span class="text-gray-700 font-semibold text-sm sm:text-base">4.8/5</span>
                 </div>
             </div>
 
-            <!-- Testimonials Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-                <!-- Testimonial 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                <!-- Feature 1 -->
+                <div
+                    class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-certificate text-xl sm:text-2xl text-white"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Batik yang saya beli kualitasnya luar biasa! Motifnya detail sekali dan bahannya nyaman dipakai.
-                        Pengiriman juga cepat."
+                    <h3 class="font-bold text-gray-900 text-base sm:text-lg mb-2 text-center">Kualitas Premium</h3>
+                    <p class="text-gray-600 text-sm sm:text-base text-center">
+                        Batik tulis dan cap asli dengan motif khas Tanjung Bumi yang detail dan berkualitas tinggi
                     </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            D
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Dewi Sartika</p>
-                            <p class="text-sm text-gray-500">Jakarta</p>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Testimonial 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                <!-- Feature 2 -->
+                <div
+                    class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-green-500 to-teal-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-hand-holding-heart text-xl sm:text-2xl text-white"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Pelayanannya ramah dan responsive. Batiknya original Tanjung Bumi, bisa dilihat dari detail
-                        motifnya. Very recommended!"
+                    <h3 class="font-bold text-gray-900 text-base sm:text-lg mb-2 text-center">Warisan Budaya</h3>
+                    <p class="text-gray-600 text-sm sm:text-base text-center">
+                        Setiap pembelian mendukung pelestarian budaya dan pemberdayaan pengrajin lokal Kampung Batik Paseseh
                     </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-green-500 to-teal-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            A
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Andi Pratama</p>
-                            <p class="text-sm text-gray-500">Surabaya</p>
-                        </div>
-                    </div>
                 </div>
 
-                <!-- Testimonial 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div class="flex text-amber-400 mb-4">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                <!-- Feature 3 -->
+                <div
+                    class="bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <div
+                        class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-shield-alt text-xl sm:text-2xl text-white"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">
-                        "Sudah beberapa kali belanja di sini dan selalu puas. Koleksi batiknya unik-unik dan kualitas
-                        terjaga. Seller terpercaya!"
+                    <h3 class="font-bold text-gray-900 text-base sm:text-lg mb-2 text-center">Terpercaya</h3>
+                    <p class="text-gray-600 text-sm sm:text-base text-center">
+                        Pengalaman lebih dari 25 tahun dalam produksi batik dengan standar kualitas yang terjaga
                     </p>
-                    <div class="flex items-center space-x-3">
-                        <div
-                            class="w-12 h-12 bg-gradient-to-br from-pink-500 to-rose-600 rounded-full flex items-center justify-center text-white font-semibold">
-                            S
-                        </div>
-                        <div>
-                            <p class="font-semibold text-gray-900">Sinta Nurhaliza</p>
-                            <p class="text-sm text-gray-500">Bandung</p>
-                        </div>
-                    </div>
                 </div>
             </div>
 
             <!-- CTA Section -->
-            <div class="text-center bg-white rounded-2xl p-8 shadow-lg">
-                <h3 class="text-2xl font-bold text-gray-900 mb-4">
-                    Sudah Terbukti Kualitasnya?
+            <div class="text-center bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg">
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
+                    Tertarik dengan Produk Kami?
                 </h3>
-                <p class="text-gray-600 mb-6 max-w-2xl mx-auto text-lg">
-                    "Jangan ragu lagi! Bergabunglah dengan ratusan pelanggan puas kami dan miliki batik Tanjung Bumi asli
-                    dengan kualitas premium. Stok terbatas, pesan sekarang sebelum kehabisan!"
+                <p class="text-gray-600 mb-5 sm:mb-6 max-w-2xl mx-auto text-sm sm:text-base lg:text-lg px-4">
+                    Jelajahi koleksi batik Tanjung Bumi lainnya dan temukan motif yang sesuai dengan gaya Anda. Setiap
+                    produk adalah karya seni yang dibuat dengan penuh dedikasi.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#"
-                        class="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center space-x-3">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span>Pesan Sekarang</span>
-                    </a>
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4">
                     <a href="{{ route('shop.index', $filters) }}"
-                        class="border-2 border-blue-500 text-blue-600 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-200 inline-flex items-center space-x-3">
-                        <i class="fas fa-arrow-left"></i>
-                        <span>Lihat Koleksi Lain</span>
+                        class="bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 inline-flex items-center justify-center space-x-2 sm:space-x-3 text-sm sm:text-base">
+                        {{-- <i class="fas fa-th"></i> --}}
+                        <i class="fas fa-shop"></i>
+                        <span>Lihat Koleksi Lainnya</span>
+                    </a>
+                    <a href="{{ route('aboutus') }}"
+                        class="border-2 border-blue-500 text-blue-600 font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl hover:bg-blue-50 transition-all duration-200 inline-flex items-center justify-center space-x-2 sm:space-x-3 text-sm sm:text-base">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Tentang Kami</span>
                     </a>
                 </div>
             </div>

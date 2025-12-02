@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', $event->title . ' - Batik Paseseh')
+
 @section('content')
     <section class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8 px-4 md:px-8 lg:px-16">
         <div class="max-w-7xl mx-auto">
@@ -24,10 +26,9 @@
                     <li class="flex items-center">
                         <i class="fas fa-chevron-right text-gray-400 text-xs"></i>
                         <span
-                            class="text-gray-700 font-medium ml-3 truncate max-w-[140px] sm:max-w-[200px] md:max-w-[300px] overflow-hidden text-ellipsis whitespace-nowrap flex items-center"
-                            title="{{ $event->title }}">
-                            {{-- <i class="fas fa-file-alt mr-2 text-blue-500 shrink-0"></i> --}}
-                            <span class="truncate">{{ Str::limit($event->title, 50) }}</span>
+                            class="ml-1 text-sm font-medium text-gray-700 md:ml-2
+                                    block max-w-[185px] truncate sm:max-w-none sm:whitespace-normal">
+                            {{ $event->title }}
                         </span>
                     </li>
                 </ol>
@@ -267,7 +268,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-4 pt-4 border-t border-gray-100">
+                        {{-- <div class="mt-4 pt-4 border-t border-gray-100">
                             <div class="flex space-x-3">
                                 <button
                                     class="flex-1 bg-blue-50 text-blue-600 py-2 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors">
@@ -278,39 +279,39 @@
                                     <i class="fas fa-phone-alt mr-1"></i> Telepon
                                 </button>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     {{-- Registration Stats --}}
                     <div class="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl shadow-xl p-4 sm:p-6 text-white">
-    <h3 class="text-base sm:text-lg font-bold mb-3 sm:mb-4">Informasi Umum</h3>
+                        <h3 class="text-base sm:text-lg font-bold mb-3 sm:mb-4">Informasi Umum</h3>
 
-    <div class="space-y-3 sm:space-y-4">
-        <!-- Baris Pertama -->
-        <div class="grid grid-cols-2 gap-3 sm:gap-4">
-            <div class="text-center sm:text-left">
-                <p class="text-xl sm:text-2xl font-bold">{{ $umkms->count() }}</p>
-                <p class="text-xs sm:text-sm text-cyan-100">Pengrajin Aktif</p>
-            </div>
-            <div class="text-center sm:text-right">
-                <p class="text-xl sm:text-2xl font-bold">{{ $batiks->count() }}</p>
-                <p class="text-xs sm:text-sm text-cyan-100">Motif Batik Terdokumentasi</p>
-            </div>
-        </div>
+                        <div class="space-y-3 sm:space-y-4">
+                            <!-- Baris Pertama -->
+                            <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                                <div class="text-center sm:text-left">
+                                    <p class="text-xl sm:text-2xl font-bold">{{ $umkms->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-cyan-100">Pengrajin Aktif</p>
+                                </div>
+                                <div class="text-center sm:text-right">
+                                    <p class="text-xl sm:text-2xl font-bold">{{ $batiks->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-cyan-100">Motif Batik Terdokumentasi</p>
+                                </div>
+                            </div>
 
-        <!-- Baris Kedua -->
-        <div class="grid grid-cols-2 gap-3 sm:gap-4 border-t border-white/30 pt-3 sm:pt-4">
-            <div class="text-center sm:text-left">
-                <p class="text-xl sm:text-2xl font-bold">{{ $edukasi->count() }}</p>
-                <p class="text-xs sm:text-sm text-cyan-100">Kegiatan Edukasi</p>
-            </div>
-            <div class="text-center sm:text-right">
-                <p class="text-xl sm:text-2xl font-bold">{{ $award->count() }}</p>
-                <p class="text-xs sm:text-sm text-cyan-100">Penghargaan Diterima</p>
-            </div>
-        </div>
-    </div>
-</div>
+                            <!-- Baris Kedua -->
+                            <div class="grid grid-cols-2 gap-3 sm:gap-4 border-t border-white/30 pt-3 sm:pt-4">
+                                <div class="text-center sm:text-left">
+                                    <p class="text-xl sm:text-2xl font-bold">{{ $edukasi->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-cyan-100">Kegiatan Edukasi</p>
+                                </div>
+                                <div class="text-center sm:text-right">
+                                    <p class="text-xl sm:text-2xl font-bold">{{ $award->count() }}</p>
+                                    <p class="text-xs sm:text-sm text-cyan-100">Penghargaan Diterima</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -329,11 +330,12 @@
                     </a>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Desktop: Grid Layout -->
+                <div class="hidden md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach ($relatedEvents as $item)
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group transform hover:-translate-y-2">
-                            <a href="{{ route('event.detail', $item->slug) }}" class="block">
+                            <a href="{{ route('event.show', $item->slug) }}" class="block">
                                 <div class="relative h-48 overflow-hidden">
                                     <img src="{{ asset('storage/' . $item->image) }}"
                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
@@ -341,7 +343,7 @@
                                     <div class="absolute top-4 right-4">
                                         <span
                                             class="px-3 py-1 rounded-full text-xs font-semibold shadow-lg
-                                                 {{ $item->is_promo ? 'bg-green-500' : 'bg-orange-500' }} text-white">
+                                     {{ $item->is_promo ? 'bg-green-500' : 'bg-orange-500' }} text-white">
                                             {{ $item->is_promo ? 'Promo' : 'Event' }}
                                         </span>
                                     </div>
@@ -363,7 +365,77 @@
                         </div>
                     @endforeach
                 </div>
+
+                <!-- Mobile/Tablet: Horizontal Scroll with Navigation -->
+                <div class="md:hidden relative">
+                    <!-- Navigation Buttons -->
+                    <button data-scroll-nav="prev" data-scroll-target="related-events-scroll"
+                        class="scroll-nav-btn absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <button data-scroll-nav="next" data-scroll-target="related-events-scroll"
+                        class="scroll-nav-btn absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-white hover:bg-gray-50 text-gray-800 rounded-full p-2.5 shadow-xl transition-all duration-300 hover:scale-110 disabled:opacity-0 disabled:pointer-events-none">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <!-- Scrollable Container -->
+                    <div id="related-events-scroll"
+                        class="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth pb-4"
+                        data-scroll-container>
+                        <div class="flex space-x-4 min-w-max px-1">
+                            @foreach ($relatedEvents as $item)
+                                <div
+                                    class="snap-center group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex-shrink-0 w-80">
+                                    <a href="{{ route('event.show', $item->slug) }}" class="block">
+                                        <div class="relative h-48 overflow-hidden">
+                                            <img src="{{ asset('storage/' . $item->image) }}"
+                                                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                alt="{{ $item->title }}">
+                                            <div class="absolute top-4 right-4">
+                                                <span
+                                                    class="px-3 py-1 rounded-full text-xs font-semibold shadow-lg
+                                             {{ $item->is_promo ? 'bg-green-500' : 'bg-orange-500' }} text-white">
+                                                    {{ $item->is_promo ? 'Promo' : 'Event' }}
+                                                </span>
+                                            </div>
+                                            <div
+                                                class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                            </div>
+                                        </div>
+                                        <div class="p-5">
+                                            <h3
+                                                class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-indigo-600 transition-colors">
+                                                {{ $item->title }}</h3>
+                                            <p class="text-sm text-gray-600 line-clamp-2 mb-3">{!! strip_tags($item->description) !!}</p>
+                                            <div class="flex items-center text-sm text-gray-500">
+                                                <i class="far fa-calendar-alt mr-2"></i>
+                                                <span>{{ \Carbon\Carbon::parse($item->start_at)->translatedFormat('d M Y') }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <!-- Scroll Indicators -->
+                    <div class="flex justify-center mt-4">
+                        <div class="scroll-indicator h-1 w-20 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="scroll-indicator-progress h-full bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full transition-all duration-300"
+                                style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 @endsection
+
+@vite('resources/js/scroll-horizontal.js')
